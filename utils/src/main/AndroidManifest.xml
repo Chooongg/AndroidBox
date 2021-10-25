@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.chooongg">
+
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+
+    <application>
+
+        <provider
+            android:name=".BoxInitializeProvider"
+            android:authorities="${applicationId}.chooongg.box"
+            android:exported="false" />
+
+        <provider
+            android:name=".BoxFileProvider"
+            android:authorities="${applicationId}.box.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/box_provider_paths" />
+        </provider>
+
+    </application>
+
+</manifest>

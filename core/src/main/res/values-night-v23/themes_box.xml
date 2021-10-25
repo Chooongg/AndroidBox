@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="BoxTheme.Surface" parent="BoxTheme">
+        <item name="android:statusBarColor">?colorSurface</item>
+        <item name="toolbarStyle">@style/BoxWidget.Toolbar.Surface</item>
+        <item name="android:textColorSecondary">?colorOnSurface</item>
+    </style>
+
+</resources>

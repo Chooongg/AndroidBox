@@ -1,0 +1,66 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'maven-publish'
+}
+
+android {
+    compileSdk compile_sdk
+
+    defaultConfig {
+        minSdk min_sdk
+        targetSdk target_sdk
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildFeatures {
+        viewBinding true
+        dataBinding true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = '11'
+    }
+}
+
+dependencies {
+    api project(path: ':utils')
+    // 官方
+    api 'androidx.constraintlayout:constraintlayout:2.1.1'
+    api 'androidx.viewpager2:viewpager2:1.1.0-beta01'
+    api 'androidx.navigation:navigation-ui-ktx:2.4.0-alpha10'
+    api 'androidx.navigation:navigation-fragment-ktx:2.4.0-alpha10'
+    api 'androidx.paging:paging-common-ktx:3.1.0-beta01'
+    api 'androidx.paging:paging-runtime-ktx:3.1.0-beta01'
+    api 'androidx.work:work-runtime-ktx:2.7.0'
+    api 'com.google.android.flexbox:flexbox:3.0.0'
+    // 适配器
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
+    api 'com.github.fondesa:recycler-view-divider:3.5.0'
+    // 下拉刷新-上拉加载
+    api 'com.scwang.smart:refresh-layout-kernel:2.0.3'      //核心必须依赖
+    api 'com.scwang.smart:refresh-header-classics:2.0.3'    //经典刷新头
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                groupId = "com.chooongg"
+                artifactId = "core"
+            }
+        }
+    }
+}

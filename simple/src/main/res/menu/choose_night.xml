@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/loading"
+        android:title="Loading"
+        app:showAsAction="ifRoom" />
+
+    <group
+        android:id="@+id/day_night_mode"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/light"
+            android:icon="@drawable/ic_theme_light"
+            android:title="@string/ui_mode_light" />
+        <item
+            android:id="@+id/night"
+            android:icon="@drawable/ic_theme_night"
+            android:title="@string/ui_mode_night" />
+        <item
+            android:id="@+id/system"
+            android:icon="@drawable/ic_theme_system"
+            android:title="@string/ui_mode_system" />
+    </group>
+</menu>

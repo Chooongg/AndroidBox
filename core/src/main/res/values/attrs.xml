@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="shimmer_color" format="color" />
+    <attr name="shimmer_animation_duration" format="integer" />
+    <attr name="shimmer_auto_start" format="boolean" />
+    <attr name="shimmer_angle" format="integer" />
+    <attr name="shimmer_mask_width" format="float" />
+    <attr name="shimmer_gradient_center_color_width" format="float" />
+    <attr name="shimmer_reverse_animation" format="boolean" />
+
+    <!-- 自动文字大小调整 -->
+    <declare-styleable name="AutoSizeTextView">
+        <attr name="ast_autoSizeEnable" format="boolean" />
+        <attr name="ast_minTextSize" format="dimension" />
+        <attr name="ast_precision" format="float" />
+    </declare-styleable>
+
+    <!-- Box 工具栏 -->
+    <declare-styleable name="BoxToolbar">
+        <attr name="loadActivityLabel" format="boolean" />
+        <attr name="defaultNavigation" format="boolean" />
+        <attr name="syncStatusBarColor" format="boolean" />
+        <attr name="autoSetActionBar" format="boolean" />
+    </declare-styleable>
+
+    <!-- 圆形图片 -->
+    <declare-styleable name="CircleImageView">
+        <attr name="civ_border_width" format="dimension" />
+        <attr name="civ_border_color" format="color" />
+        <attr name="civ_border_overlay" format="boolean" />
+        <attr name="civ_circle_background_color" format="color" />
+    </declare-styleable>
+
+    <!-- 蒙版输入框 -->
+    <declare-styleable name="MaskTextInputEditText">
+        <!-- 占位格式 [#]为占位符 -->
+        <attr name="met_mask" format="string" />
+    </declare-styleable>
+
+    <!-- 骨架屏 FrameLayout -->
+    <declare-styleable name="ShimmerFrameLayout">
+        <attr name="shimmer_color" />
+        <attr name="shimmer_animation_duration" />
+        <attr name="shimmer_auto_start" />
+        <attr name="shimmer_angle" />
+        <attr name="shimmer_mask_width" />
+        <attr name="shimmer_gradient_center_color_width" />
+        <attr name="shimmer_reverse_animation" />
+    </declare-styleable>
+
+    <!-- 骨架屏 LinearLayout -->
+    <declare-styleable name="ShimmerLinearLayout">
+        <attr name="shimmer_color" />
+        <attr name="shimmer_animation_duration" />
+        <attr name="shimmer_auto_start" />
+        <attr name="shimmer_angle" />
+        <attr name="shimmer_mask_width" />
+        <attr name="shimmer_gradient_center_color_width" />
+        <attr name="shimmer_reverse_animation" />
+    </declare-styleable>
+
+    <!-- 骨架屏 ConstraintLayout -->
+    <declare-styleable name="ShimmerConstraintLayout">
+        <attr name="shimmer_color" />
+        <attr name="shimmer_animation_duration" />
+        <attr name="shimmer_auto_start" />
+        <attr name="shimmer_angle" />
+        <attr name="shimmer_mask_width" />
+        <attr name="shimmer_gradient_center_color_width" />
+        <attr name="shimmer_reverse_animation" />
+    </declare-styleable>
+
+    <!-- 正方形布局 -->
+    <declare-styleable name="SquareLayout">
+        <attr name="basisAxis">
+            <enum name="basisWidth" value="0" />
+            <enum name="basisHeight" value="1" />
+        </attr>
+    </declare-styleable>
+
+</resources>

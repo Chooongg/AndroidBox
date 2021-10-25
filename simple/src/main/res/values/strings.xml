@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">AndroidBox</string>
+
+    <string name="ui_mode_light">日间模式</string>
+    <string name="ui_mode_night">夜间模式</string>
+    <string name="ui_mode_system">跟随系统</string>
+</resources>

@@ -1,0 +1,34 @@
+buildscript {
+
+    ext.compile_sdk = 31
+    ext.min_sdk = 21
+    ext.target_sdk = 31
+
+    ext.version_code = 1
+    ext.version_name = "0.0.1"
+
+    ext.appcompat_version = "1.4.0-beta01"
+    ext.material_version = "1.5.0-alpha04"
+
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.0.3'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31'
+    }
+
+    tasks.withType(Javadoc) {
+        options {
+            encoding "UTF-8"
+            charSet 'UTF-8'
+            links "https://docs.oracle.com/javase/11/docs/api"
+        }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

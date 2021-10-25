@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        app:constraintSetEnd="@id/end"
+        app:constraintSetStart="@+id/start"
+        app:duration="600">
+
+        <KeyFrameSet>
+            <KeyPosition
+                app:framePosition="50"
+                app:motionTarget="@+id/iv_logo"
+                app:percentX="0.2" />
+            <KeyPosition
+                app:framePosition="50"
+                app:motionTarget="@+id/tv_name"
+                app:percentX="0.2"
+                app:percentY="1.0" />
+            <KeyPosition
+                app:framePosition="50"
+                app:motionTarget="@+id/tv_version"
+                app:percentX="0.2"
+                app:percentY="1.0" />
+
+            <KeyAttribute
+                android:scaleX="1.0"
+                android:scaleY="1.0"
+                app:framePosition="50"
+                app:motionTarget="@+id/iv_logo" />
+            <KeyAttribute
+                app:framePosition="30"
+                android:alpha="0.0"
+                app:motionTarget="@+id/tv_name" />
+            <KeyAttribute
+                app:framePosition="30"
+                android:alpha="0.0"
+                app:motionTarget="@+id/tv_version" />
+        </KeyFrameSet>
+
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start" />
+
+    <ConstraintSet android:id="@+id/end">
+
+        <Constraint
+            android:id="@+id/iv_logo"
+            android:layout_width="@dimen/d72"
+            android:layout_height="@dimen/d72"
+            android:layout_marginStart="@dimen/d16"
+            android:layout_marginBottom="@dimen/d36"
+            android:scaleX="1.0"
+            android:scaleY="1.0"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tv_name"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Constraint
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/d16"
+            android:layout_marginEnd="@dimen/d16"
+            android:alpha="1.0"
+            android:text="@string/app_name"
+            android:textAppearance="?textAppearanceHeadline5"
+            app:layout_constraintBottom_toTopOf="@id/tv_version"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_logo"
+            app:layout_constraintTop_toTopOf="@id/iv_logo"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <Constraint
+            android:id="@+id/tv_version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="1.0"
+            app:layout_constraintBottom_toBottomOf="@id/iv_logo"
+            app:layout_constraintEnd_toEndOf="@id/tv_name"
+            app:layout_constraintStart_toStartOf="@id/tv_name"
+            app:layout_constraintTop_toBottomOf="@id/tv_name" />
+
+    </ConstraintSet>
+
+</MotionScene>
