@@ -27,7 +27,6 @@ class DefaultErrorConverter : HttpErrorConverter() {
         HttpException.Type.HTTP415 -> "请求出现错误(415)"
         HttpException.Type.HTTP416 -> "请求出现错误(416)"
         HttpException.Type.HTTP417 -> "请求出现错误(417)"
-
         HttpException.Type.HTTP500 -> "服务器遇到错误(500)"
         HttpException.Type.HTTP501 -> "服务器不具备完成请求的功能(501)"
         HttpException.Type.HTTP502 -> "服务器遇到错误(502)"
