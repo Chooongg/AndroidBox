@@ -116,8 +116,10 @@ class HttpException : RuntimeException {
         get() = messageCopy
 
     enum class Type(val value: Int) {
-        UN_KNOWN(-1), CUSTOM(-2),
-        NETWORK(-3), TIMEOUT(-4),
+        UN_KNOWN(-1),
+        CUSTOM(-2),
+        NETWORK(-3),
+        TIMEOUT(-4),
         PARSE(-5),
         SSL(-6),
         EMPTY(-7),

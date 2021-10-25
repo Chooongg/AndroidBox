@@ -5,12 +5,8 @@ import com.chooongg.http.annotation.BaseUrl
 import com.chooongg.http.cookie.CookieManager
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import okhttp3.Cache
-import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
-import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.Retrofit
-import retrofit2.http.Streaming
-import java.io.File
 import java.util.concurrent.TimeUnit
 import kotlin.reflect.KClass
 
@@ -52,6 +48,9 @@ object HttpFactory {
             retryOnConnectionFailure(true)
             cache(Cache(APPLICATION.cacheDir, config.cacheSize))
             cookieJar(CookieManager)
+            if (config.sslSocketFactory != null && config.x509TrustManager != null) {
+                sslSocketFactory(config.sslSocketFactory!!,config.x509TrustManager!!)
+            }
             config.interceptors.forEach { addInterceptor(it) }
             config.networkInterceptors.forEach { addNetworkInterceptor(it) }
             config.okHttpClientBuilder?.invoke(this)

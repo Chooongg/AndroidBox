@@ -8,6 +8,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.util.*
+import javax.net.ssl.SSLSocketFactory
+import javax.net.ssl.X509TrustManager
 
 data class HttpConfig(
     // 缓存保存时间-秒
@@ -33,6 +35,8 @@ data class HttpConfig(
         ScalarsConverterFactory.create(),
         GsonConverterFactory.create()
     ),
+    var sslSocketFactory: SSLSocketFactory? = null,
+    var x509TrustManager: X509TrustManager? = null,
     // Retrofit 请求适配器列表
     val callAdapterFactories: ArrayList<CallAdapter.Factory> = arrayListOf(),
 

@@ -8,19 +8,32 @@ class DefaultErrorConverter : HttpErrorConverter() {
         HttpException.Type.PARSE -> "数据出现异常"
         HttpException.Type.SSL -> "验证失败"
         HttpException.Type.EMPTY -> "没有数据"
-        HttpException.Type.HTTP302 -> "链接重定向"
-        HttpException.Type.HTTP400,
-        HttpException.Type.HTTP401, HttpException.Type.HTTP403,
-        HttpException.Type.HTTP404, HttpException.Type.HTTP405,
-        HttpException.Type.HTTP406, HttpException.Type.HTTP407,
-        HttpException.Type.HTTP408, HttpException.Type.HTTP409,
-        HttpException.Type.HTTP410, HttpException.Type.HTTP411,
-        HttpException.Type.HTTP412, HttpException.Type.HTTP413,
-        HttpException.Type.HTTP414, HttpException.Type.HTTP415,
-        HttpException.Type.HTTP416, HttpException.Type.HTTP417 -> "请求出现错误"
-        HttpException.Type.HTTP500, HttpException.Type.HTTP501,
-        HttpException.Type.HTTP502, HttpException.Type.HTTP503,
-        HttpException.Type.HTTP504, HttpException.Type.HTTP505 -> "服务器遇到错误"
+        HttpException.Type.CONNECT -> "与服务器连接异常"
+        HttpException.Type.HTTP302 -> "请求被重定向"
+        HttpException.Type.HTTP400 -> "请求出现错误(400)"
+        HttpException.Type.HTTP401 -> "请求出现错误(401)"
+        HttpException.Type.HTTP403 -> "服务器拒绝请求(403)"
+        HttpException.Type.HTTP404 -> "未找到请求的资源(404)"
+        HttpException.Type.HTTP405 -> "请求的资源已禁用(405)"
+        HttpException.Type.HTTP406 -> "请求出现错误(406)"
+        HttpException.Type.HTTP407 -> "请求出现错误(407)"
+        HttpException.Type.HTTP408 -> "请求出现错误(408)"
+        HttpException.Type.HTTP409 -> "请求出现错误(409)"
+        HttpException.Type.HTTP410 -> "请求的资源已删除(410)"
+        HttpException.Type.HTTP411 -> "请求出现错误(411)"
+        HttpException.Type.HTTP412 -> "请求出现错误(412)"
+        HttpException.Type.HTTP413 -> "请求超出服务器的处理能力(413)"
+        HttpException.Type.HTTP414 -> "请求出现错误(414)"
+        HttpException.Type.HTTP415 -> "请求出现错误(415)"
+        HttpException.Type.HTTP416 -> "请求出现错误(416)"
+        HttpException.Type.HTTP417 -> "请求出现错误(417)"
+
+        HttpException.Type.HTTP500 -> "服务器遇到错误(500)"
+        HttpException.Type.HTTP501 -> "服务器不具备完成请求的功能(501)"
+        HttpException.Type.HTTP502 -> "服务器遇到错误(502)"
+        HttpException.Type.HTTP503 -> "服务器暂时不可用(503)"
+        HttpException.Type.HTTP504 -> "服务器遇到错误(504)"
+        HttpException.Type.HTTP505 -> "服务器遇到错误(505)"
         else -> "未知错误"
     }
 
@@ -31,6 +44,7 @@ class DefaultErrorConverter : HttpErrorConverter() {
         HttpException.Type.PARSE -> "请求实体解析失败"
         HttpException.Type.SSL -> "SSL证书验证失败"
         HttpException.Type.EMPTY -> "Body为空"
+        HttpException.Type.CONNECT -> "与服务器连接异常"
         HttpException.Type.HTTP302 -> "302:服务器要求重定向"
         HttpException.Type.HTTP400 -> "400:服务器不理解请求的语法"
         HttpException.Type.HTTP401 -> "401:请求要求身份验证"
