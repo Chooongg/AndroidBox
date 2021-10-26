@@ -1,4 +1,4 @@
-package com.chooongg.stateLayout.state
+package com.chooongg.statusLayout.status
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -26,11 +26,17 @@ abstract class AbstractBindingStatus<BINDING : ViewBinding> : AbstractStatus() {
 
     abstract fun onDetach(context: Context, binding: BINDING)
 
+    open fun reloadEventView(binding: BINDING): View? = null
+
     override fun onAttach(context: Context, view: View) {
         onAttach(context, binding)
     }
 
     override fun onDetach(context: Context, view: View) {
         onDetach(context, binding)
+    }
+
+    override fun reloadEventView(rootView: View): View? {
+        return reloadEventView(binding)
     }
 }

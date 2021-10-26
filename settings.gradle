@@ -5,17 +5,13 @@ dependencyResolutionManagement {
         mavenCentral()
         maven { url 'https://jitpack.io' }
         maven { url 'https://maven.aliyun.com/repository/jcenter' }
-//        maven {
-//            url = "http://cache"
-//            allowInsecureProtocol = true
-//        }
     }
 }
 rootProject.name = "AndroidBox"
 include ':simple'
 include ':all'
-include ':utils'
-include ':core'
-include ':stateLayout'
-include ':http'
 include ':eventBus'
+include ':http'
+include ':statusLayout'
+include ':core'
+include ':utils'

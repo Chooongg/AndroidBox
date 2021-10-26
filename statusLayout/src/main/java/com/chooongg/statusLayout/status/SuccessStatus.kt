@@ -1,4 +1,4 @@
-package com.chooongg.stateLayout.state
+package com.chooongg.statusLayout.status
 
 import android.content.Context
 import android.view.View

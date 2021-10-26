@@ -1,31 +1,26 @@
-package com.chooongg.simple.modules.main
+package com.chooongg.simple.modules
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
-import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.lifecycleScope
-import androidx.paging.PagingDataAdapter
-import androidx.recyclerview.widget.ConcatAdapter
-import androidx.recyclerview.widget.DiffUtil
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.chooongg.activity.BoxBindingActivity
 import com.chooongg.adapter.BindingAdapter
-import com.chooongg.adapter.BindingHolder
+import com.chooongg.core.ext.divider
 import com.chooongg.core.ext.hideLoading
 import com.chooongg.core.ext.showLoading
+import com.chooongg.ext.dp2px
 import com.chooongg.ext.getNightMode
 import com.chooongg.ext.setNightMode
 import com.chooongg.ext.withMain
 import com.chooongg.simple.R
 import com.chooongg.simple.databinding.ActivityMainBinding
-import com.chooongg.simple.databinding.ItemMainBinding
-import com.chooongg.simple.model.ArticleItem
-import com.chooongg.simple.modules.main.viewModel.MainViewModel
+import com.chooongg.simple.databinding.ItemSingleBinding
+import com.chooongg.simple.model.SingleItem
 import com.google.android.material.badge.BadgeDrawable
 import com.google.android.material.badge.BadgeUtils
 import kotlinx.coroutines.delay
@@ -33,19 +28,31 @@ import kotlinx.coroutines.launch
 
 class MainActivity : BoxBindingActivity<ActivityMainBinding>() {
 
-    private val model: MainViewModel by viewModels()
-
     private val adapter = Adapter()
-    private val concatAdapter = ConcatAdapter(adapter)
 
     override fun isShowToolbarNavigationIcon() = false
 
     override fun initConfig(savedInstanceState: Bundle?) {
-//        binding.recyclerView.adapter = concatAdapter
-//        binding.statusLayout.showSuccess()
+        binding.recyclerView.adapter = adapter
+        binding.recyclerView.divider {
+            asSpace().size(dp2px(16f))
+            showFirstDivider().showLastDivider().showSideDividers()
+        }
+        adapter.setOnItemClickListener { _, _, position ->
+
+        }
     }
 
     override fun initContent() {
+        adapter.setNewInstance(
+            arrayListOf(
+                SingleItem("AppBar") {
+                    startActivity(Intent(context, AppBarActivity::class.java))
+                }, SingleItem("状态布局") {
+                    startActivity(Intent(context, StatusActivity::class.java))
+                }
+            )
+        )
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -104,34 +111,9 @@ class MainActivity : BoxBindingActivity<ActivityMainBinding>() {
         }
     }
 
-    private class Adapter : BindingAdapter<String, ItemMainBinding>() {
-        override fun convert(holder: BaseViewHolder, binding: ItemMainBinding, item: String) {
-
-        }
-    }
-
-    private class Adapter2 : PagingDataAdapter<ArticleItem, BindingHolder<ItemMainBinding>>(object :
-        DiffUtil.ItemCallback<ArticleItem>() {
-        override fun areItemsTheSame(oldItem: ArticleItem, newItem: ArticleItem): Boolean {
-            if (oldItem.id == null && newItem.id == null) return false
-            return oldItem.id == newItem.id
-        }
-
-        override fun areContentsTheSame(oldItem: ArticleItem, newItem: ArticleItem): Boolean {
-            return oldItem == newItem
-        }
-    }) {
-
-        override fun onCreateViewHolder(
-            parent: ViewGroup,
-            viewType: Int
-        ): BindingHolder<ItemMainBinding> = BindingHolder(
-            ItemMainBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        )
-
-        override fun onBindViewHolder(holder: BindingHolder<ItemMainBinding>, position: Int) {
-            val item = getItem(position)
-            holder.binding.tvTitle.text = item?.title
+    private class Adapter : BindingAdapter<SingleItem, ItemSingleBinding>() {
+        override fun convert(holder: BaseViewHolder, binding: ItemSingleBinding, item: SingleItem) {
+            binding.tvTitle.text = item.title
         }
     }
 }

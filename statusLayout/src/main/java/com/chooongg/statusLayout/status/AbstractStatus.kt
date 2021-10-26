@@ -1,4 +1,4 @@
-package com.chooongg.stateLayout.state
+package com.chooongg.statusLayout.status
 
 import android.content.Context
 import android.view.View
@@ -33,5 +33,7 @@ abstract class AbstractStatus : Serializable {
     open fun messageView(rootView: View): TextView? = null
 
     open fun showSuccess(): Boolean = false
+
+    open fun enableAnimation():Boolean = true
 
 }

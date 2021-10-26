@@ -20,9 +20,13 @@
         </activity>
 
         <activity
-            android:name=".modules.main.MainActivity"
+            android:name=".modules.MainActivity"
             android:label="首页"
             android:launchMode="singleTask" />
+        <activity
+            android:name=".modules.AppBarActivity"
+            android:label="AppBar"
+            android:launchMode="singleTop" />
 
     </application>
 

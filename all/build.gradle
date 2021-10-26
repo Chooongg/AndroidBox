@@ -31,7 +31,7 @@ android {
 dependencies {
     api project(path: ':core')
     api project(path: ':eventBus')
-    api project(path: ':stateLayout')
+    api project(path: ':statusLayout')
     api project(path: ':http')
 }
 

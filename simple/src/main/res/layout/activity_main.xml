@@ -4,21 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".modules.main.MainActivity">
-
-    <!--    <com.chooongg.stateLayout.StatusLayout-->
-    <!--        android:id="@+id/status_layout"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent">-->
-
-    <!--        <androidx.recyclerview.widget.RecyclerView-->
-    <!--            android:id="@+id/recycler_view"-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="match_parent"-->
-    <!--            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
-    <!--            tools:listitem="@layout/item_main" />-->
-
-    <!--    </com.chooongg.stateLayout.StatusLayout>-->
+    tools:context=".modules.MainActivity">
 
     <com.chooongg.core.widget.shimmer.ShimmerFrameLayout
         android:layout_width="match_parent"
@@ -32,5 +18,11 @@
 
     </com.chooongg.core.widget.shimmer.ShimmerFrameLayout>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_single" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

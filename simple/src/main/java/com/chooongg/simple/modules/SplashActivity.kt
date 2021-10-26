@@ -10,7 +10,6 @@ import com.chooongg.ext.withMain
 import com.chooongg.simple.BuildConfig
 import com.chooongg.simple.R
 import com.chooongg.simple.databinding.ActivitySplashBinding
-import com.chooongg.simple.modules.main.MainActivity
 import kotlinx.coroutines.delay
 
 @SuppressLint("CustomSplashScreen")
