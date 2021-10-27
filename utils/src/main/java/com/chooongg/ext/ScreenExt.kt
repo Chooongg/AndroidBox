@@ -144,12 +144,12 @@ fun Activity.isLightNavigationBars(): Boolean? {
 /**
  * 屏幕是否亮屏
  */
-fun isScreenOn() = APPLICATION.powerManager.isInteractive
+fun isScreenBrightOn() = APPLICATION.powerManager.isInteractive
 
 /**
  * 屏幕是否熄灭
  */
-fun isScreenOff() = !isScreenOn()
+fun isScreenBrightOff() = !isScreenBrightOn()
 
 /**
  * 屏幕是否锁屏

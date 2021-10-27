@@ -9,24 +9,23 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
 import androidx.annotation.StyleRes
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.FitWindowsLinearLayout
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.updateLayoutParams
-import com.chooongg.annotation.ActionBar
 import com.chooongg.annotation.Theme
 import com.chooongg.autoHideIME.AutoHideInputMethodEditor
 import com.chooongg.core.R
 import com.chooongg.ext.contentView
 import com.chooongg.ext.dp2px
-import com.chooongg.ext.loadActivityLabel
 import com.chooongg.toolbar.BoxToolbar
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 
 abstract class BoxActivity : AppCompatActivity {
 
-    internal constructor() : super()
+    constructor() : super()
     constructor(@LayoutRes contentLayoutId: Int) : super(contentLayoutId)
 
     //<editor-fold desc="子类实现方法">
@@ -71,7 +70,7 @@ abstract class BoxActivity : AppCompatActivity {
     /**
      * 初始化行动栏
      */
-    open fun initActionBar(toolbar: Toolbar) = Unit
+    open fun initActionBar(toolbar: ActionBar) = Unit
 
     /**
      * 配置 SnackBar 锚点 View
@@ -108,21 +107,35 @@ abstract class BoxActivity : AppCompatActivity {
                 id = R.id.box_activity_toolbar
             }
             if (windowToolBar !is BoxToolbar) {
-                setSupportActionBar(windowToolBar!!)
-                initActionBar(windowToolBar!!)
+                super.setSupportActionBar(windowToolBar!!)
             }
             parentLayout.addView(windowToolBar!!, 0)
-            title = loadActivityLabel()
+            if (supportActionBar != null) {
+                if (isShowToolbarNavigationIcon()) {
+                    supportActionBar!!.setHomeButtonEnabled(true)
+                    supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+                    supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_app_bar_back)
+                }
+                initActionBar(supportActionBar!!)
+            }
+        } else {
+            if (supportActionBar != null) {
+                if (isShowToolbarNavigationIcon()) {
+                    supportActionBar!!.setHomeButtonEnabled(true)
+                    supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+                    supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_app_bar_back)
+                }
+                initActionBar(supportActionBar!!)
+            }
         }
     }
 
+    @Deprecated(
+        "BoxActivity has been processed automatically",
+        ReplaceWith("", ""), DeprecationLevel.ERROR
+    )
     override fun setSupportActionBar(toolbar: Toolbar?) {
         super.setSupportActionBar(toolbar)
-        if (isShowToolbarNavigationIcon()) {
-            supportActionBar?.setHomeButtonEnabled(true)
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
-            supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_app_bar_back)
-        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -136,7 +149,8 @@ abstract class BoxActivity : AppCompatActivity {
     private fun getTheme4Box() = javaClass.getAnnotation(Theme::class.java)?.resId ?: initTheme()
 
     private fun getActionBar4Box() =
-        javaClass.getAnnotation(ActionBar::class.java)?.isShow ?: isShowActionBar()
+        javaClass.getAnnotation(com.chooongg.annotation.ActionBar::class.java)?.isShow
+            ?: isShowActionBar()
 
     //</editor-fold>
 
