@@ -52,9 +52,6 @@ class BoxToolbar @JvmOverloads constructor(
             if (activity is AppCompatActivity) {
                 activity.setSupportActionBar(this)
             }
-            if (activity is BoxActivity) {
-                activity.initActionBar(this)
-            }
         }
     }
 
