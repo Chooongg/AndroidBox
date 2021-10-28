@@ -2,10 +2,11 @@ package com.chooongg.activity
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.transition.Fade
+import android.transition.Slide
+import android.transition.Transition
+import android.transition.TransitionSet
+import android.view.*
 import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
 import androidx.annotation.StyleRes
@@ -13,20 +14,28 @@ import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.FitWindowsLinearLayout
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.updateLayoutParams
 import com.chooongg.annotation.Theme
 import com.chooongg.autoHideIME.AutoHideInputMethodEditor
 import com.chooongg.core.R
 import com.chooongg.ext.contentView
 import com.chooongg.ext.dp2px
+import com.chooongg.ext.resourcesInteger
 import com.chooongg.toolbar.BoxToolbar
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 
 abstract class BoxActivity : AppCompatActivity {
 
-    constructor() : super()
-    constructor(@LayoutRes contentLayoutId: Int) : super(contentLayoutId)
+    constructor() : super() {
+        contentId = ResourcesCompat.ID_NULL
+    }
+
+    constructor(@LayoutRes contentLayoutId: Int) : super() {
+        contentId = contentLayoutId
+    }
 
     //<editor-fold desc="子类实现方法">
 
@@ -40,6 +49,8 @@ abstract class BoxActivity : AppCompatActivity {
 
     protected inline val activity: BoxActivity get() = this
 
+    private val contentId: Int
+
     protected var windowToolBar: Toolbar? = null
         private set
 
@@ -49,7 +60,7 @@ abstract class BoxActivity : AppCompatActivity {
      * 初始化主题
      */
     @StyleRes
-    protected fun initTheme(): Int = 0
+    protected fun initTheme(): Int = ResourcesCompat.ID_NULL
 
     /**
      * 是否显示标题栏
@@ -87,9 +98,14 @@ abstract class BoxActivity : AppCompatActivity {
     //<editor-fold desc="框架方法">
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        getTheme4Box().let { if (it != 0) setTheme(it) }
+        getTheme4Box().let { if (it != ResourcesCompat.ID_NULL) setTheme(it) }
         super.onCreate(savedInstanceState)
         if (getActionBar4Box()) configActionBar()
+        window.sharedElementEnterTransition = initSharedElementEnterTransition()
+        window.sharedElementExitTransition = initSharedElementExitTransition()
+        window.sharedElementReturnTransition = initSharedElementReturnTransition()
+        window.sharedElementReenterTransition = initSharedElementReenterTransition()
+        if (contentId != ResourcesCompat.ID_NULL) setContentView(contentId)
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
@@ -204,6 +220,71 @@ abstract class BoxActivity : AppCompatActivity {
         anchorView = anchor
         block?.invoke(this)
         show()
+    }
+
+    //</editor-fold>
+
+    //<editor-fold desc="共享元素">
+
+    /**
+     * 共享元素-进入动画
+     */
+    protected open fun initSharedElementEnterTransition(): Transition {
+        return TransitionSet().apply {
+            addTransition(Fade().apply {
+                duration = resourcesInteger(android.R.integer.config_longAnimTime).toLong()
+                excludeChildren(android.R.id.content, true)
+            })
+            addTransition(Slide(Gravity.END).apply {
+                excludeTarget(android.R.id.statusBarBackground, true)
+                excludeTarget(android.R.id.navigationBarBackground, true)
+                excludeTarget(BottomNavigationView::class.java, true)
+                excludeTarget(R.id.box_activity_toolbar, true)
+            })
+        }
+    }
+
+    /**
+     * 共享元素-退出动画
+     */
+    protected open fun initSharedElementExitTransition(): Transition {
+        return Fade().apply {
+            duration = resourcesInteger(android.R.integer.config_shortAnimTime).toLong()
+            startDelay = 200L
+            excludeChildren(android.R.id.content, true)
+            excludeTarget(android.R.id.statusBarBackground, true)
+            excludeTarget(android.R.id.navigationBarBackground, true)
+            excludeTarget(R.id.box_activity_toolbar, true)
+        }
+    }
+
+    /**
+     * 共享元素-返回动画
+     */
+    protected open fun initSharedElementReturnTransition(): Transition {
+        return TransitionSet().apply {
+            addTransition(Fade().apply {
+                excludeChildren(android.R.id.content, true)
+            })
+            addTransition(Slide(Gravity.END).apply {
+                excludeTarget(android.R.id.statusBarBackground, true)
+                excludeTarget(android.R.id.navigationBarBackground, true)
+                excludeTarget(BottomNavigationView::class.java, true)
+                excludeTarget(R.id.box_activity_toolbar, true)
+            })
+        }
+    }
+
+    /**
+     * 共享元素-重新进入动画
+     */
+    protected open fun initSharedElementReenterTransition(): Transition {
+        return Fade().apply {
+            excludeChildren(android.R.id.content, true)
+            excludeTarget(android.R.id.statusBarBackground, true)
+            excludeTarget(android.R.id.navigationBarBackground, true)
+            excludeTarget(R.id.box_activity_toolbar, true)
+        }
     }
 
     //</editor-fold>

@@ -1,7 +1,6 @@
 package com.chooongg.simple.modules
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -13,6 +12,7 @@ import com.chooongg.adapter.BindingAdapter
 import com.chooongg.core.ext.divider
 import com.chooongg.core.ext.hideLoading
 import com.chooongg.core.ext.showLoading
+import com.chooongg.core.ext.startActivity
 import com.chooongg.ext.dp2px
 import com.chooongg.ext.getNightMode
 import com.chooongg.ext.setNightMode
@@ -33,13 +33,14 @@ class MainActivity : BoxBindingActivity<ActivityMainBinding>() {
     override fun isShowToolbarNavigationIcon() = false
 
     override fun initConfig(savedInstanceState: Bundle?) {
+        window.sharedElementEnterTransition
         binding.recyclerView.adapter = adapter
         binding.recyclerView.divider {
             asSpace().size(dp2px(16f))
             showFirstDivider().showLastDivider().showSideDividers()
         }
-        adapter.setOnItemClickListener { _, _, position ->
-
+        adapter.setOnItemClickListener { _, view, position ->
+            adapter.data[position].block.invoke(view)
         }
     }
 
@@ -47,9 +48,9 @@ class MainActivity : BoxBindingActivity<ActivityMainBinding>() {
         adapter.setNewInstance(
             arrayListOf(
                 SingleItem("AppBar") {
-                    startActivity(Intent(context, AppBarActivity::class.java))
+                    startActivity(AppBarActivity::class)
                 }, SingleItem("状态布局") {
-                    startActivity(Intent(context, StatusActivity::class.java))
+                    startActivity(StatusActivity::class)
                 }
             )
         )

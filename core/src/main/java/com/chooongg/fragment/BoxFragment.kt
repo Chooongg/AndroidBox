@@ -15,6 +15,7 @@ import com.google.android.material.snackbar.Snackbar
 abstract class BoxFragment : Fragment {
 
     constructor() : super()
+
     constructor(@LayoutRes contentLayoutId: Int) : super(contentLayoutId)
 
     //<editor-fold desc="子类实现方法">

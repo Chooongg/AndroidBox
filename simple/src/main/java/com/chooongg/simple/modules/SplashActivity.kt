@@ -1,11 +1,11 @@
 package com.chooongg.simple.modules
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.lifecycleScope
 import com.chooongg.activity.BoxBindingActivity
+import com.chooongg.core.ext.startActivity
 import com.chooongg.ext.withMain
 import com.chooongg.simple.BuildConfig
 import com.chooongg.simple.R
@@ -31,11 +31,9 @@ class SplashActivity : BoxBindingActivity<ActivitySplashBinding>() {
             delay(1800)
             withMain {
                 startActivity(
-                    Intent(context, MainActivity::class.java),
+                    MainActivity::class,
                     ActivityOptionsCompat.makeCustomAnimation(
-                        context,
-                        R.anim.fade_in,
-                        R.anim.fade_out
+                        context, R.anim.fade_in, R.anim.fade_out
                     ).toBundle()
                 )
                 finish()

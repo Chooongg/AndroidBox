@@ -1,6 +1,8 @@
 package com.chooongg.simple.model
 
+import android.view.View
+
 data class SingleItem(
     val title: String,
-    val block: () -> Unit
+    val block: (View) -> Unit
 )
