@@ -1,6 +1,5 @@
 package com.chooongg.mmkv
 
-import androidx.lifecycle.MediatorLiveData
 import com.chooongg.ext.getTClass
 import com.tencent.mmkv.MMKV
 
@@ -8,9 +7,9 @@ import com.tencent.mmkv.MMKV
  * MMKV 字典
  * 使用时请使用 object 类继承此类
  */
-open class MMKVKey<T> : MediatorLiveData<T> {
+open class MMKVKey<T> {
 
-    private val mmkv: MMKV?
+    protected val mmkv: MMKV?
     val key: String
     val default: T
 
@@ -26,50 +25,13 @@ open class MMKVKey<T> : MediatorLiveData<T> {
         this.default = default
     }
 
-    init {
-        super.postValue(getValueFromController())
-    }
-
-    private fun getValueFromController() = decode()
-
-//    override fun observe(owner: LifecycleOwner, observer: Observer<in T>) {
-//        value
-//        super.observe(owner, observer)
-//    }
-//
-//    override fun observeForever(observer: Observer<in T>) {
-//        value
-//        super.observeForever(observer)
-//    }
-
-    override fun getValue(): T {
-        var currentValue = super.getValue() ?: default
-        val mmkvValue = decode()
-        if (currentValue != mmkvValue) {
-            currentValue = mmkvValue
-            postValue(currentValue)
-        }
-        return currentValue
-    }
-
-    override fun postValue(value: T?) {
-        encode(value)
-        super.postValue(value ?: default)
-    }
-
-    override fun setValue(value: T?) {
-        encode(value)
-        super.setValue(value ?: default)
-    }
-
     fun remove() {
-        if (mmkv == null) throw NullPointerException("MMKV is null")
+        if (mmkv == null) return
         mmkv.removeValueForKey(key)
-        postValue(null)
     }
 
     @Suppress("UNCHECKED_CAST")
-    private fun encode(value: T?) {
+    open fun set(value: T?) {
         if (mmkv == null) return
         if (value == null) mmkv.removeValueForKey(key)
         else when (javaClass.getTClass()) {
@@ -91,7 +53,7 @@ open class MMKVKey<T> : MediatorLiveData<T> {
     }
 
     @Suppress("UNCHECKED_CAST")
-    private fun decode(): T {
+    open fun get(): T {
         if (mmkv == null) return default
         return if (mmkv.containsKey(key)) {
             when (javaClass.getTClass()) {
