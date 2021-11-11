@@ -73,6 +73,11 @@ abstract class BoxActivity : AppCompatActivity {
     protected open fun isShowToolbarNavigationIcon() = true
 
     /**
+     * 是否启用自动隐藏输入法
+     */
+    protected open fun isEnableAutoHideInputMethod() = true
+
+    /**
      * 获取 ToolBar
      */
     protected open fun getToolbar(parentLayout: ViewGroup): Toolbar = LayoutInflater.from(context)
@@ -110,7 +115,9 @@ abstract class BoxActivity : AppCompatActivity {
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
-        AutoHideInputMethodEditor.initialize(this)
+        if (isEnableAutoHideInputMethod()) {
+            AutoHideInputMethodEditor.initialize(this)
+        }
         initConfig(savedInstanceState)
         initContent()
     }

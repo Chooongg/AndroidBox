@@ -41,6 +41,11 @@ abstract class BoxFragment : Fragment {
     //<editor-fold desc="开放方法">
 
     /**
+     * 是否启用自动隐藏输入法
+     */
+    protected open fun isEnableAutoHideInputMethod() = true
+
+    /**
      * 再次选择时
      */
     protected fun onReselected() = Unit
@@ -67,7 +72,9 @@ abstract class BoxFragment : Fragment {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        AutoHideInputMethodEditor.initialize(this)
+        if (isEnableAutoHideInputMethod()) {
+            AutoHideInputMethodEditor.initialize(this)
+        }
     }
 
     override fun onResume() {
