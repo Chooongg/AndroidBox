@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="BoxWidget.Toolbar.Primary" parent="@style/Widget.MaterialComponents.Toolbar.Primary">
+    <style name="BoxWidget.Toolbar.Primary" parent="Widget.MaterialComponents.Toolbar.Primary">
         <item name="titleMargin">0dp</item>
         <item name="maxButtonHeight">?android:actionBarSize</item>
         <item name="android:minHeight">?android:actionBarSize</item>
@@ -10,7 +10,7 @@
         <item name="subtitleTextAppearance">@style/BoxSubtitleAppearance</item>
     </style>
 
-    <style name="BoxWidget.Toolbar.Surface" parent="@style/Widget.MaterialComponents.Toolbar.Surface">
+    <style name="BoxWidget.Toolbar.Surface" parent="Widget.MaterialComponents.Toolbar.Surface">
         <item name="titleMargin">0dp</item>
         <item name="maxButtonHeight">?android:actionBarSize</item>
         <item name="android:minHeight">?android:actionBarSize</item>
@@ -19,7 +19,7 @@
         <item name="subtitleTextAppearance">@style/BoxSubtitleAppearance</item>
     </style>
 
-    <style name="BoxWidget.Toolbar.PrimarySurface" parent="@style/Widget.MaterialComponents.Toolbar.PrimarySurface">
+    <style name="BoxWidget.Toolbar.PrimarySurface" parent="Widget.MaterialComponents.Toolbar.PrimarySurface">
         <item name="titleMargin">0dp</item>
         <item name="maxButtonHeight">?android:actionBarSize</item>
         <item name="android:minHeight">?android:actionBarSize</item>

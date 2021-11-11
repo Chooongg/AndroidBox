@@ -7,9 +7,6 @@ buildscript {
     ext.version_code = 1
     ext.version_name = "0.0.1"
 
-    ext.appcompat_version = "1.4.0-beta01"
-    ext.material_version = "1.5.0-alpha04"
-
     repositories {
         google()
         mavenCentral()

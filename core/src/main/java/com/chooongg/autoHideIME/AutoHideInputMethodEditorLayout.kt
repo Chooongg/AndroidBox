@@ -47,6 +47,7 @@ class AutoHideInputMethodEditorLayout @JvmOverloads constructor(
     private fun hideInputMethod(currentFocus: View?) {
         currentFocus?.let {
             context.inputMethodManager.hideSoftInputFromWindow(it.windowToken, HIDE_NOT_ALWAYS)
+            it.clearFocus()
         }
     }
 }

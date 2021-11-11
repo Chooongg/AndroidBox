@@ -33,15 +33,15 @@ android {
 
 dependencies {
     api 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2'
-    api "com.google.android.material:material:$material_version"
-    api "androidx.appcompat:appcompat:$appcompat_version"
+    api 'com.google.android.material:material:1.5.0-alpha05'
+    api 'androidx.appcompat:appcompat:1.4.0-rc01'
     api 'androidx.recyclerview:recyclerview:1.2.1'
     api 'androidx.core:core-ktx:1.7.0-beta02'
     api 'androidx.lifecycle:lifecycle-process:2.4.0-rc01'
     api 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.0-rc01'
     api 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0-rc01'
     api 'com.github.getActivity:XXPermissions:11.6'
-    api 'com.tencent:mmkv-static:1.2.10'
+    api 'com.tencent:mmkv-static:1.2.11'
     // 调试工具
     implementation 'com.facebook.stetho:stetho:1.6.0'
 }

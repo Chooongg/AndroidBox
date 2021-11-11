@@ -43,7 +43,6 @@
         <item name="subtitleCentered">true</item>
     </style>
 
-
     <style name="Base.BoxTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:windowBackground">@color/background</item>
         <item name="android:colorBackground">@color/background</item>
