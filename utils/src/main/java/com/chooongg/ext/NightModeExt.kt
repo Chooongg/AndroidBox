@@ -2,7 +2,7 @@ package com.chooongg.ext
 
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatDelegate
-import com.chooongg.manager.BoxSimpleDataManager
+import com.chooongg.manager.BoxMMKV
 
 /**
  * 判断当前是否深色模式
@@ -23,6 +23,6 @@ fun getNightMode() = AppCompatDelegate.getDefaultNightMode()
  * 设置深色模式
  */
 fun setNightMode(@AppCompatDelegate.NightMode mode: Int) {
-    BoxSimpleDataManager.DayNightMode.postValue(mode)
     AppCompatDelegate.setDefaultNightMode(mode)
+    BoxMMKV.DayNightMode.set(mode)
 }

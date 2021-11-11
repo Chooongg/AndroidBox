@@ -8,7 +8,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import com.chooongg.ext.isAppDebug
 import com.chooongg.manager.ApplicationManager
-import com.chooongg.manager.BoxSimpleDataManager
+import com.chooongg.manager.BoxMMKV
 import com.chooongg.utils.PermissionInterceptor
 import com.facebook.stetho.Stetho
 import com.hjq.permissions.XXPermissions
@@ -27,7 +27,7 @@ class BoxInitializeProvider : ContentProvider() {
         if (context is Application) {
             ApplicationManager.initialize(context as Application)
             MMKV.initialize(context as Application)
-            AppCompatDelegate.setDefaultNightMode(BoxSimpleDataManager.DayNightMode.value)
+            AppCompatDelegate.setDefaultNightMode(BoxMMKV.DayNightMode.get())
             Stetho.initializeWithDefaults(context)
             XXPermissions.setScopedStorage(true)
             XXPermissions.setDebugMode(isAppDebug())
