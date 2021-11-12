@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.chooongg.toolbar.BoxToolbar xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.appbar.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="?attr/toolbarStyle"
+    android:id="@+id/box_activity_appbar_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:defaultNavigation="false"
-    app:loadActivityLabel="false"
-    tools:viewBindingIgnore="true" />
+    android:fitsSystemWindows="true"
+    app:elevation="@dimen/toolbarElevation">
+
+    <com.chooongg.toolbar.BoxToolbar
+        android:id="@+id/box_activity_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:autoSetActionBar="true"
+        app:defaultNavigation="false"
+        app:loadActivityLabel="false"
+        tools:viewBindingIgnore="true" />
+
+</com.google.android.material.appbar.AppBarLayout>

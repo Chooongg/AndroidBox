@@ -1,35 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="BoxWidget.Toolbar.Primary" parent="Widget.MaterialComponents.Toolbar.Primary">
+    <style name="BoxWidget.Toolbar.Surface" parent="Widget.Material3.Toolbar.OnSurface">
         <item name="titleMargin">0dp</item>
         <item name="maxButtonHeight">?android:actionBarSize</item>
         <item name="android:minHeight">?android:actionBarSize</item>
-        <item name="android:elevation">@dimen/toolbarElevation</item>
         <item name="contentInsetStartWithNavigation">?android:actionBarSize</item>
         <item name="subtitleTextAppearance">@style/BoxSubtitleAppearance</item>
+        <item name="materialThemeOverlay">@style/ThemeOverlay.Material3.Toolbar.Surface</item>
     </style>
 
-    <style name="BoxWidget.Toolbar.Surface" parent="Widget.MaterialComponents.Toolbar.Surface">
-        <item name="titleMargin">0dp</item>
-        <item name="maxButtonHeight">?android:actionBarSize</item>
-        <item name="android:minHeight">?android:actionBarSize</item>
-        <item name="android:elevation">@dimen/toolbarElevation</item>
-        <item name="contentInsetStartWithNavigation">?android:actionBarSize</item>
-        <item name="subtitleTextAppearance">@style/BoxSubtitleAppearance</item>
+    <style name="BoxWidget.Toolbar.Primary" parent="BoxWidget.Toolbar.Surface">
+        <item name="android:background">?colorPrimary</item>
+        <item name="titleTextColor">?colorOnPrimary</item>
+        <item name="subtitleTextColor">?colorOnPrimary</item>
+        <item name="navigationIconTint">?colorOnPrimary</item>
+        <item name="materialThemeOverlay">@style/Box.ThemeOverlay.Toolbar.Primary</item>
     </style>
 
-    <style name="BoxWidget.Toolbar.PrimarySurface" parent="Widget.MaterialComponents.Toolbar.PrimarySurface">
-        <item name="titleMargin">0dp</item>
-        <item name="maxButtonHeight">?android:actionBarSize</item>
-        <item name="android:minHeight">?android:actionBarSize</item>
-        <item name="android:elevation">@dimen/toolbarElevation</item>
-        <item name="contentInsetStartWithNavigation">?android:actionBarSize</item>
-        <item name="subtitleTextAppearance">@style/BoxSubtitleAppearance</item>
+    <style name="BoxWidget.Toolbar.PrimarySurface" parent="BoxWidget.Toolbar.Surface">
+        <item name="android:background">?colorPrimarySurface</item>
+        <item name="titleTextColor">?colorOnPrimarySurface</item>
+        <item name="subtitleTextColor">?colorOnPrimarySurface</item>
+        <item name="navigationIconTint">?colorOnPrimarySurface</item>
+        <item name="materialThemeOverlay">@style/Box.ThemeOverlay.Toolbar.PrimarySurface</item>
     </style>
 
     <style name="BoxSubtitleAppearance">
         <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="Box.ThemeOverlay.Toolbar.Primary" parent="">
+        <item name="actionMenuTextColor">?colorOnPrimary</item>
+        <item name="colorControlNormal">?colorOnPrimary</item>
+    </style>
+
+    <style name="Box.ThemeOverlay.Toolbar.PrimarySurface" parent="">
+        <item name="actionMenuTextColor">?colorOnPrimarySurface</item>
+        <item name="colorControlNormal">?colorOnPrimarySurface</item>
     </style>
 
 </resources>

@@ -17,12 +17,12 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.updateLayoutParams
 import com.chooongg.annotation.Theme
-import com.chooongg.autoHideIME.AutoHideInputMethodEditor
 import com.chooongg.core.R
+import com.chooongg.core.databinding.BoxActivityToolbarBinding
 import com.chooongg.ext.contentView
 import com.chooongg.ext.dp2px
+import com.chooongg.ext.hideInputMethodEditor
 import com.chooongg.ext.resourcesInteger
-import com.chooongg.toolbar.BoxToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
@@ -51,8 +51,10 @@ abstract class BoxActivity : AppCompatActivity {
 
     private val contentId: Int
 
-    protected var windowToolBar: Toolbar? = null
-        private set
+    /**
+     * 不显示时为空
+     */
+    protected lateinit var toolbarBinding: BoxActivityToolbarBinding
 
     //<editor-fold desc="开放方法">
 
@@ -76,12 +78,6 @@ abstract class BoxActivity : AppCompatActivity {
      * 是否启用自动隐藏输入法
      */
     protected open fun isEnableAutoHideInputMethod() = true
-
-    /**
-     * 获取 ToolBar
-     */
-    protected open fun getToolbar(parentLayout: ViewGroup): Toolbar = LayoutInflater.from(context)
-        .inflate(R.layout.box_activity_toolbar, parentLayout, false) as BoxToolbar
 
     /**
      * 初始化行动栏
@@ -116,7 +112,7 @@ abstract class BoxActivity : AppCompatActivity {
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
         if (isEnableAutoHideInputMethod()) {
-            AutoHideInputMethodEditor.initialize(this)
+            contentView.setOnClickListener { hideInputMethodEditor() }
         }
         initConfig(savedInstanceState)
         initContent()
@@ -126,13 +122,8 @@ abstract class BoxActivity : AppCompatActivity {
         val parentLayout = contentView.parent as ViewGroup
         // 在 Theme 中使用 NoActionBar 才生效
         if (parentLayout is FitWindowsLinearLayout) {
-            windowToolBar = getToolbar(parentLayout).apply {
-                id = R.id.box_activity_toolbar
-            }
-            if (windowToolBar !is BoxToolbar) {
-                super.setSupportActionBar(windowToolBar!!)
-            }
-            parentLayout.addView(windowToolBar!!, 0)
+            toolbarBinding = BoxActivityToolbarBinding.inflate(LayoutInflater.from(context))
+            parentLayout.addView(toolbarBinding.root, 0)
             if (supportActionBar != null) {
                 if (isShowToolbarNavigationIcon()) {
                     supportActionBar!!.setHomeButtonEnabled(true)

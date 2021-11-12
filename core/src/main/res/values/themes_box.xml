@@ -2,15 +2,25 @@
 <resources>
 
     <style name="BoxTheme" parent="Base.BoxTheme">
-        <item name="android:statusBarColor">?colorPrimary</item>
-        <item name="toolbarStyle">@style/BoxWidget.Toolbar.Primary</item>
-        <item name="actionBarStyle">@style/BoxWidget.Toolbar.Primary</item>
+        <item name="android:statusBarColor">@android:color/darker_gray</item>
+        <item name="toolbarStyle">@style/BoxWidget.Toolbar.Surface</item>
+        <item name="actionBarStyle">@style/BoxWidget.Toolbar.Surface</item>
+        <item name="android:textColorSecondary">?colorOnSurface</item>
     </style>
 
     <style name="BoxTheme.CenterTitle" parent="BoxTheme">
+        <item name="titleCentered">true</item>
+        <item name="subtitleCentered">true</item>
+    </style>
+
+    <style name="BoxTheme.Primary" parent="Base.BoxTheme">
         <item name="android:statusBarColor">?colorPrimary</item>
         <item name="toolbarStyle">@style/BoxWidget.Toolbar.Primary</item>
         <item name="actionBarStyle">@style/BoxWidget.Toolbar.Primary</item>
+        <item name="android:textColorSecondary">?colorOnPrimary</item>
+    </style>
+
+    <style name="BoxTheme.Primary.CenterTitle" parent="BoxTheme.Primary">
         <item name="titleCentered">true</item>
         <item name="subtitleCentered">true</item>
     </style>
@@ -19,32 +29,15 @@
         <item name="android:statusBarColor">?colorPrimarySurface</item>
         <item name="toolbarStyle">@style/BoxWidget.Toolbar.PrimarySurface</item>
         <item name="actionBarStyle">@style/BoxWidget.Toolbar.PrimarySurface</item>
+        <item name="android:textColorSecondary">?colorOnPrimarySurface</item>
     </style>
 
     <style name="BoxTheme.PrimarySurface.CenterTitle" parent="BoxTheme.PrimarySurface">
-        <item name="android:statusBarColor">?colorPrimarySurface</item>
-        <item name="toolbarStyle">@style/BoxWidget.Toolbar.PrimarySurface</item>
-        <item name="actionBarStyle">@style/BoxWidget.Toolbar.PrimarySurface</item>
         <item name="titleCentered">true</item>
         <item name="subtitleCentered">true</item>
     </style>
 
-    <style name="BoxTheme.Surface" parent="Base.BoxTheme">
-        <item name="android:statusBarColor">@android:color/darker_gray</item>
-        <item name="toolbarStyle">@style/BoxWidget.Toolbar.Surface</item>
-        <item name="actionBarStyle">@style/BoxWidget.Toolbar.Surface</item>
-    </style>
-
-    <style name="BoxTheme.Surface.CenterTitle" parent="BoxTheme.Surface">
-        <item name="android:statusBarColor">?colorSurface</item>
-        <item name="toolbarStyle">@style/BoxWidget.Toolbar.Surface</item>
-        <item name="actionBarStyle">@style/BoxWidget.Toolbar.Surface</item>
-        <item name="titleCentered">true</item>
-        <item name="subtitleCentered">true</item>
-    </style>
-
-    <style name="Base.BoxTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="android:windowBackground">@color/background</item>
+    <style name="Base.BoxTheme" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:colorBackground">@color/background</item>
         <item name="colorOnBackground">@color/onBackground</item>
         <item name="colorSurface">@color/surface</item>
@@ -53,15 +46,10 @@
         <item name="colorOnError">@color/onError</item>
         <item name="android:windowAnimationStyle">@style/BoxWindowAnimation</item>
         <!-- 圆角设置 -->
-        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearanceImage.Rounded.8dp</item>
-        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearanceImage.Rounded.8dp</item>
-        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearanceImage.Rounded.8dp</item>
         <!-- 工具栏配置 -->
-        <item name="statusBarScrim">@android:color/transparent</item>
-        <item name="toolbarStyle">@style/BoxWidget.Toolbar.PrimarySurface</item>
-        <item name="actionBarStyle">@style/BoxWidget.Toolbar.PrimarySurface</item>
         <item name="actionBarSize">@dimen/d48</item>
         <item name="android:actionBarSize">@dimen/d48</item>
+        <item name="toolbarStyle">@style/BoxWidget.Toolbar.Surface</item>
         <item name="toolbarNavigationButtonStyle">@style/BoxToolBarNavigationButton</item>
         <item name="titleCentered">false</item>
         <item name="subtitleCentered">false</item>
@@ -86,10 +74,6 @@
         <item name="minWidth">?actionBarSize</item>
         <item name="maxWidth">?actionBarSize</item>
         <item name="android:scaleType">centerInside</item>
-    </style>
-
-    <style name="sdf" parent="Widget.Material3.Snackbar">
-
     </style>
 
 </resources>

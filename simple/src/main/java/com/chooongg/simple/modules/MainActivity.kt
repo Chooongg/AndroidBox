@@ -51,6 +51,42 @@ class MainActivity : BoxBindingActivity<ActivityMainBinding>() {
                     startActivity(AppBarActivity::class)
                 }, SingleItem("状态布局") {
                     startActivity(StatusActivity::class)
+                }, SingleItem("AppBar") {
+                    startActivity(AppBarActivity::class)
+                }, SingleItem("状态布局") {
+                    startActivity(StatusActivity::class)
+                }, SingleItem("AppBar") {
+                    startActivity(AppBarActivity::class)
+                }, SingleItem("状态布局") {
+                    startActivity(StatusActivity::class)
+                }, SingleItem("AppBar") {
+                    startActivity(AppBarActivity::class)
+                }, SingleItem("状态布局") {
+                    startActivity(StatusActivity::class)
+                }, SingleItem("AppBar") {
+                    startActivity(AppBarActivity::class)
+                }, SingleItem("状态布局") {
+                    startActivity(StatusActivity::class)
+                }, SingleItem("AppBar") {
+                    startActivity(AppBarActivity::class)
+                }, SingleItem("状态布局") {
+                    startActivity(StatusActivity::class)
+                }, SingleItem("AppBar") {
+                    startActivity(AppBarActivity::class)
+                }, SingleItem("状态布局") {
+                    startActivity(StatusActivity::class)
+                }, SingleItem("AppBar") {
+                    startActivity(AppBarActivity::class)
+                }, SingleItem("状态布局") {
+                    startActivity(StatusActivity::class)
+                }, SingleItem("AppBar") {
+                    startActivity(AppBarActivity::class)
+                }, SingleItem("状态布局") {
+                    startActivity(StatusActivity::class)
+                }, SingleItem("AppBar") {
+                    startActivity(AppBarActivity::class)
+                }, SingleItem("状态布局") {
+                    startActivity(StatusActivity::class)
                 }
             )
         )
@@ -71,7 +107,11 @@ class MainActivity : BoxBindingActivity<ActivityMainBinding>() {
         }
         val create = BadgeDrawable.create(context)
         create.number = 1
-        BadgeUtils.attachBadgeDrawable(create, windowToolBar!!, R.id.day_night_mode)
+        BadgeUtils.attachBadgeDrawable(
+            create,
+            toolbarBinding.boxActivityToolbar,
+            R.id.day_night_mode
+        )
         return super.onPrepareOptionsMenu(menu)
     }
 

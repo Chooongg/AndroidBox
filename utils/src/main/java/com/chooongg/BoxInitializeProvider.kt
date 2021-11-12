@@ -11,6 +11,7 @@ import com.chooongg.manager.ApplicationManager
 import com.chooongg.manager.BoxMMKV
 import com.chooongg.utils.PermissionInterceptor
 import com.facebook.stetho.Stetho
+import com.google.android.material.color.DynamicColors
 import com.hjq.permissions.XXPermissions
 import com.tencent.mmkv.MMKV
 
@@ -32,6 +33,7 @@ class BoxInitializeProvider : ContentProvider() {
             XXPermissions.setScopedStorage(true)
             XXPermissions.setDebugMode(isAppDebug())
             XXPermissions.setInterceptor(PermissionInterceptor())
+            DynamicColors.applyToActivitiesIfAvailable(context as Application)
         } else {
             Log.e("AndroidBox", "BoxInitializeProvider initialize failure")
         }

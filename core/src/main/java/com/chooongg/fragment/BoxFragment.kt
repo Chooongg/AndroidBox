@@ -7,7 +7,7 @@ import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import com.chooongg.activity.BoxActivity
 import com.chooongg.annotation.Title
-import com.chooongg.autoHideIME.AutoHideInputMethodEditor
+import com.chooongg.ext.hideInputMethodEditor
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 
@@ -73,7 +73,7 @@ abstract class BoxFragment : Fragment {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (isEnableAutoHideInputMethod()) {
-            AutoHideInputMethodEditor.initialize(this)
+            view.setOnClickListener { hideInputMethodEditor() }
         }
     }
 
