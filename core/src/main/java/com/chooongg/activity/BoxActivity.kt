@@ -6,7 +6,10 @@ import android.transition.Fade
 import android.transition.Slide
 import android.transition.Transition
 import android.transition.TransitionSet
-import android.view.*
+import android.view.Gravity
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
 import androidx.annotation.StyleRes
@@ -18,11 +21,11 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.updateLayoutParams
 import com.chooongg.annotation.Theme
 import com.chooongg.core.R
-import com.chooongg.core.databinding.BoxActivityToolbarBinding
 import com.chooongg.ext.contentView
 import com.chooongg.ext.dp2px
 import com.chooongg.ext.hideInputMethodEditor
 import com.chooongg.ext.resourcesInteger
+import com.chooongg.toolbar.BoxToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
@@ -51,10 +54,8 @@ abstract class BoxActivity : AppCompatActivity {
 
     private val contentId: Int
 
-    /**
-     * 不显示时为空
-     */
-    protected lateinit var toolbarBinding: BoxActivityToolbarBinding
+    protected var windowToolBar: Toolbar? = null
+        private set
 
     //<editor-fold desc="开放方法">
 
@@ -122,8 +123,15 @@ abstract class BoxActivity : AppCompatActivity {
         val parentLayout = contentView.parent as ViewGroup
         // 在 Theme 中使用 NoActionBar 才生效
         if (parentLayout is FitWindowsLinearLayout) {
-            toolbarBinding = BoxActivityToolbarBinding.inflate(LayoutInflater.from(context))
-            parentLayout.addView(toolbarBinding.root, 0)
+            windowToolBar = layoutInflater.inflate(
+                R.layout.box_activity_toolbar,
+                parentLayout,
+                false
+            ) as Toolbar
+            if (windowToolBar !is BoxToolbar) {
+                super.setSupportActionBar(windowToolBar!!)
+            }
+            parentLayout.addView(windowToolBar!!, 0)
             if (supportActionBar != null) {
                 if (isShowToolbarNavigationIcon()) {
                     supportActionBar!!.setHomeButtonEnabled(true)
@@ -232,12 +240,13 @@ abstract class BoxActivity : AppCompatActivity {
             addTransition(Fade().apply {
                 duration = resourcesInteger(android.R.integer.config_longAnimTime).toLong()
                 excludeChildren(android.R.id.content, true)
+                addTarget(BottomNavigationView::class.java)
             })
             addTransition(Slide(Gravity.END).apply {
                 excludeTarget(android.R.id.statusBarBackground, true)
                 excludeTarget(android.R.id.navigationBarBackground, true)
                 excludeTarget(BottomNavigationView::class.java, true)
-                excludeTarget(R.id.box_activity_toolbar, true)
+                excludeTarget(BoxToolbar::class.java, true)
             })
         }
     }
@@ -263,6 +272,7 @@ abstract class BoxActivity : AppCompatActivity {
         return TransitionSet().apply {
             addTransition(Fade().apply {
                 excludeChildren(android.R.id.content, true)
+                addTarget(BottomNavigationView::class.java)
             })
             addTransition(Slide(Gravity.END).apply {
                 excludeTarget(android.R.id.statusBarBackground, true)
@@ -281,7 +291,7 @@ abstract class BoxActivity : AppCompatActivity {
             excludeChildren(android.R.id.content, true)
             excludeTarget(android.R.id.statusBarBackground, true)
             excludeTarget(android.R.id.navigationBarBackground, true)
-            excludeTarget(R.id.box_activity_toolbar, true)
+            excludeTarget(BoxToolbar::class.java, true)
         }
     }
 

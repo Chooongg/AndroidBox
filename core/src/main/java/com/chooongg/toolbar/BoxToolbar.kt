@@ -6,12 +6,11 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.util.AttributeSet
+import android.view.Gravity
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.chooongg.activity.BoxActivity
 import com.chooongg.core.R
-import com.chooongg.ext.getActivity
-import com.chooongg.ext.loadActivityLabel
-import com.chooongg.ext.setLightStatusBars
+import com.chooongg.ext.*
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.elevation.ElevationOverlayProvider
 import com.google.android.material.shape.MaterialShapeDrawable
@@ -30,6 +29,8 @@ class BoxToolbar @JvmOverloads constructor(
 
     private val autoSetActionBar: Boolean
 
+    private val dividerView: View
+
     init {
         val a =
             context.obtainStyledAttributes(attrs, R.styleable.BoxToolbar, defStyleAttr, defStyleRes)
@@ -43,6 +44,15 @@ class BoxToolbar @JvmOverloads constructor(
         syncStatusBarColor = a.getBoolean(R.styleable.BoxToolbar_syncStatusBarColor, true)
         autoSetActionBar = a.getBoolean(R.styleable.BoxToolbar_autoSetActionBar, true)
         a.recycle()
+        dividerView = View(context)
+        dividerView.layoutParams =
+            LayoutParams(
+                LayoutParams.MATCH_PARENT, resourcesDimensionPixelSize(R.dimen.divider)
+            ).apply {
+                gravity = Gravity.BOTTOM
+            }
+        dividerView.gone()
+        addView(dividerView)
     }
 
     override fun onFinishInflate() {
@@ -58,6 +68,18 @@ class BoxToolbar @JvmOverloads constructor(
     override fun setElevation(elevation: Float) {
         super.setElevation(elevation)
         actualElevation = elevation
+    }
+
+    fun showDivider() {
+        dividerView.visible()
+    }
+
+    fun hideDivider() {
+        dividerView.gone()
+    }
+
+    fun bindLayoutScrollView() {
+
     }
 
     /**

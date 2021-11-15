@@ -9,7 +9,7 @@
         <item name="colorOnSecondary">@color/onSecondary</item>
     </style>
 
-    <style name="Theme.AndroidBox.Splash" parent="BoxTheme">
+    <style name="Theme.AndroidBox.Splash" parent="BoxTheme.Surface">
         <item name="android:colorBackground">?colorSurface</item>
         <item name="android:windowBackground">?colorSurface</item>
         <item name="android:windowDisablePreview">true</item>

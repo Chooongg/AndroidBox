@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.view.NestedScrollingParent
 import androidx.lifecycle.lifecycleScope
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.chooongg.activity.BoxBindingActivity
@@ -28,12 +29,12 @@ import kotlinx.coroutines.launch
 
 class MainActivity : BoxBindingActivity<ActivityMainBinding>() {
 
+
     private val adapter = Adapter()
 
     override fun isShowToolbarNavigationIcon() = false
 
     override fun initConfig(savedInstanceState: Bundle?) {
-        window.sharedElementEnterTransition
         binding.recyclerView.adapter = adapter
         binding.recyclerView.divider {
             asSpace().size(dp2px(16f))
@@ -107,11 +108,9 @@ class MainActivity : BoxBindingActivity<ActivityMainBinding>() {
         }
         val create = BadgeDrawable.create(context)
         create.number = 1
-        BadgeUtils.attachBadgeDrawable(
-            create,
-            toolbarBinding.boxActivityToolbar,
-            R.id.day_night_mode
-        )
+        windowToolBar?.let {
+            BadgeUtils.attachBadgeDrawable(create, it, R.id.day_night_mode)
+        }
         return super.onPrepareOptionsMenu(menu)
     }
 

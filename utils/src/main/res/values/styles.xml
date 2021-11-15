@@ -27,6 +27,10 @@
         <item name="cornerSize">16dp</item>
     </style>
 
+    <style name="ShapeAppearanceImage.Rounded.24dp" parent="ShapeAppearanceImage.Rounded">
+        <item name="cornerSize">24dp</item>
+    </style>
+
 
     <style name="ShapeAppearanceImage.Cut" parent="ShapeAppearanceImage">
         <item name="cornerFamily">cut</item>
