@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.chooongg.statusLayout.StatusLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<com.scwang.smart.refresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/status_layout"
+    android:id="@+id/refresh_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -10,7 +9,6 @@
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_single" />
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-</com.chooongg.statusLayout.StatusLayout>
+</com.scwang.smart.refresh.layout.SmartRefreshLayout>

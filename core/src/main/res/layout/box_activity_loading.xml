@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:animateLayoutChanges="true"
             android:gravity="center"
-            android:minWidth="@dimen/d104"
+            android:minWidth="104dp"
             android:minHeight="@dimen/d56"
             android:orientation="vertical"
             android:padding="@dimen/d16">

@@ -3,7 +3,6 @@ package com.chooongg.simple.api
 import com.chooongg.http.HttpFactory
 import com.chooongg.http.annotation.BaseUrl
 import com.chooongg.simple.model.ArticleEntity
-import com.chooongg.simple.model.ArticleItem
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -23,5 +22,5 @@ interface WanAndroidAPI {
     ): WanAndroidResponse<ArticleEntity>
 
     @GET("maven_pom/package/json")
-    suspend fun allPackage(): WanAndroidResponse<String>
+    suspend fun allPackage(): WanAndroidResponse<MutableList<String>>
 }

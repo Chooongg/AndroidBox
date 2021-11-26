@@ -9,7 +9,6 @@
     <dimen name="d4">4dp</dimen>
     <dimen name="d6">6dp</dimen>
     <dimen name="d8">8dp</dimen>
-    <dimen name="d10">10dp</dimen>
     <dimen name="d12">12dp</dimen>
     <dimen name="d16">16dp</dimen>
     <dimen name="d24">24dp</dimen>
@@ -21,14 +20,20 @@
     <dimen name="d56">56dp</dimen>
     <dimen name="d64">64dp</dimen>
     <dimen name="d72">72dp</dimen>
+    <dimen name="d76">76dp</dimen>
     <dimen name="d80">80dp</dimen>
     <dimen name="d84">84dp</dimen>
+    <dimen name="d88">88dp</dimen>
+    <dimen name="d92">92dp</dimen>
     <dimen name="d96">96dp</dimen>
-    <dimen name="d104">104dp</dimen>
-    <dimen name="d120">120dp</dimen>
 
     <!--______________________________分割线规范______________________________-->
     <dimen name="divider">1dp</dimen>
-    <dimen name="divider_big">10dp</dimen>
+    <dimen name="dividerBig">10dp</dimen>
+
+    <!--______________________________常用距离单位______________________________-->
+    <dimen name="contentSmall">1dp</dimen>
+    <dimen name="contentMedium">16dp</dimen>
+    <dimen name="contentLarge">20dp</dimen>
 
 </resources>

@@ -2,7 +2,7 @@
 <resources>
 
     <style name="BoxTheme" parent="Base.BoxTheme">
-        <item name="android:statusBarColor">?colorPrimary</item>
+        <item name="android:statusBarColor">?attr/colorPrimary</item>
         <item name="toolbarStyle">@style/BoxWidget.Toolbar.Primary</item>
         <item name="actionBarStyle">@style/BoxWidget.Toolbar.Primary</item>
     </style>
@@ -75,8 +75,8 @@
     </style>
 
     <style name="BoxToolBarNavigationButton" parent="Widget.AppCompat.Toolbar.Button.Navigation">
-        <item name="minWidth">?actionBarSize</item>
-        <item name="maxWidth">?actionBarSize</item>
+        <item name="minWidth">?attr/actionBarSize</item>
+        <item name="maxWidth">?attr/actionBarSize</item>
         <item name="android:scaleType">centerInside</item>
     </style>
 

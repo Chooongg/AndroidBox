@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.view.NestedScrollingParent
 import androidx.lifecycle.lifecycleScope
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.chooongg.activity.BoxBindingActivity
@@ -52,8 +51,8 @@ class MainActivity : BoxBindingActivity<ActivityMainBinding>() {
                     startActivity(AppBarActivity::class)
                 }, SingleItem("状态布局") {
                     startActivity(StatusActivity::class)
-                }, SingleItem("AppBar") {
-                    startActivity(AppBarActivity::class)
+                }, SingleItem("网络请求") {
+                    startActivity(HttpActivity::class)
                 }, SingleItem("状态布局") {
                     startActivity(StatusActivity::class)
                 }, SingleItem("AppBar") {
@@ -121,20 +120,6 @@ class MainActivity : BoxBindingActivity<ActivityMainBinding>() {
             R.id.light -> setNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             R.id.night -> setNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             R.id.system -> setNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-            R.id.loading -> {
-                lifecycleScope.launch {
-                    withMain {
-                        if (isLong) {
-                            showLoading("测试加载${System.currentTimeMillis()}")
-                        } else {
-                            showLoading("${System.currentTimeMillis()}")
-                        }
-                        isLong = !isLong
-                    }
-                    delay(5000)
-                    withMain { hideLoading() }
-                }
-            }
             else -> return super.onOptionsItemSelected(item)
         }
         return true

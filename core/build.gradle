@@ -37,13 +37,13 @@ android {
 dependencies {
     api project(path: ':utils')
     // 官方
-    api 'androidx.constraintlayout:constraintlayout:2.1.1'
+    api 'androidx.constraintlayout:constraintlayout:2.1.2'
     api 'androidx.viewpager2:viewpager2:1.1.0-beta01'
-    api 'androidx.navigation:navigation-ui-ktx:2.4.0-alpha10'
-    api 'androidx.navigation:navigation-fragment-ktx:2.4.0-alpha10'
-    api 'androidx.paging:paging-common-ktx:3.1.0-beta01'
-    api 'androidx.paging:paging-runtime-ktx:3.1.0-beta01'
-    api 'androidx.work:work-runtime-ktx:2.7.0'
+    api 'androidx.navigation:navigation-ui-ktx:2.4.0-beta02'
+    api 'androidx.navigation:navigation-fragment-ktx:2.4.0-beta02'
+    api 'androidx.paging:paging-common-ktx:3.1.0'
+    api 'androidx.paging:paging-runtime-ktx:3.1.0'
+    api 'androidx.work:work-runtime-ktx:2.7.1'
     api 'com.google.android.flexbox:flexbox:3.0.0'
     // 适配器
     api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'

@@ -14,7 +14,7 @@
         android:id="@+id/iv_icon"
         android:layout_width="@dimen/d24"
         android:layout_height="@dimen/d24"
-        app:tint="?colorOnSurface"
+        app:tint="?attr/colorOnSurface"
         tools:src="@drawable/ic_permission_sensors" />
 
     <TextView
@@ -23,8 +23,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/d8"
         android:gravity="center"
-        android:textAppearance="?textAppearanceHeadline6"
-        android:textColor="?colorOnSurface"
+        android:textAppearance="?attr/textAppearanceHeadline6"
+        android:textColor="?attr/colorOnSurface"
         tools:text="@string/common_permission_sensors">
 
     </TextView>

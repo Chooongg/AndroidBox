@@ -32,11 +32,15 @@ android {
 }
 
 dependencies {
-
-    implementation 'androidx.core:core-ktx:1.3.2'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.3.0'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    api project(path: ':utils')
+    implementation "com.mikepenz:fastadapter:5.5.1"
+    implementation "com.mikepenz:fastadapter-extensions-expandable:5.5.1"
+    implementation "com.mikepenz:fastadapter-extensions-binding:5.5.1" // view binding helpers
+    implementation "com.mikepenz:fastadapter-extensions-diff:5.5.1" // diff util helpers
+    implementation "com.mikepenz:fastadapter-extensions-drag:5.5.1" // drag support
+    implementation "com.mikepenz:fastadapter-extensions-paged:5.5.1" // paging support
+    implementation "com.mikepenz:fastadapter-extensions-scroll:5.5.1" // scroll helpers
+    implementation "com.mikepenz:fastadapter-extensions-swipe:5.5.1" // swipe support
+    implementation "com.mikepenz:fastadapter-extensions-ui:5.5.1" // pre-defined ui components
+    implementation "com.mikepenz:fastadapter-extensions-utils:5.5.1" // needs the `expandable`, `drag` and `scroll` extension.
 }
