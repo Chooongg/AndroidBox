@@ -21,6 +21,9 @@ interface WanAndroidAPI {
         @Query("page_size") pageSize: Int = 10
     ): WanAndroidResponse<ArticleEntity>
 
+    /**
+     * 获取所有谷歌仓库包名
+     */
     @GET("maven_pom/package/json")
     suspend fun allPackage(): WanAndroidResponse<MutableList<String>>
 }
