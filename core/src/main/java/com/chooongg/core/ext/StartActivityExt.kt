@@ -123,6 +123,7 @@ private fun getActivityOption(
     activity: Activity?,
     vararg sharedElements: Pair<View, String>
 ): ActivityOptionsCompat? {
+    ActivityOptionsCompat.makeBasic()
     return if (activity != null) {
         if (sharedElements.size == 1) {
             ActivityOptionsCompat.makeSceneTransitionAnimation(

@@ -58,8 +58,8 @@
         <item name="titleCentered">false</item>
         <item name="subtitleCentered">false</item>
         <!-- 添加 Transitions 支持 -->
-        <item name="android:windowContentTransitions">true</item>
-        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:windowContentTransitions">false</item>
+        <item name="android:windowActivityTransitions">false</item>
         <item name="android:windowSharedElementsUseOverlay">true</item>
         <!-- 前后两个页面是同步执行还是顺序执行, true为同步 -->
         <item name="android:windowAllowEnterTransitionOverlap">false</item>

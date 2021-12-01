@@ -5,29 +5,22 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.lifecycle.lifecycleScope
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.chooongg.activity.BoxBindingActivity
 import com.chooongg.adapter.BindingAdapter
 import com.chooongg.core.ext.divider
-import com.chooongg.core.ext.hideLoading
-import com.chooongg.core.ext.showLoading
 import com.chooongg.core.ext.startActivity
 import com.chooongg.ext.dp2px
 import com.chooongg.ext.getNightMode
 import com.chooongg.ext.setNightMode
-import com.chooongg.ext.withMain
 import com.chooongg.simple.R
 import com.chooongg.simple.databinding.ActivityMainBinding
 import com.chooongg.simple.databinding.ItemSingleBinding
 import com.chooongg.simple.model.SingleItem
 import com.google.android.material.badge.BadgeDrawable
 import com.google.android.material.badge.BadgeUtils
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 class MainActivity : BoxBindingActivity<ActivityMainBinding>() {
-
 
     private val adapter = Adapter()
 
@@ -53,40 +46,6 @@ class MainActivity : BoxBindingActivity<ActivityMainBinding>() {
                     startActivity(StatusActivity::class)
                 }, SingleItem("网络请求") {
                     startActivity(HttpActivity::class)
-                }, SingleItem("状态布局") {
-                    startActivity(StatusActivity::class)
-                }, SingleItem("AppBar") {
-                    startActivity(AppBarActivity::class)
-                }, SingleItem("状态布局") {
-                    startActivity(StatusActivity::class)
-                }, SingleItem("AppBar") {
-                    startActivity(AppBarActivity::class)
-                }, SingleItem("状态布局") {
-                    startActivity(StatusActivity::class)
-                }, SingleItem("AppBar") {
-                    startActivity(AppBarActivity::class)
-                }, SingleItem("状态布局") {
-                    startActivity(StatusActivity::class)
-                }, SingleItem("AppBar") {
-                    startActivity(AppBarActivity::class)
-                }, SingleItem("状态布局") {
-                    startActivity(StatusActivity::class)
-                }, SingleItem("AppBar") {
-                    startActivity(AppBarActivity::class)
-                }, SingleItem("状态布局") {
-                    startActivity(StatusActivity::class)
-                }, SingleItem("AppBar") {
-                    startActivity(AppBarActivity::class)
-                }, SingleItem("状态布局") {
-                    startActivity(StatusActivity::class)
-                }, SingleItem("AppBar") {
-                    startActivity(AppBarActivity::class)
-                }, SingleItem("状态布局") {
-                    startActivity(StatusActivity::class)
-                }, SingleItem("AppBar") {
-                    startActivity(AppBarActivity::class)
-                }, SingleItem("状态布局") {
-                    startActivity(StatusActivity::class)
                 }
             )
         )

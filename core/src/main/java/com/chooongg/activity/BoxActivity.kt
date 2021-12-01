@@ -2,14 +2,10 @@ package com.chooongg.activity
 
 import android.content.Context
 import android.os.Bundle
-import android.transition.Fade
-import android.transition.Slide
-import android.transition.Transition
-import android.transition.TransitionSet
-import android.view.Gravity
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
 import androidx.annotation.StyleRes
@@ -24,9 +20,7 @@ import com.chooongg.core.R
 import com.chooongg.ext.contentView
 import com.chooongg.ext.dp2px
 import com.chooongg.ext.hideInputMethodEditor
-import com.chooongg.ext.resourcesInteger
 import com.chooongg.toolbar.BoxToolbar
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 
@@ -102,16 +96,22 @@ abstract class BoxActivity : AppCompatActivity {
     override fun onCreate(savedInstanceState: Bundle?) {
         getTheme4Box().let { if (it != ResourcesCompat.ID_NULL) setTheme(it) }
         super.onCreate(savedInstanceState)
+        // 是否启用内容过渡效果
+        if (isEnableContentTransitions()) {
+            window.requestFeature(Window.FEATURE_CONTENT_TRANSITIONS)
+        }
+        // 是否启用页面过渡效果
+        if (isEnableActivityTransitions()) {
+            window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
+        }
+        // 配置工具栏
         if (getActionBar4Box()) configActionBar()
-        window.sharedElementEnterTransition = initSharedElementEnterTransition()
-        window.sharedElementExitTransition = initSharedElementExitTransition()
-        window.sharedElementReturnTransition = initSharedElementReturnTransition()
-        window.sharedElementReenterTransition = initSharedElementReenterTransition()
         if (contentId != ResourcesCompat.ID_NULL) setContentView(contentId)
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
+        // 是否启用点击空白隐藏输入法
         if (isEnableAutoHideInputMethod()) {
             contentView.setOnClickListener { hideInputMethodEditor() }
         }
@@ -233,67 +233,14 @@ abstract class BoxActivity : AppCompatActivity {
     //<editor-fold desc="共享元素">
 
     /**
-     * 共享元素-进入动画
+     * 是否启用内容过渡效果
      */
-    protected open fun initSharedElementEnterTransition(): Transition {
-        return TransitionSet().apply {
-            addTransition(Fade().apply {
-                duration = resourcesInteger(android.R.integer.config_longAnimTime).toLong()
-                excludeChildren(android.R.id.content, true)
-                addTarget(BottomNavigationView::class.java)
-            })
-            addTransition(Slide(Gravity.END).apply {
-                excludeTarget(android.R.id.statusBarBackground, true)
-                excludeTarget(android.R.id.navigationBarBackground, true)
-                excludeTarget(BottomNavigationView::class.java, true)
-                excludeTarget(BoxToolbar::class.java, true)
-            })
-        }
-    }
+    protected open fun isEnableContentTransitions(): Boolean = false
 
     /**
-     * 共享元素-退出动画
+     * 是否启用页面过渡效果
      */
-    protected open fun initSharedElementExitTransition(): Transition {
-        return Fade().apply {
-            duration = resourcesInteger(android.R.integer.config_shortAnimTime).toLong()
-            startDelay = 200L
-            excludeChildren(android.R.id.content, true)
-            excludeTarget(android.R.id.statusBarBackground, true)
-            excludeTarget(android.R.id.navigationBarBackground, true)
-            excludeTarget(R.id.box_activity_toolbar, true)
-        }
-    }
-
-    /**
-     * 共享元素-返回动画
-     */
-    protected open fun initSharedElementReturnTransition(): Transition {
-        return TransitionSet().apply {
-            addTransition(Fade().apply {
-                excludeChildren(android.R.id.content, true)
-                addTarget(BottomNavigationView::class.java)
-            })
-            addTransition(Slide(Gravity.END).apply {
-                excludeTarget(android.R.id.statusBarBackground, true)
-                excludeTarget(android.R.id.navigationBarBackground, true)
-                excludeTarget(BottomNavigationView::class.java, true)
-                excludeTarget(R.id.box_activity_toolbar, true)
-            })
-        }
-    }
-
-    /**
-     * 共享元素-重新进入动画
-     */
-    protected open fun initSharedElementReenterTransition(): Transition {
-        return Fade().apply {
-            excludeChildren(android.R.id.content, true)
-            excludeTarget(android.R.id.statusBarBackground, true)
-            excludeTarget(android.R.id.navigationBarBackground, true)
-            excludeTarget(BoxToolbar::class.java, true)
-        }
-    }
+    protected open fun isEnableActivityTransitions(): Boolean = false
 
     //</editor-fold>
 }

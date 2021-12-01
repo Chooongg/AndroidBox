@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.chooongg.simple">
 
     <application
@@ -7,7 +8,8 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AndroidBox">
+        android:theme="@style/Theme.AndroidBox"
+        tools:replace="allowBackup">
 
         <activity
             android:name=".modules.SplashActivity"
@@ -29,9 +31,15 @@
             android:launchMode="singleTop" />
 
         <activity
+            android:name=".modules.StatusActivity"
+            android:label="状态布局"
+            android:launchMode="singleTop" />
+
+        <activity
             android:name=".modules.HttpActivity"
             android:label="网络请求"
             android:launchMode="singleTop" />
+
 
     </application>
 

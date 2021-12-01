@@ -37,4 +37,5 @@ android {
 
 dependencies {
     implementation project(path: ':all')
+    implementation 'com.github.osama-raddad:FireCrasher:2.0.0'
 }
