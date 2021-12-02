@@ -1,4 +1,4 @@
-package com.chooongg.http.throws
+package com.chooongg.http.exception
 
 class DefaultErrorConverter : HttpErrorConverter() {
     override fun convertRelease(type: HttpException.Type) = when (type) {

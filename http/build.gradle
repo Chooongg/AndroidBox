@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
+    id 'kotlin-kapt'
     id 'maven-publish'
 }
 
@@ -40,7 +41,9 @@ dependencies {
     api 'com.squareup.retrofit2:converter-gson:2.9.0'
     api 'com.squareup.retrofit2:converter-scalars:2.9.0'
     // 图片加载
-    api 'io.coil-kt:coil:1.4.0'
+    api 'com.github.bumptech.glide:glide:4.12.0'
+    api 'com.github.bumptech.glide:okhttp3-integration:4.12.0'
+    kapt 'com.github.bumptech.glide:compiler:4.12.0'
     // 调试工具-拦截器
     implementation 'com.facebook.stetho:stetho-okhttp3:1.6.0'
 }

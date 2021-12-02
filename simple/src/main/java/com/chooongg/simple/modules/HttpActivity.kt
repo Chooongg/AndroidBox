@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.chooongg.activity.BoxBindingActivity
 import com.chooongg.adapter.BindingHolder
-import com.chooongg.http.throws.HttpException
+import com.chooongg.http.exception.HttpException
 import com.chooongg.simple.api.apiWanAndroid
 import com.chooongg.simple.databinding.ActivityHttpBinding
 import com.chooongg.simple.databinding.ItemSingleBinding

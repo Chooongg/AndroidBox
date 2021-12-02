@@ -1,7 +1,7 @@
 package com.chooongg.simple.api
 
 import com.chooongg.http.ext.ResponseData
-import com.chooongg.http.throws.HttpException
+import com.chooongg.http.exception.HttpException
 
 data class WanAndroidResponse<T>(val data: T?, val errorCode: Int?, val errorMsg: String?) :
     ResponseData<T> {

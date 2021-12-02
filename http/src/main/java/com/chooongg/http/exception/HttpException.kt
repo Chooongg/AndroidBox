@@ -1,4 +1,4 @@
-package com.chooongg.http.throws
+package com.chooongg.http.exception
 
 import android.net.ParseException
 import android.util.MalformedJsonException

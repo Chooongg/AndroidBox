@@ -3,7 +3,7 @@ package com.chooongg.http.ext
 import com.chooongg.ext.debug
 import com.chooongg.ext.withIO
 import com.chooongg.ext.withMain
-import com.chooongg.http.throws.HttpException
+import com.chooongg.http.exception.HttpException
 
 interface ResponseData<DATA> {
     suspend fun checkData(): DATA?
