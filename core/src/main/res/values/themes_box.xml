@@ -54,7 +54,7 @@
         <item name="actionBarSize">@dimen/d48</item>
         <item name="android:actionBarSize">@dimen/d48</item>
         <item name="toolbarNavigationButtonStyle">@style/BoxToolBarNavigationButton</item>
-        <item name="toolbarElevation">0dp</item>
+        <item name="toolbarElevation">4dp</item>
         <item name="titleCentered">false</item>
         <item name="subtitleCentered">false</item>
         <!-- 添加 Transitions 支持 -->
