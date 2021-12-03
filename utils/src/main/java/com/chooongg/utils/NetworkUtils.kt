@@ -17,7 +17,7 @@ object NetworkUtils {
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
     fun isNetworkConnected(): Boolean {
         val cm = APPLICATION.connectivityManager
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             cm.getNetworkCapabilities(cm.activeNetwork)?.run {
                 hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
                         && hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)
@@ -35,7 +35,7 @@ object NetworkUtils {
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
     fun isNetworkWifiConnected(): Boolean {
         val cm = APPLICATION.connectivityManager
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             cm.getNetworkCapabilities(cm.activeNetwork)?.run {
                 hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) &&
                         hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED) &&
@@ -52,9 +52,9 @@ object NetworkUtils {
      */
     @Suppress("DEPRECATION")
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
-    fun currentNetWorkStatusIsCelluLar(): Boolean {
+    fun currentNetWorkStatusIsCellular(): Boolean {
         val cm = APPLICATION.connectivityManager
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             cm.getNetworkCapabilities(cm.activeNetwork)?.run {
                 hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
                         && hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)
