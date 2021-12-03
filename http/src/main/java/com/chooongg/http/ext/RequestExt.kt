@@ -3,11 +3,8 @@ package com.chooongg.http.ext
 import com.chooongg.ext.debug
 import com.chooongg.ext.withIO
 import com.chooongg.ext.withMain
+import com.chooongg.http.ResponseData
 import com.chooongg.http.exception.HttpException
-
-interface ResponseData<DATA> {
-    suspend fun checkData(): DATA?
-}
 
 /**
  * 常规请求 DSL

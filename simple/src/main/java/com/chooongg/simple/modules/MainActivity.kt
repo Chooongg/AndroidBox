@@ -72,8 +72,6 @@ class MainActivity : BoxBindingActivity<ActivityMainBinding>() {
         return super.onPrepareOptionsMenu(menu)
     }
 
-    private var isLong = false
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.light -> setNightMode(AppCompatDelegate.MODE_NIGHT_NO)
