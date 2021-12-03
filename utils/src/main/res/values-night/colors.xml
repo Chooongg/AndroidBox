@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="divider">#1FFFFFFF</color>
+    <color name="dividerPrimary">#33FFFFFF</color>
+    <color name="dividerPrimarySurface">@color/divider</color>
+</resources>

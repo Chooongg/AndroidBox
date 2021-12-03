@@ -2,4 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="divider">#1F000000</color>
+    <color name="dividerPrimary">#33FFFFFF</color>
+    <color name="dividerPrimarySurface">@color/dividerPrimary</color>
 </resources>

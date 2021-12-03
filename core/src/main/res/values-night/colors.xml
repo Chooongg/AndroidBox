@@ -6,8 +6,4 @@
     <color name="onSurface">#FFFFFF</color>
     <color name="error">#CF6679</color>
     <color name="onError">#000000</color>
-
-    <color name="divider">#1FFFFFFF</color>
-    <color name="dividerPrimary">#33FFFFFF</color>
-    <color name="dividerPrimarySurface">@color/divider</color>
 </resources>
