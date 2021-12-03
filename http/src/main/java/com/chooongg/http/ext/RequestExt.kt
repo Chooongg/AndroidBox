@@ -1,5 +1,6 @@
 package com.chooongg.http.ext
 
+import android.util.Log
 import com.chooongg.ext.debug
 import com.chooongg.ext.withIO
 import com.chooongg.ext.withMain
@@ -39,7 +40,13 @@ suspend fun <RESPONSE> requestBasic(block: RetrofitCoroutinesBaseDsl<RESPONSE>.(
 open class RetrofitCoroutinesDsl<RESPONSE : ResponseData<DATA>, DATA> :
     RetrofitCoroutinesBaseDsl<RESPONSE>() {
 
-    protected var onSuccess: (suspend (DATA?) -> Unit)? = null
+    private var onSuccessMessage: (suspend (String?) -> Unit)? = null
+
+    private var onSuccess: (suspend (DATA?) -> Unit)? = null
+
+    fun onSuccessMessage(block: suspend (String?) -> Unit) {
+        this.onSuccessMessage = block
+    }
 
     fun onSuccess(block: suspend (data: DATA?) -> Unit) {
         this.onSuccess = block
@@ -47,8 +54,9 @@ open class RetrofitCoroutinesDsl<RESPONSE : ResponseData<DATA>, DATA> :
 
     override suspend fun processData(response: RESPONSE) {
         val data = response.checkData()
-        if (onSuccess != null) {
-            withMain { onSuccess!!.invoke(data) }
+        withMain {
+            onSuccessMessage?.invoke(response.getMessage())
+            onSuccess?.invoke(data)
         }
     }
 }
@@ -97,29 +105,24 @@ open class RetrofitCoroutinesBaseDsl<RESPONSE> {
      * 执行网络请求
      */
     internal suspend fun executeRequest() {
-        if (api == null) return
-        if (onStart != null) {
-            withMain { onStart!!.invoke() }
+        if (api == null) {
+            Log.e("HttpRequest", "Not implemented api method, cancel operation.")
+            return
         }
+        withMain { onStart?.invoke() }
         withIO {
             try {
                 val response = api!!.invoke()
-                if (onResponse != null) {
-                    withMain { onResponse!!.invoke(response) }
-                }
+                withMain { onResponse?.invoke(response) }
                 processData(response)
-                if (onEnd != null) {
-                    withMain { onEnd!!.invoke(true) }
-                }
+                withMain { onEnd?.invoke(true) }
             } catch (e: Exception) {
                 if (onFailed != null) {
                     val httpException = HttpException(e)
                     debug { httpException.printStackTrace() }
                     withMain { onFailed!!.invoke(httpException) }
                 }
-                if (onEnd != null) {
-                    withMain { onEnd!!.invoke(false) }
-                }
+                withMain { onEnd?.invoke(false) }
             }
         }
     }
