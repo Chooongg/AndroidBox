@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.lifecycle.lifecycleScope
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.chooongg.activity.BoxBindingActivity
 import com.chooongg.adapter.BindingAdapter
@@ -13,12 +14,15 @@ import com.chooongg.core.ext.startActivity
 import com.chooongg.ext.dp2px
 import com.chooongg.ext.getNightMode
 import com.chooongg.ext.setNightMode
+import com.chooongg.http.ext.requestBasic
 import com.chooongg.simple.R
+import com.chooongg.simple.api.apiSeniverse
 import com.chooongg.simple.databinding.ActivityMainBinding
 import com.chooongg.simple.databinding.ItemSingleBinding
 import com.chooongg.simple.model.SingleItem
 import com.google.android.material.badge.BadgeDrawable
 import com.google.android.material.badge.BadgeUtils
+import kotlinx.coroutines.launch
 
 class MainActivity : BoxBindingActivity<ActivityMainBinding>() {
 
@@ -46,6 +50,19 @@ class MainActivity : BoxBindingActivity<ActivityMainBinding>() {
                     startActivity(StatusActivity::class)
                 }, SingleItem("网络请求") {
                     startActivity(HttpActivity::class)
+                }, SingleItem("分布式光伏功率预测") {
+                    lifecycleScope.launch {
+                        requestBasic<Any> {
+                            api {
+                                apiSeniverse().sensePower(
+                                    "38.70261:115.539963",
+                                    "41.1",
+                                    "20",
+                                    "0"
+                                )
+                            }
+                        }
+                    }
                 }
             )
         )
