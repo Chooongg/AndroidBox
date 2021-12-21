@@ -11,27 +11,30 @@ import com.chooongg.http.exception.HttpException
  * 常规请求 DSL
  */
 suspend fun <DATA> request(block: RetrofitCoroutinesDsl<ResponseData<DATA>, DATA>.() -> Unit) {
-    val dsl = RetrofitCoroutinesDsl<ResponseData<DATA>, DATA>()
-    block.invoke(dsl)
-    dsl.executeRequest()
+    RetrofitCoroutinesDsl<ResponseData<DATA>, DATA>().apply {
+        block(this)
+        executeRequest()
+    }
 }
 
 /**
  * 完整的请求 DSL
  */
 suspend fun <RESPONSE : ResponseData<DATA>, DATA> requestIntact(block: RetrofitCoroutinesDsl<RESPONSE, DATA>.() -> Unit) {
-    val dsl = RetrofitCoroutinesDsl<RESPONSE, DATA>()
-    block.invoke(dsl)
-    dsl.executeRequest()
+    RetrofitCoroutinesDsl<RESPONSE, DATA>().apply {
+        block(this)
+        executeRequest()
+    }
 }
 
 /**
  * 基础的请求 DSL
  */
 suspend fun <RESPONSE> requestBasic(block: RetrofitCoroutinesBaseDsl<RESPONSE>.() -> Unit) {
-    val dsl = RetrofitCoroutinesBaseDsl<RESPONSE>()
-    block.invoke(dsl)
-    dsl.executeRequest()
+    RetrofitCoroutinesBaseDsl<RESPONSE>().apply {
+        block(this)
+        executeRequest()
+    }
 }
 
 /**
@@ -53,7 +56,9 @@ open class RetrofitCoroutinesDsl<RESPONSE : ResponseData<DATA>, DATA> :
     }
 
     override suspend fun processData(response: RESPONSE) {
+        response.setOnReExecuteRequestListener { executeRequest() }
         val data = response.checkData()
+        response.removeOnExecuteRequestListener()
         withMain {
             onSuccessMessage?.invoke(response.getMessage())
             onSuccess?.invoke(data)
@@ -100,6 +105,13 @@ open class RetrofitCoroutinesBaseDsl<RESPONSE> {
      * 处理数据信息 不通过时抛出异常即可
      */
     protected open suspend fun processData(response: RESPONSE) = Unit
+
+    /**
+     * 重新执行请求
+     */
+    suspend fun reExecuteRequest() {
+        executeRequest()
+    }
 
     /**
      * 执行网络请求
