@@ -35,6 +35,7 @@ interface SeniverseAPI {
         @Query("azimuth") azimuth: String, // 阵列朝向 0为正南
         @Query("public_key") publicKey: String = "PHPQMXLSDOW0urvwg", // 公钥
         @Query("fields") fields: String = "pv_forecast_basic",
+        @Query("ts") ts: Long = System.currentTimeMillis() / 1000
     ): Any
 
 }

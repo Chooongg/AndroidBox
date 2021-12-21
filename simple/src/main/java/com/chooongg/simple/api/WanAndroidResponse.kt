@@ -4,7 +4,7 @@ import com.chooongg.http.ResponseData
 import com.chooongg.http.exception.HttpException
 
 data class WanAndroidResponse<T>(val data: T?, val errorCode: Int?, val errorMsg: String?) :
-    ResponseData<T> {
+    ResponseData<T>() {
 
     override fun getCode() = errorCode?.toString()
 

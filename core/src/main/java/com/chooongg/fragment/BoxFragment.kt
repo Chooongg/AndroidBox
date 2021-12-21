@@ -21,6 +21,8 @@ abstract class BoxFragment : Fragment {
 
     abstract fun initConfig(savedInstanceState: Bundle?)
 
+    open fun initContent() = Unit
+
     abstract fun initLazyContent()
 
     //</editor-fold>
@@ -72,6 +74,8 @@ abstract class BoxFragment : Fragment {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initConfig(savedInstanceState)
+        initContent()
         if (isEnableAutoHideInputMethod()) {
             view.setOnClickListener { hideInputMethodEditor() }
         }
