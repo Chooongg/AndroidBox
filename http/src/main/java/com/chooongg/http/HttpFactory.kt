@@ -45,7 +45,7 @@ object HttpFactory {
             connectTimeout(config.connectTimeout, TimeUnit.SECONDS)
             writeTimeout(config.writeTimeout, TimeUnit.SECONDS)
             readTimeout(config.readTimeout, TimeUnit.SECONDS)
-            retryOnConnectionFailure(true)
+            retryOnConnectionFailure(false)
             cache(Cache(APPLICATION.cacheDir, config.cacheSize))
             cookieJar(CookieManager)
             if (config.sslSocketFactory != null && config.x509TrustManager != null) {

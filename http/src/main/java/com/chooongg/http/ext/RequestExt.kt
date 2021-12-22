@@ -1,7 +1,6 @@
 package com.chooongg.http.ext
 
 import android.util.Log
-import com.chooongg.ext.debug
 import com.chooongg.ext.withIO
 import com.chooongg.ext.withMain
 import com.chooongg.http.ResponseData
@@ -131,7 +130,6 @@ open class RetrofitCoroutinesBaseDsl<RESPONSE> {
             } catch (e: Exception) {
                 if (onFailed != null) {
                     val httpException = HttpException(e)
-                    debug { httpException.printStackTrace() }
                     withMain { onFailed!!.invoke(httpException) }
                 }
                 withMain { onEnd?.invoke(false) }

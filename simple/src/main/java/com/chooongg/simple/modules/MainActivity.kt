@@ -2,6 +2,7 @@ package com.chooongg.simple.modules
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatDelegate
@@ -55,11 +56,17 @@ class MainActivity : BoxBindingActivity<ActivityMainBinding>() {
                         requestBasic<Any> {
                             api {
                                 apiSeniverse().sensePower(
-                                    "38.70261:115.539963",
-                                    "41.1",
+                                    "38.610084:115.047043",
+                                    "38",
                                     "20",
                                     "0"
                                 )
+                            }
+                            onResponse {
+                                Log.d("weather", "onResponse:$it")
+                            }
+                            onFailed {
+                                Log.e("weather", "onFailed:${it.message}")
                             }
                         }
                     }

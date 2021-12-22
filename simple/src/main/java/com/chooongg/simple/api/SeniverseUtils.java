@@ -2,6 +2,7 @@ package com.chooongg.simple.api;
 
 import android.util.Base64;
 
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -55,9 +56,24 @@ public class SeniverseUtils {
         Mac hmac = Mac.getInstance("HmacSHA1");
         hmac.init(new SecretKeySpec(secretKey.getBytes(StandardCharsets.UTF_8), "HmacSHA1"));
         String sig = Base64.encodeToString(hmac.doFinal(query.getBytes(StandardCharsets.UTF_8)), Base64.DEFAULT);
+
         stringBuilder.append("&sig=");
-        stringBuilder.append(sig);
+        stringBuilder.append(urlEncoded(sig));
 
         return baseUrl.concat("?").concat(stringBuilder.toString());
+    }
+
+    private String urlEncoded(String paramString) {
+        if (paramString == null || paramString.equals("")) {
+            return "";
+        }
+        try {
+            String str = new String(paramString.getBytes(), StandardCharsets.UTF_8);
+            str = URLEncoder.encode(str, "UTF-8");
+            return str;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 }
