@@ -1,4 +1,4 @@
-package com.chooongg.core.widget.autoSizeText
+package com.chooongg.core.widget.autoSize
 
 import android.text.*
 import android.util.AttributeSet

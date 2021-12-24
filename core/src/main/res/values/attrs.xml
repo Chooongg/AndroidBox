@@ -34,10 +34,17 @@
         <attr name="civ_circle_background_color" format="color" />
     </declare-styleable>
 
-    <!-- 蒙版输入框 -->
-    <declare-styleable name="MaskTextInputEditText">
-        <!-- 占位格式 [#]为占位符 -->
-        <attr name="met_mask" format="string" />
+    <!-- 掩码输入框 -->
+    <declare-styleable name="MaskedTextInputEditText">
+        <!-- 匹配字符： -->
+        <!-- *：任何字符 -->
+        <!-- #：数字 -->
+        <!-- U：大写字母 -->
+        <!-- L：小写字母 -->
+        <!-- A：字母和数字 -->
+        <!-- ?：字符 -->
+        <!-- H：十六进制 -->
+        <attr name="mask" format="string" />
     </declare-styleable>
 
     <!-- 骨架屏 FrameLayout -->
@@ -90,21 +97,6 @@
             <enum name="basisWidth" value="0" />
             <enum name="basisHeight" value="1" />
         </attr>
-    </declare-styleable>
-
-    <!-- 输入框扩展 -->
-    <declare-styleable name="XEditText">
-        <attr name="x_separator" format="string"/>
-        <attr name="x_pattern" format="string"/>
-        <attr name="x_clearDrawable" format="reference"/>
-        <attr name="x_showPwdDrawable" format="reference"/>
-        <attr name="x_hidePwdDrawable" format="reference"/>
-        <attr name="x_clearDrawableTint" format="color|reference"/>
-        <attr name="x_togglePwdDrawableTint" format="color|reference"/>
-        <attr name="x_interactionPadding" format="dimension|reference"/>
-        <attr name="x_disableClear" format="boolean"/>
-        <attr name="x_togglePwdDrawableEnable" format="boolean"/>
-        <attr name="x_disableEmoji" format="boolean"/>
     </declare-styleable>
 
 </resources>
