@@ -9,8 +9,7 @@
     <com.scwang.smart.refresh.layout.SmartRefreshLayout
         android:id="@+id/refresh_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone">
+        android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
@@ -20,14 +19,5 @@
             tools:listitem="@layout/item_single" />
 
     </com.scwang.smart.refresh.layout.SmartRefreshLayout>
-
-    <com.chooongg.core.widget.maskInput.MaskedTextInputEditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/d16"
-        android:background="?attr/colorSurface"
-        android:paddingTop="@dimen/d12"
-        android:paddingBottom="@dimen/d12"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

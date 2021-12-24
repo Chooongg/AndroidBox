@@ -99,4 +99,19 @@
         </attr>
     </declare-styleable>
 
+    <!-- 输入框扩展 -->
+    <declare-styleable name="BoxTextInputEditText">
+        <attr name="separator" format="string"/>
+        <attr name="pattern" format="string"/>
+        <attr name="clearDrawable" format="reference"/>
+        <attr name="showPwdDrawable" format="reference"/>
+        <attr name="hidePwdDrawable" format="reference"/>
+        <attr name="clearDrawableTint" format="color|reference"/>
+        <attr name="togglePwdDrawableTint" format="color|reference"/>
+        <attr name="interactionPadding" format="dimension|reference"/>
+        <attr name="disableClear" format="boolean"/>
+        <attr name="togglePwdDrawableEnable" format="boolean"/>
+        <attr name="disableEmoji" format="boolean"/>
+    </declare-styleable>
+
 </resources>
