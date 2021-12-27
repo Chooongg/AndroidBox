@@ -147,7 +147,7 @@ class AutoSizeTextHelper private constructor(private val textView: TextView) {
         private const val DEFAULT_PRECISION = 0.5f
 
         @JvmOverloads
-        fun create(view: TextView, attrs: AttributeSet? = null, defStyle: Int = 0) {
+        fun create(view: TextView, attrs: AttributeSet? = null, defStyle: Int = 0):AutoSizeTextHelper {
             val helper = AutoSizeTextHelper(view)
             var enable = true
             if (attrs != null) {
@@ -171,6 +171,7 @@ class AutoSizeTextHelper private constructor(private val textView: TextView) {
                 helper.precision = precision
             }
             helper.isEnabled = enable
+            return helper
         }
 
         private fun autoSize(
