@@ -34,7 +34,7 @@ data class HttpConfig(
     // Retrofit 转换器列表
     val converterFactories: ArrayList<Converter.Factory> = arrayListOf(
         ScalarsConverterFactory.create(),
-        GsonConverterFactory.create(GsonBuilder().setLenient().create()!!)
+        GsonConverterFactory.create(GsonBuilder().create())
     ),
     var sslSocketFactory: SSLSocketFactory? = null,
     var x509TrustManager: X509TrustManager? = null,
