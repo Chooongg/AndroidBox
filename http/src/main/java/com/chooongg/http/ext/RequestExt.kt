@@ -5,6 +5,7 @@ import com.chooongg.ext.withIO
 import com.chooongg.ext.withMain
 import com.chooongg.http.ResponseData
 import com.chooongg.http.exception.HttpException
+import com.chooongg.http.exception.HttpNoneException
 
 /**
  * 常规请求 DSL
@@ -128,6 +129,9 @@ open class RetrofitCoroutinesBaseDsl<RESPONSE> {
                 processData(response)
                 withMain { onEnd?.invoke(true) }
             } catch (e: Exception) {
+                if (e is HttpNoneException) {
+                    return@withIO
+                }
                 if (onFailed != null) {
                     val httpException = HttpException(e)
                     withMain { onFailed!!.invoke(httpException) }
