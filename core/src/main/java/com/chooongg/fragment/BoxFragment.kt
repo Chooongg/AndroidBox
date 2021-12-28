@@ -36,7 +36,7 @@ abstract class BoxFragment : Fragment {
      * 标题
      */
     var title: CharSequence? = null
-        get() = javaClass.getAnnotation(Title::class.java)?.title ?: field
+        get() = field ?: javaClass.getAnnotation(Title::class.java)?.title
 
     inline val isShowed get() = !isHidden && isResumed
 
@@ -107,9 +107,9 @@ abstract class BoxFragment : Fragment {
     //<editor-fold desc="SnackBar显示">
 
     fun showSnackBar(
-        message: CharSequence,
-        @BaseTransientBottomBar.Duration duration: Int = Snackbar.LENGTH_SHORT,
-        block: (Snackbar.() -> Unit)? = null,
+            message: CharSequence,
+            @BaseTransientBottomBar.Duration duration: Int = Snackbar.LENGTH_SHORT,
+            block: (Snackbar.() -> Unit)? = null,
     ) = Snackbar.make(requireView(), message, duration).apply {
         val snackBarAnchorView = snackBarAnchorView()
         if (snackBarAnchorView != null) anchorView = snackBarAnchorView
@@ -120,19 +120,19 @@ abstract class BoxFragment : Fragment {
     }.apply { show() }
 
     fun showSnackBar(
-        message: CharSequence,
-        anchor: View,
-        @BaseTransientBottomBar.Duration duration: Int = Snackbar.LENGTH_SHORT,
-        block: (Snackbar.() -> Unit)? = null,
+            message: CharSequence,
+            anchor: View,
+            @BaseTransientBottomBar.Duration duration: Int = Snackbar.LENGTH_SHORT,
+            block: (Snackbar.() -> Unit)? = null,
     ) = Snackbar.make(requireView(), message, duration).apply {
         anchorView = anchor
         block?.invoke(this)
     }.apply { show() }
 
     fun showSnackBar(
-        @StringRes resId: Int,
-        @BaseTransientBottomBar.Duration duration: Int = Snackbar.LENGTH_SHORT,
-        block: (Snackbar.() -> Unit)? = null,
+            @StringRes resId: Int,
+            @BaseTransientBottomBar.Duration duration: Int = Snackbar.LENGTH_SHORT,
+            block: (Snackbar.() -> Unit)? = null,
     ) = Snackbar.make(requireView(), resId, duration).apply {
         val snackBarAnchorView = snackBarAnchorView()
         if (snackBarAnchorView != null) anchorView = snackBarAnchorView
@@ -143,10 +143,10 @@ abstract class BoxFragment : Fragment {
     }.apply { show() }
 
     fun showSnackBar(
-        @StringRes resId: Int,
-        anchor: View,
-        @BaseTransientBottomBar.Duration duration: Int = Snackbar.LENGTH_SHORT,
-        block: (Snackbar.() -> Unit)? = null,
+            @StringRes resId: Int,
+            anchor: View,
+            @BaseTransientBottomBar.Duration duration: Int = Snackbar.LENGTH_SHORT,
+            block: (Snackbar.() -> Unit)? = null,
     ) = Snackbar.make(requireView(), resId, duration).apply {
         anchorView = anchor
         block?.invoke(this)
