@@ -50,12 +50,12 @@ abstract class BoxFragment : Fragment {
     /**
      * 再次选择时
      */
-    protected fun onReselected() = Unit
+    fun onReselected() = Unit
 
     /**
      * 刷新
      */
-    protected fun refresh(any: Any? = null) = Unit
+    fun refresh(any: Any? = null) = Unit
 
     /**
      * 是否可以回退
