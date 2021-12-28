@@ -50,12 +50,12 @@ abstract class BoxFragment : Fragment {
     /**
      * 再次选择时
      */
-    fun onReselected() = Unit
+    protected fun onReselected() = Unit
 
     /**
      * 刷新
      */
-    fun refresh(any: Any? = null) = Unit
+    protected fun onRefresh(any: Any? = null) = Unit
 
     /**
      * 是否可以回退
@@ -88,6 +88,10 @@ abstract class BoxFragment : Fragment {
             initLazyContent()
         }
     }
+
+    fun reselected() = onReselected()
+
+    fun refresh(any: Any? = null) = onRefresh(any)
 
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)
