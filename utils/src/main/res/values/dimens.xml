@@ -32,7 +32,7 @@
     <dimen name="dividerBig">10dp</dimen>
 
     <!--______________________________常用距离单位______________________________-->
-    <dimen name="contentSmall">1dp</dimen>
+    <dimen name="contentSmall">10dp</dimen>
     <dimen name="contentMedium">16dp</dimen>
     <dimen name="contentLarge">20dp</dimen>
 
