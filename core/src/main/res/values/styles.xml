@@ -32,4 +32,9 @@
         <item name="android:textSize">10sp</item>
     </style>
 
+    <style name="BoxWidget.CheckBox.Primary" parent="Widget.Material3.CompoundButton.CheckBox">
+        <item name="android:colorControlActivated">?attr/colorPrimary</item>
+        <item name="android:colorControlNormal">?attr/colorPrimary</item>
+    </style>
+
 </resources>
