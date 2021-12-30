@@ -1,6 +1,6 @@
 package com.chooongg.http
 
-import com.google.gson.GsonBuilder
+import com.hjq.gson.factory.GsonFactory
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.CallAdapter
@@ -34,7 +34,7 @@ data class HttpConfig(
     // Retrofit 转换器列表
     val converterFactories: ArrayList<Converter.Factory> = arrayListOf(
         ScalarsConverterFactory.create(),
-        GsonConverterFactory.create(GsonBuilder().create())
+        GsonConverterFactory.create(GsonFactory.getSingletonGson())
     ),
     var sslSocketFactory: SSLSocketFactory? = null,
     var x509TrustManager: X509TrustManager? = null,

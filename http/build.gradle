@@ -35,6 +35,7 @@ dependencies {
     api project(path: ':utils')
     // JSON解析
     api 'com.google.code.gson:gson:2.8.8'
+    api 'com.github.getActivity:GsonFactory:5.2'
     // 网络请求
     api 'com.squareup.okhttp3:okhttp:5.0.0-alpha.2'
     api 'com.squareup.retrofit2:retrofit:2.9.0'
