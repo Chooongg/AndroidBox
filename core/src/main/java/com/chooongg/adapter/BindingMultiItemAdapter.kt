@@ -29,15 +29,20 @@ abstract class BindingMultiItemAdapter<T : MultiItemEntity> :
 
     override fun onCreateDefViewHolder(parent: ViewGroup, viewType: Int): BindingHolder<*> {
         val binding = bindings.get(viewType)
+        return BindingHolder(initBindingViewHolder(binding, parent))
+    }
+
+    private fun initBindingViewHolder(
+        binding: KClass<out ViewBinding>,
+        parent: ViewGroup
+    ): ViewBinding {
         val method = binding.java.getMethod(
             "inflate",
             LayoutInflater::class.java,
             ViewGroup::class.java,
             Boolean::class.java
         )
-        return BindingHolder(
-            method.invoke(null, LayoutInflater.from(context), parent, false) as ViewBinding
-        )
+        return method.invoke(null, LayoutInflater.from(context), parent, false) as ViewBinding
     }
 
     @Deprecated("弃用", ReplaceWith("convert(binding, holder, item)"))

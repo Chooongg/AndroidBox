@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <item name="box_activity_appbar_layout" type="id" />
-    <item name="box_activity_toolbar" type="id" />
-
     <item name="box_activity_loading" type="id" />
 
 </resources>

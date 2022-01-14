@@ -15,8 +15,6 @@ import kotlinx.coroutines.delay
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : BoxBindingActivity<ActivitySplashBinding>() {
 
-    override fun isShowActionBar() = false
-
     override fun initConfig(savedInstanceState: Bundle?) {
         window.setBackgroundDrawableResource(R.color.surface)
         binding.tvVersion.text = BuildConfig.VERSION_NAME

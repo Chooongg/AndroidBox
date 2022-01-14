@@ -20,7 +20,7 @@ class BoxToolbar @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = R.attr.toolbarStyle,
-    defStyleRes: Int = R.style.BoxWidget_Toolbar_PrimarySurface,
+    defStyleRes: Int = R.style.BoxWidget_Toolbar_Surface,
 ) : MaterialToolbar(context, attrs, defStyleAttr) {
 
     private var actualElevation: Float = 0f

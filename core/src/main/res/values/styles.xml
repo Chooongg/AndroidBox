@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="BoxWidget.Toolbar.Primary" parent="Widget.MaterialComponents.Toolbar.Primary">
+    <style name="BoxWidget.Toolbar.Surface" parent="Widget.Material3.Toolbar.Surface">
         <item name="titleMargin">0dp</item>
         <item name="maxButtonHeight">?android:attr/actionBarSize</item>
         <item name="android:minHeight">?android:attr/actionBarSize</item>
@@ -10,23 +10,14 @@
         <item name="subtitleTextAppearance">@style/BoxSubtitleAppearance</item>
     </style>
 
-    <style name="BoxWidget.Toolbar.Surface" parent="Widget.MaterialComponents.Toolbar.Surface">
-        <item name="titleMargin">0dp</item>
-        <item name="maxButtonHeight">?android:attr/actionBarSize</item>
-        <item name="android:minHeight">?android:attr/actionBarSize</item>
-        <item name="android:elevation">?attr/toolbarElevation</item>
-        <item name="contentInsetStartWithNavigation">?android:attr/actionBarSize</item>
-        <item name="subtitleTextAppearance">@style/BoxSubtitleAppearance</item>
+    <style name="BoxWidget.Toolbar.Primary" parent="BoxWidget.Toolbar.Surface">
+        <item name="android:background">?attr/colorPrimary</item>
+        <item name="titleTextColor">?attr/colorOnPrimary</item>
+        <item name="subtitleTextColor">?attr/colorPrimaryContainer</item>
+        <item name="navigationIconTint">?attr/colorOnPrimary</item>
     </style>
 
-    <style name="BoxWidget.Toolbar.PrimarySurface" parent="Widget.MaterialComponents.Toolbar.PrimarySurface">
-        <item name="titleMargin">0dp</item>
-        <item name="maxButtonHeight">?android:attr/actionBarSize</item>
-        <item name="android:minHeight">?android:attr/actionBarSize</item>
-        <item name="android:elevation">?attr/toolbarElevation</item>
-        <item name="contentInsetStartWithNavigation">?android:attr/actionBarSize</item>
-        <item name="subtitleTextAppearance">@style/BoxSubtitleAppearance</item>
-    </style>
+    <style name="BoxWidget.Toolbar.PrimarySurface" parent="BoxWidget.Toolbar.Primary"/>
 
     <style name="BoxSubtitleAppearance">
         <item name="android:textSize">10sp</item>

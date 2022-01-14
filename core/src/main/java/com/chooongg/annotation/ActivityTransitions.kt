@@ -5,4 +5,4 @@ import java.lang.annotation.Inherited
 @Inherited
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class ActionBar(val isShow: Boolean = true)
+annotation class ActivityTransitions(val isEnable:Boolean)
