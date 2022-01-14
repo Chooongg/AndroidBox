@@ -45,17 +45,17 @@ abstract class BoxTopAppBarActivity : BoxActivity() {
     override fun setContentView(layoutResID: Int) {
         val coordinatorLayout = findViewById<CoordinatorLayout>(R.id.coordinator_layout)
         val view = layoutInflater.inflate(layoutResID, coordinatorLayout)
-        val layoutParams = view.layoutParams
-        val height = layoutParams.height
+        view.updateLayoutParams<CoordinatorLayout.LayoutParams> {
+            behavior = AppBarLayout.ScrollingViewBehavior()
+        }
     }
 
     override fun setContentView(view: View?) {
         val coordinatorLayout = findViewById<CoordinatorLayout>(R.id.coordinator_layout)
         if (view == null) return
-        coordinatorLayout.addView(view)
-        view.updateLayoutParams<CoordinatorLayout.LayoutParams> {
+        coordinatorLayout.addView(view,CoordinatorLayout.LayoutParams(-1,-1).apply {
             behavior = AppBarLayout.ScrollingViewBehavior()
-        }
+        })
     }
 
     override fun setContentView(view: View?, params: ViewGroup.LayoutParams?) {
