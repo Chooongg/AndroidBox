@@ -10,6 +10,8 @@ import androidx.lifecycle.lifecycleScope
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.chooongg.activity.BoxBindingTopAppBarActivity
 import com.chooongg.adapter.BindingAdapter
+import com.chooongg.annotation.TopAppBarDefaultNavigation
+import com.chooongg.annotation.TopAppBarType
 import com.chooongg.core.ext.divider
 import com.chooongg.core.ext.startActivity
 import com.chooongg.ext.dp2px
@@ -23,6 +25,8 @@ import com.chooongg.simple.databinding.ItemSingleBinding
 import com.chooongg.simple.model.SingleItem
 import kotlinx.coroutines.launch
 
+@TopAppBarType(TopAppBarType.TYPE_LARGE)
+@TopAppBarDefaultNavigation(false)
 class MainActivity : BoxBindingTopAppBarActivity<ActivityMainBinding>() {
 
     private val adapter = Adapter()

@@ -11,6 +11,7 @@ import com.chooongg.annotation.TopAppBarType
 import com.chooongg.core.R
 import com.chooongg.toolbar.BoxToolbar
 import com.google.android.material.appbar.AppBarLayout
+import com.zackratos.ultimatebarx.ultimatebarx.statusBarOnly
 
 abstract class BoxTopAppBarActivity : BoxActivity() {
 
@@ -19,6 +20,13 @@ abstract class BoxTopAppBarActivity : BoxActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         configRootView()
+        statusBarOnly {
+            transparent()
+        }
+//        statusBar {
+//
+//            light = true
+//        }
     }
 
     /**
@@ -53,7 +61,7 @@ abstract class BoxTopAppBarActivity : BoxActivity() {
     override fun setContentView(view: View?) {
         val coordinatorLayout = findViewById<CoordinatorLayout>(R.id.coordinator_layout)
         if (view == null) return
-        coordinatorLayout.addView(view,CoordinatorLayout.LayoutParams(-1,-1).apply {
+        coordinatorLayout.addView(view, CoordinatorLayout.LayoutParams(-1, -1).apply {
             behavior = AppBarLayout.ScrollingViewBehavior()
         })
     }
@@ -66,6 +74,5 @@ abstract class BoxTopAppBarActivity : BoxActivity() {
         javaClass.getAnnotation(TopAppBarDefaultNavigation::class.java)?.isShow ?: true
 
     private fun getTopAppBarType4Annotation() =
-        javaClass.getAnnotation(TopAppBarType::class.java)?.type
-            ?: TopAppBarType.TYPE_SMALL
+        javaClass.getAnnotation(TopAppBarType::class.java)?.type ?: TopAppBarType.TYPE_SMALL
 }

@@ -13,9 +13,10 @@
     </style>
 
     <style name="BoxTheme.Primary" parent="Base.BoxTheme">
-        <item name="android:statusBarColor">?attr/colorPrimarySurface</item>
+        <item name="android:statusBarColor">?attr/colorPrimary</item>
         <item name="toolbarStyle">@style/BoxWidget.Toolbar.Primary</item>
         <item name="actionBarStyle">@style/BoxWidget.Toolbar.Primary</item>
+        <item name="android:textColorSecondary">?attr/colorOnPrimary</item>
     </style>
 
     <style name="BoxTheme.Primary.CenterTitle" parent="BoxTheme.Primary">
@@ -27,6 +28,7 @@
         <item name="android:statusBarColor">?attr/colorPrimarySurface</item>
         <item name="toolbarStyle">@style/BoxWidget.Toolbar.PrimarySurface</item>
         <item name="actionBarStyle">@style/BoxWidget.Toolbar.PrimarySurface</item>
+        <item name="android:textColorSecondary">?attr/colorOnPrimarySurface</item>
     </style>
 
     <style name="BoxTheme.PrimarySurface.CenterTitle" parent="BoxTheme.PrimarySurface">
@@ -70,8 +72,8 @@
         <item name="shapeAppearanceLargeComponent">@style/ShapeAppearanceImage.Rounded.24dp</item>
         <!-- 工具栏配置 -->
         <item name="statusBarScrim">@android:color/transparent</item>
-        <item name="toolbarStyle">@style/BoxWidget.Toolbar.PrimarySurface</item>
-        <item name="actionBarStyle">@style/BoxWidget.Toolbar.PrimarySurface</item>
+        <item name="toolbarStyle">@style/BoxWidget.Toolbar.Surface</item>
+        <item name="actionBarStyle">@style/BoxWidget.Toolbar.Surface</item>
         <item name="android:actionBarSize">@dimen/d48</item>
         <item name="toolbarNavigationButtonStyle">@style/BoxToolBarNavigationButton</item>
         <item name="toolbarElevation">0dp</item>
