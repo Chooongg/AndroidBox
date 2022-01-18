@@ -9,9 +9,9 @@ import androidx.core.view.updateLayoutParams
 import com.chooongg.annotation.TopAppBarDefaultNavigation
 import com.chooongg.annotation.TopAppBarType
 import com.chooongg.core.R
+import com.chooongg.manager.WindowPreferencesManager
 import com.chooongg.toolbar.BoxToolbar
 import com.google.android.material.appbar.AppBarLayout
-import com.zackratos.ultimatebarx.ultimatebarx.statusBarOnly
 
 abstract class BoxTopAppBarActivity : BoxActivity() {
 
@@ -19,14 +19,8 @@ abstract class BoxTopAppBarActivity : BoxActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        WindowPreferencesManager(this).applyEdgeToEdgePreference(window)
         configRootView()
-        statusBarOnly {
-            transparent()
-        }
-//        statusBar {
-//
-//            light = true
-//        }
     }
 
     /**
@@ -38,9 +32,8 @@ abstract class BoxTopAppBarActivity : BoxActivity() {
             TopAppBarType.TYPE_MEDIUM -> super.setContentView(R.layout.box_activity_root_medium)
             TopAppBarType.TYPE_LARGE -> super.setContentView(R.layout.box_activity_root_large)
         }
-        val toolbar = findViewById<BoxToolbar>(R.id.toolbar)
         if (supportActionBar == null) {
-            setSupportActionBar(toolbar)
+            setSupportActionBar(findViewById<BoxToolbar>(R.id.toolbar))
         }
         if (getTopAppBarDefaultNavigation4Annotation()) {
             supportActionBar!!.setHomeButtonEnabled(true)
@@ -69,10 +62,4 @@ abstract class BoxTopAppBarActivity : BoxActivity() {
     override fun setContentView(view: View?, params: ViewGroup.LayoutParams?) {
         super.setContentView(view, params)
     }
-
-    private fun getTopAppBarDefaultNavigation4Annotation() =
-        javaClass.getAnnotation(TopAppBarDefaultNavigation::class.java)?.isShow ?: true
-
-    private fun getTopAppBarType4Annotation() =
-        javaClass.getAnnotation(TopAppBarType::class.java)?.type ?: TopAppBarType.TYPE_SMALL
 }

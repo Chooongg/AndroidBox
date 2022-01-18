@@ -96,7 +96,7 @@ class BoxToolbar @JvmOverloads constructor(
 
     override fun setBackground(background: Drawable?) {
         super.setBackground(background)
-        syncStatusBarColorOnTheBasisOfBackground()
+//        syncStatusBarColorOnTheBasisOfBackground()
     }
 
     private fun syncStatusBarColorOnTheBasisOfBackground() {

@@ -2,9 +2,9 @@
 <resources>
 
     <style name="BoxTheme.Surface" parent="Base.BoxTheme">
-        <item name="android:statusBarColor">@android:color/darker_gray</item>
-        <item name="toolbarStyle">@style/BoxWidget.Toolbar.Surface</item>
-        <item name="actionBarStyle">@style/BoxWidget.Toolbar.Surface</item>
+<!--        <item name="android:statusBarColor">@android:color/darker_gray</item>-->
+<!--        <item name="toolbarStyle">@style/BoxWidget.Toolbar.Surface</item>-->
+<!--        <item name="actionBarStyle">@style/BoxWidget.Toolbar.Surface</item>-->
     </style>
 
     <style name="BoxTheme.Surface.CenterTitle" parent="BoxTheme.Surface">

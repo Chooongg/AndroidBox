@@ -9,12 +9,13 @@ import java.lang.annotation.Inherited
 annotation class TopAppBarType(@Type val type: Int = TYPE_SMALL) {
 
     companion object {
+        const val TYPE_NONE = 0
         const val TYPE_SMALL = 1
         const val TYPE_MEDIUM = 2
         const val TYPE_LARGE = 3
     }
 
-    @IntDef(TYPE_SMALL, TYPE_MEDIUM, TYPE_LARGE)
+    @IntDef(TYPE_NONE, TYPE_SMALL, TYPE_MEDIUM, TYPE_LARGE)
     annotation class Type
 }
 

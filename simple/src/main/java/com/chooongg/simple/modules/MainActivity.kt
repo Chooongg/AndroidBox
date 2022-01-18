@@ -25,7 +25,7 @@ import com.chooongg.simple.databinding.ItemSingleBinding
 import com.chooongg.simple.model.SingleItem
 import kotlinx.coroutines.launch
 
-@TopAppBarType(TopAppBarType.TYPE_LARGE)
+@TopAppBarType(TopAppBarType.TYPE_MEDIUM)
 @TopAppBarDefaultNavigation(false)
 class MainActivity : BoxBindingTopAppBarActivity<ActivityMainBinding>() {
 

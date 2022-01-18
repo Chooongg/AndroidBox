@@ -9,12 +9,12 @@ import android.view.Window
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.updateLayoutParams
-import com.chooongg.annotation.ActivityTransitions
-import com.chooongg.annotation.AutoHideInputMethod
-import com.chooongg.annotation.ContentTransitions
+import com.chooongg.annotation.*
+import com.chooongg.core.R
 import com.chooongg.ext.contentView
 import com.chooongg.ext.dp2px
 import com.chooongg.ext.hideInputMethodEditor
+import com.chooongg.toolbar.BoxToolbar
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 
@@ -58,6 +58,24 @@ abstract class BoxActivity : AppCompatActivity() {
         if (isEnableContentTransitions4Annotation()) {
             window.requestFeature(Window.FEATURE_CONTENT_TRANSITIONS)
         }
+        configRootView()
+    }
+
+    private fun configRootView() {
+        when (getTopAppBarType4Annotation()) {
+            TopAppBarType.TYPE_SMALL -> super.setContentView(R.layout.box_activity_root_small)
+            TopAppBarType.TYPE_MEDIUM -> super.setContentView(R.layout.box_activity_root_medium)
+            TopAppBarType.TYPE_LARGE -> super.setContentView(R.layout.box_activity_root_large)
+        }
+        if (supportActionBar == null) {
+            setSupportActionBar(findViewById<BoxToolbar>(R.id.toolbar))
+        }
+        if (isShowTopAppBarDefaultNavigation4Annotation()) {
+            supportActionBar!!.setHomeButtonEnabled(true)
+            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+            supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_app_bar_back)
+        }
+        initActionBar(supportActionBar!!)
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
@@ -90,6 +108,12 @@ abstract class BoxActivity : AppCompatActivity() {
 
     private fun isEnableContentTransitions4Annotation() =
         javaClass.getAnnotation(ContentTransitions::class.java)?.isEnable ?: false
+
+    private fun isShowTopAppBarDefaultNavigation4Annotation() =
+        javaClass.getAnnotation(TopAppBarDefaultNavigation::class.java)?.isShow ?: true
+
+    private fun getTopAppBarType4Annotation() =
+        javaClass.getAnnotation(TopAppBarType::class.java)?.type ?: TopAppBarType.TYPE_SMALL
 
     //</editor-fold>
 
