@@ -2,9 +2,9 @@
 <resources>
 
     <style name="BoxTheme.Surface" parent="Base.BoxTheme">
-<!--        <item name="android:statusBarColor">@android:color/darker_gray</item>-->
-<!--        <item name="toolbarStyle">@style/BoxWidget.Toolbar.Surface</item>-->
-<!--        <item name="actionBarStyle">@style/BoxWidget.Toolbar.Surface</item>-->
+        <item name="android:statusBarColor">@android:color/darker_gray</item>
+        <item name="toolbarStyle">@style/BoxWidget.Toolbar.OnSurface</item>
+        <item name="appBarLayoutStyle">@style/BoxWidget.AppBarLayout.Surface</item>
     </style>
 
     <style name="BoxTheme.Surface.CenterTitle" parent="BoxTheme.Surface">
@@ -14,9 +14,8 @@
 
     <style name="BoxTheme.Primary" parent="Base.BoxTheme">
         <item name="android:statusBarColor">?attr/colorPrimary</item>
-        <item name="toolbarStyle">@style/BoxWidget.Toolbar.Primary</item>
-        <item name="actionBarStyle">@style/BoxWidget.Toolbar.Primary</item>
-        <item name="android:textColorSecondary">?attr/colorOnPrimary</item>
+        <item name="toolbarStyle">@style/BoxWidget.Toolbar.OnPrimary</item>
+        <item name="appBarLayoutStyle">@style/BoxWidget.AppBarLayout.Primary</item>
     </style>
 
     <style name="BoxTheme.Primary.CenterTitle" parent="BoxTheme.Primary">
@@ -25,10 +24,9 @@
     </style>
 
     <style name="BoxTheme.PrimarySurface" parent="Base.BoxTheme">
-        <item name="android:statusBarColor">?attr/colorPrimarySurface</item>
-        <item name="toolbarStyle">@style/BoxWidget.Toolbar.PrimarySurface</item>
-        <item name="actionBarStyle">@style/BoxWidget.Toolbar.PrimarySurface</item>
-        <item name="android:textColorSecondary">?attr/colorOnPrimarySurface</item>
+        <item name="android:statusBarColor">?attr/colorPrimary</item>
+        <item name="toolbarStyle">@style/BoxWidget.Toolbar.OnPrimary</item>
+        <item name="appBarLayoutStyle">@style/BoxWidget.AppBarLayout.Primary</item>
     </style>
 
     <style name="BoxTheme.PrimarySurface.CenterTitle" parent="BoxTheme.PrimarySurface">

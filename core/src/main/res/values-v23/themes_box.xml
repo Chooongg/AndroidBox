@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="BoxTheme.Surface" parent="BoxTheme">
+    <style name="BoxTheme.Surface" parent="Base.BoxTheme">
         <item name="android:statusBarColor">?attr/colorSurface</item>
-<!--        <item name="toolbarStyle">@style/BoxWidget.Toolbar.Surface</item>-->
-<!--        <item name="actionBarStyle">@style/BoxWidget.Toolbar.Surface</item>-->
-<!--        <item name="android:windowLightStatusBar">true</item>-->
+        <item name="toolbarStyle">@style/BoxWidget.Toolbar.OnSurface</item>
+        <item name="appBarLayoutStyle">@style/BoxWidget.AppBarLayout.Surface</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
 </resources>

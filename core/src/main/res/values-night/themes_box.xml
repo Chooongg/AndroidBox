@@ -3,9 +3,8 @@
 
     <style name="BoxTheme.PrimarySurface" parent="Base.BoxTheme">
         <item name="android:statusBarColor">?attr/colorSurface</item>
-        <item name="toolbarStyle">@style/BoxWidget.Toolbar.PrimarySurface</item>
-        <item name="actionBarStyle">@style/BoxWidget.Toolbar.PrimarySurface</item>
-        <item name="android:textColorSecondary">?attr/colorOnPrimarySurface</item>
+        <item name="toolbarStyle">@style/BoxWidget.Toolbar.OnSurface</item>
+        <item name="appBarLayoutStyle">@style/BoxWidget.AppBarLayout.Surface</item>
     </style>
 
 </resources>

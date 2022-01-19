@@ -1,37 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="BoxWidget.Toolbar.Primary" parent="Widget.MaterialComponents.Toolbar.Primary">
-        <item name="titleMargin">0dp</item>
-        <item name="maxButtonHeight">?android:attr/actionBarSize</item>
-        <item name="android:minHeight">?android:attr/actionBarSize</item>
-        <item name="android:elevation">?attr/toolbarElevation</item>
-        <item name="contentInsetStartWithNavigation">?android:attr/actionBarSize</item>
-        <item name="subtitleTextAppearance">@style/BoxSubtitleAppearance</item>
-    </style>
-
-    <style name="BoxWidget.Toolbar.Surface" parent="Widget.MaterialComponents.Toolbar.Surface">
-        <item name="titleMargin">0dp</item>
-        <item name="maxButtonHeight">?android:attr/actionBarSize</item>
-        <item name="android:minHeight">?android:attr/actionBarSize</item>
-        <item name="android:elevation">?attr/toolbarElevation</item>
-        <item name="contentInsetStartWithNavigation">?android:attr/actionBarSize</item>
-        <item name="subtitleTextAppearance">@style/BoxSubtitleAppearance</item>
-    </style>
-
-    <style name="BoxWidget.Toolbar.PrimarySurface" parent="Widget.MaterialComponents.Toolbar.PrimarySurface">
-        <item name="titleMargin">0dp</item>
-        <item name="maxButtonHeight">?android:attr/actionBarSize</item>
-        <item name="android:minHeight">?android:attr/actionBarSize</item>
-        <item name="android:elevation">?attr/toolbarElevation</item>
-        <item name="contentInsetStartWithNavigation">?android:attr/actionBarSize</item>
-        <item name="subtitleTextAppearance">@style/BoxSubtitleAppearance</item>
-    </style>
-
-    <style name="BoxSubtitleAppearance">
-        <item name="android:textSize">10sp</item>
-    </style>
-
     <style name="BoxWidget.CheckBox.Primary" parent="Widget.Material3.CompoundButton.CheckBox">
         <item name="android:colorControlActivated">?attr/colorPrimary</item>
         <item name="android:colorControlNormal">?attr/colorPrimary</item>

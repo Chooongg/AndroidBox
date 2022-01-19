@@ -7,15 +7,16 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar_layout"
+        style="?attr/appBarLayoutStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true">
 
         <com.chooongg.toolbar.BoxToolbar
             android:id="@+id/toolbar"
+            style="?attr/toolbarStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@null"
             app:autoSetActionBar="true"
             app:defaultNavigation="false"
             app:loadActivityLabel="false" />

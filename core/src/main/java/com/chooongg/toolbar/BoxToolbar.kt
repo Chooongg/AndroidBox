@@ -20,7 +20,7 @@ class BoxToolbar @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = R.attr.toolbarStyle,
-    defStyleRes: Int = R.style.BoxWidget_Toolbar_PrimarySurface,
+    defStyleRes: Int = R.style.BoxWidget_Toolbar_Surface,
 ) : MaterialToolbar(context, attrs, defStyleAttr) {
 
     private var actualElevation: Float = 0f
@@ -78,10 +78,6 @@ class BoxToolbar @JvmOverloads constructor(
         dividerView.gone()
     }
 
-    fun bindLayoutScrollView() {
-
-    }
-
     /**
      * 适配黑夜模式的高度覆盖层模式
      */
@@ -96,7 +92,7 @@ class BoxToolbar @JvmOverloads constructor(
 
     override fun setBackground(background: Drawable?) {
         super.setBackground(background)
-//        syncStatusBarColorOnTheBasisOfBackground()
+        syncStatusBarColorOnTheBasisOfBackground()
     }
 
     private fun syncStatusBarColorOnTheBasisOfBackground() {
@@ -125,5 +121,4 @@ class BoxToolbar @JvmOverloads constructor(
             }
         }
     }
-
 }

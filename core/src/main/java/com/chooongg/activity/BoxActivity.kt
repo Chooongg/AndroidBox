@@ -7,20 +7,27 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import androidx.annotation.StringRes
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.updateLayoutParams
 import com.chooongg.annotation.*
 import com.chooongg.core.R
 import com.chooongg.ext.contentView
 import com.chooongg.ext.dp2px
 import com.chooongg.ext.hideInputMethodEditor
+import com.chooongg.manager.WindowPreferencesManager
 import com.chooongg.toolbar.BoxToolbar
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 
 abstract class BoxActivity : AppCompatActivity() {
 
     //<editor-fold desc="子类实现方法">
+
+    protected open fun initActionBar(actionBar: ActionBar) = Unit
 
     abstract fun initConfig(savedInstanceState: Bundle?)
 
@@ -50,6 +57,7 @@ abstract class BoxActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        WindowPreferencesManager(this).applyEdgeToEdgePreference(window)
         // 是否启用页面过渡效果
         if (isEnableActivityTransitions4Annotation()) {
             window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
@@ -66,6 +74,7 @@ abstract class BoxActivity : AppCompatActivity() {
             TopAppBarType.TYPE_SMALL -> super.setContentView(R.layout.box_activity_root_small)
             TopAppBarType.TYPE_MEDIUM -> super.setContentView(R.layout.box_activity_root_medium)
             TopAppBarType.TYPE_LARGE -> super.setContentView(R.layout.box_activity_root_large)
+            else -> return
         }
         if (supportActionBar == null) {
             setSupportActionBar(findViewById<BoxToolbar>(R.id.toolbar))
@@ -74,6 +83,11 @@ abstract class BoxActivity : AppCompatActivity() {
             supportActionBar!!.setHomeButtonEnabled(true)
             supportActionBar!!.setDisplayHomeAsUpEnabled(true)
             supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_app_bar_back)
+        }
+        val liftOnScrollTargetId = getLiftOnScrollTargetId4Annotation()
+        if (liftOnScrollTargetId != null && liftOnScrollTargetId != ResourcesCompat.ID_NULL) {
+            val appBarLayout = findViewById<AppBarLayout>(R.id.appbar_layout)
+            appBarLayout.liftOnScrollTargetViewId = liftOnScrollTargetId
         }
         initActionBar(supportActionBar!!)
     }
@@ -96,6 +110,46 @@ abstract class BoxActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+    override fun setContentView(layoutResID: Int) {
+        when (getTopAppBarType4Annotation()) {
+            TopAppBarType.TYPE_SMALL, TopAppBarType.TYPE_MEDIUM, TopAppBarType.TYPE_LARGE -> {
+                val coordinatorLayout = findViewById<CoordinatorLayout>(R.id.coordinator_layout)
+                val view = layoutInflater.inflate(layoutResID, coordinatorLayout)
+                view.updateLayoutParams<CoordinatorLayout.LayoutParams> {
+                    behavior = AppBarLayout.ScrollingViewBehavior()
+                }
+            }
+            else -> super.setContentView(layoutResID)
+        }
+    }
+
+    override fun setContentView(view: View?) {
+        when (getTopAppBarType4Annotation()) {
+            TopAppBarType.TYPE_SMALL, TopAppBarType.TYPE_MEDIUM, TopAppBarType.TYPE_LARGE -> {
+                val coordinatorLayout = findViewById<CoordinatorLayout>(R.id.coordinator_layout)
+                if (view == null) return
+                coordinatorLayout.addView(view, CoordinatorLayout.LayoutParams(-1, -1).apply {
+                    behavior = AppBarLayout.ScrollingViewBehavior()
+                })
+            }
+            else -> super.setContentView(view)
+        }
+    }
+
+    override fun setContentView(view: View?, params: ViewGroup.LayoutParams?) {
+        when (getTopAppBarType4Annotation()) {
+            TopAppBarType.TYPE_SMALL, TopAppBarType.TYPE_MEDIUM, TopAppBarType.TYPE_LARGE -> {
+                val coordinatorLayout = findViewById<CoordinatorLayout>(R.id.coordinator_layout)
+                if (view == null) return
+                if (params is CoordinatorLayout.LayoutParams && params.behavior == null) {
+                    params.behavior = AppBarLayout.ScrollingViewBehavior()
+                }
+                coordinatorLayout.addView(view, params)
+            }
+            else -> super.setContentView(view, params)
+        }
+    }
+
     //</editor-fold>
 
     //<editor-fold desc="注解获取">
@@ -114,6 +168,9 @@ abstract class BoxActivity : AppCompatActivity() {
 
     private fun getTopAppBarType4Annotation() =
         javaClass.getAnnotation(TopAppBarType::class.java)?.type ?: TopAppBarType.TYPE_SMALL
+
+    private fun getLiftOnScrollTargetId4Annotation() =
+        javaClass.getAnnotation(LiftOnScrollTargetId::class.java)?.resId
 
     //</editor-fold>
 

@@ -8,8 +8,9 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.lifecycleScope
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
-import com.chooongg.activity.BoxBindingTopAppBarActivity
+import com.chooongg.activity.BoxBindingActivity
 import com.chooongg.adapter.BindingAdapter
+import com.chooongg.annotation.LiftOnScrollTargetId
 import com.chooongg.annotation.TopAppBarDefaultNavigation
 import com.chooongg.annotation.TopAppBarType
 import com.chooongg.core.ext.divider
@@ -25,9 +26,10 @@ import com.chooongg.simple.databinding.ItemSingleBinding
 import com.chooongg.simple.model.SingleItem
 import kotlinx.coroutines.launch
 
-@TopAppBarType(TopAppBarType.TYPE_MEDIUM)
+@TopAppBarType(TopAppBarType.TYPE_SMALL)
 @TopAppBarDefaultNavigation(false)
-class MainActivity : BoxBindingTopAppBarActivity<ActivityMainBinding>() {
+@LiftOnScrollTargetId(R.id.recycler_view)
+class MainActivity : BoxBindingActivity<ActivityMainBinding>() {
 
     private val adapter = Adapter()
 
