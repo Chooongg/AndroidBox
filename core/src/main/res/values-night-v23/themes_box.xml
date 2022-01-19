@@ -4,6 +4,7 @@
     <style name="BoxTheme.Surface" parent="BoxTheme">
         <item name="android:statusBarColor">?attr/colorSurface</item>
         <item name="toolbarStyle">@style/BoxWidget.Toolbar.Surface</item>
+        <item name="actionBarStyle">@style/BoxWidget.Toolbar.Surface</item>
         <item name="android:textColorSecondary">?attr/colorOnSurface</item>
     </style>
 
