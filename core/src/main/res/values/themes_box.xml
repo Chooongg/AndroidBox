@@ -15,6 +15,7 @@
     <style name="BoxTheme.Primary" parent="Base.BoxTheme">
         <item name="android:statusBarColor">?attr/colorPrimary</item>
         <item name="toolbarStyle">@style/BoxWidget.Toolbar.OnPrimary</item>
+        <item name="toolbarNavigationButtonStyle">@style/BoxWidget.Toolbar.Button.Navigation.Primary</item>
         <item name="appBarLayoutStyle">@style/BoxWidget.AppBarLayout.Primary</item>
     </style>
 
@@ -26,6 +27,7 @@
     <style name="BoxTheme.PrimarySurface" parent="Base.BoxTheme">
         <item name="android:statusBarColor">?attr/colorPrimary</item>
         <item name="toolbarStyle">@style/BoxWidget.Toolbar.OnPrimary</item>
+        <item name="toolbarNavigationButtonStyle">@style/BoxWidget.Toolbar.Button.Navigation.Primary</item>
         <item name="appBarLayoutStyle">@style/BoxWidget.AppBarLayout.Primary</item>
     </style>
 
@@ -73,8 +75,6 @@
         <item name="toolbarStyle">@style/BoxWidget.Toolbar.Surface</item>
         <item name="actionBarStyle">@style/BoxWidget.Toolbar.Surface</item>
         <item name="android:actionBarSize">@dimen/d48</item>
-        <item name="toolbarNavigationButtonStyle">@style/BoxToolBarNavigationButton</item>
-        <item name="toolbarElevation">0dp</item>
         <item name="titleCentered">false</item>
         <item name="subtitleCentered">false</item>
         <!-- 添加 Transitions 支持 -->
@@ -92,12 +92,6 @@
         <item name="android:activityCloseExitAnimation">@anim/parallax_horizontal_close_exit</item>
         <item name="android:activityCloseEnterAnimation">@anim/parallax_horizontal_close_enter
         </item>
-    </style>
-
-    <style name="BoxToolBarNavigationButton" parent="Widget.AppCompat.Toolbar.Button.Navigation">
-        <item name="minWidth">?attr/actionBarSize</item>
-        <item name="maxWidth">?attr/actionBarSize</item>
-        <item name="android:scaleType">centerInside</item>
     </style>
 
 </resources>

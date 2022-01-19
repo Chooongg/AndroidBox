@@ -15,6 +15,8 @@
         <item name="titleTextColor">?attr/colorOnPrimary</item>
         <item name="subtitleTextColor">?attr/colorPrimaryContainer</item>
         <item name="navigationIconTint">?attr/colorOnSurface</item>
+        <item name="colorControlNormal">?attr/colorOnPrimary</item>
+        <item name="android:theme">@style/ThemeOverlay.Material3.Toolbar.Primary</item>
         <item name="materialThemeOverlay">@style/ThemeOverlay.Material3.Toolbar.Primary</item>
     </style>
 
@@ -33,6 +35,7 @@
         <item name="titleTextColor">?attr/colorOnPrimary</item>
         <item name="subtitleTextColor">?attr/colorPrimaryContainer</item>
         <item name="navigationIconTint">?attr/colorOnPrimary</item>
+        <item name="android:theme">@style/ThemeOverlay.Material3.Toolbar.Primary</item>
         <item name="materialThemeOverlay">@style/ThemeOverlay.Material3.Toolbar.Primary</item>
     </style>
 
@@ -40,6 +43,13 @@
 
     <style name="BoxSubtitleAppearance">
         <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="BoxWidget.Toolbar.Button.Navigation.Primary" parent="Widget.AppCompat.Toolbar.Button.Navigation">
+        <item name="minWidth">?attr/actionBarSize</item>
+        <item name="maxWidth">?attr/actionBarSize</item>
+        <item name="android:scaleType">centerInside</item>
+        <item name="tint">?attr/colorOnPrimary</item>
     </style>
 
     <style name="ThemeOverlay.Material3.Toolbar.Primary" parent="">
