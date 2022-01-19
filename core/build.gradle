@@ -49,8 +49,14 @@ dependencies {
     api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.7'
     api 'com.github.fondesa:recycler-view-divider:3.5.0'
     // 下拉刷新-上拉加载
-    api 'com.scwang.smart:refresh-layout-kernel:2.0.3'      //核心必须依赖
-    api 'com.scwang.smart:refresh-header-classics:2.0.3'    //经典刷新头
+    api 'com.github.dkzwm:srl-core:1.7.2.4'
+    api 'com.github.dkzwm:srl-ext-classics:1.7.2.4'
+    api 'com.github.dkzwm:srl-ext-material:1.7.2.4'
+    api 'com.github.dkzwm:srl-ext-util:1.7.2.4'
+    api  'io.github.scwang90:refresh-layout-kernel:2.0.5'
+    api  'io.github.scwang90:refresh-header-classics:2.0.5'
+    // 状态栏适配
+    api 'com.gitee.zackratos:UltimateBarX:0.8.0'
 }
 
 afterEvaluate {
