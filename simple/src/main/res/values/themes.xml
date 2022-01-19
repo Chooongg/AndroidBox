@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="Theme.AndroidBox" parent="BoxTheme.PrimarySurface.CenterTitle">
+    <style name="Theme.AndroidBox" parent="BoxTheme.Surface.CenterTitle">
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryVariant">@color/primaryVariant</item>
         <item name="colorOnPrimary">@color/onPrimary</item>
