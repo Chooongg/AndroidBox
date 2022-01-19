@@ -1,8 +1,9 @@
 package com.chooongg.annotation
 
+import androidx.annotation.StyleRes
 import java.lang.annotation.Inherited
 
 @Inherited
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class AutoHideInputMethod(val isEnable: Boolean)
+annotation class Theme(@StyleRes val resId: Int)
