@@ -6,6 +6,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import androidx.annotation.IdRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
@@ -28,6 +29,9 @@ abstract class BoxActivity : AppCompatActivity() {
     //<editor-fold desc="子类实现方法">
 
     protected open fun initActionBar(actionBar: ActionBar) = Unit
+
+    @IdRes
+    protected open fun initLiftOnScrollTargetId(): Int = ResourcesCompat.ID_NULL
 
     abstract fun initConfig(savedInstanceState: Bundle?)
 
@@ -84,10 +88,9 @@ abstract class BoxActivity : AppCompatActivity() {
             supportActionBar!!.setDisplayHomeAsUpEnabled(true)
             supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_app_bar_back)
         }
-        val liftOnScrollTargetId = getLiftOnScrollTargetId4Annotation()
-        if (liftOnScrollTargetId != null && liftOnScrollTargetId != ResourcesCompat.ID_NULL) {
+        if (initLiftOnScrollTargetId() != ResourcesCompat.ID_NULL) {
             val appBarLayout = findViewById<AppBarLayout>(R.id.appbar_layout)
-            appBarLayout.liftOnScrollTargetViewId = liftOnScrollTargetId
+            appBarLayout.liftOnScrollTargetViewId = initLiftOnScrollTargetId()
         }
         initActionBar(supportActionBar!!)
     }
@@ -168,9 +171,6 @@ abstract class BoxActivity : AppCompatActivity() {
 
     private fun getTopAppBarType4Annotation() =
         javaClass.getAnnotation(TopAppBarType::class.java)?.type ?: TopAppBarType.TYPE_SMALL
-
-    private fun getLiftOnScrollTargetId4Annotation() =
-        javaClass.getAnnotation(LiftOnScrollTargetId::class.java)?.resId
 
     //</editor-fold>
 

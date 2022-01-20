@@ -10,7 +10,6 @@ import androidx.lifecycle.lifecycleScope
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.chooongg.activity.BoxBindingActivity
 import com.chooongg.adapter.BindingAdapter
-import com.chooongg.annotation.LiftOnScrollTargetId
 import com.chooongg.annotation.TopAppBarDefaultNavigation
 import com.chooongg.annotation.TopAppBarType
 import com.chooongg.core.ext.divider
@@ -28,10 +27,11 @@ import kotlinx.coroutines.launch
 
 @TopAppBarType(TopAppBarType.TYPE_SMALL)
 @TopAppBarDefaultNavigation(false)
-@LiftOnScrollTargetId(R.id.recycler_view)
 class MainActivity : BoxBindingActivity<ActivityMainBinding>() {
 
     private val adapter = Adapter()
+
+    override fun initLiftOnScrollTargetId() = R.id.recycler_view
 
     override fun initConfig(savedInstanceState: Bundle?) {
         binding.recyclerView.adapter = adapter
