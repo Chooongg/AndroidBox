@@ -23,6 +23,7 @@ import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.ViewCompat
 import androidx.core.widget.TextViewCompat
 import com.chooongg.core.R
+import com.chooongg.core.ext.EmojiExcludeFilter
 import com.chooongg.ext.clipboardManager
 import com.google.android.material.textfield.TextInputEditText
 import kotlin.math.min
@@ -835,27 +836,5 @@ class BoxTextInputEditText @JvmOverloads constructor(
             return
         }
         super.onRestoreInstanceState(state)
-    }
-
-    /**
-     * Disable emoji and other special symbol input.
-     */
-    private class EmojiExcludeFilter : InputFilter {
-        override fun filter(
-            source: CharSequence,
-            start: Int,
-            end: Int,
-            dest: Spanned,
-            dstart: Int,
-            dend: Int
-        ): CharSequence? {
-            for (i in start until end) {
-                val type = Character.getType(source[i])
-                if (type == Character.SURROGATE.toInt() || type == Character.OTHER_SYMBOL.toInt()) {
-                    return ""
-                }
-            }
-            return null
-        }
     }
 }
