@@ -5,7 +5,9 @@ import android.content.Context
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.provider.Settings
+import android.view.View
 import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import androidx.annotation.RequiresPermission
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
@@ -98,6 +100,14 @@ fun Fragment.showInputMethodEditor() = activity?.showInputMethodEditor()
 fun Activity.showInputMethodEditor() {
     val insetsController = WindowCompat.getInsetsController(window, decorView) ?: return
     insetsController.show(WindowInsetsCompat.Type.ime())
+}
+
+/**
+ * 显示输入法
+ */
+fun Fragment.showInputMethodEditor(view: View) = activity?.showInputMethodEditor(view)
+fun Activity.showInputMethodEditor(view: View) {
+    inputMethodManager.showSoftInput(view, InputMethodManager.SHOW_FORCED)
 }
 
 /**
