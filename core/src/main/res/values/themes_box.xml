@@ -74,7 +74,7 @@
         <item name="statusBarScrim">@android:color/transparent</item>
         <item name="toolbarStyle">@style/BoxWidget.Toolbar.Surface</item>
         <item name="actionBarStyle">@style/BoxWidget.Toolbar.Surface</item>
-        <item name="android:actionBarSize">@dimen/d48</item>
+        <item name="actionBarSize">@dimen/d48</item>
         <item name="titleCentered">false</item>
         <item name="subtitleCentered">false</item>
         <!-- 添加 Transitions 支持 -->

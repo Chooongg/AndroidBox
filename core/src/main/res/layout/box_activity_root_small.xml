@@ -17,7 +17,7 @@
             style="?attr/toolbarStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:autoSetActionBar="true"
+            app:autoSetActionBar="false"
             app:defaultNavigation="false"
             app:loadActivityLabel="false" />
 

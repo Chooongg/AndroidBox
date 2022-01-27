@@ -10,6 +10,7 @@ import androidx.annotation.IdRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.updateLayoutParams
@@ -76,17 +77,16 @@ abstract class BoxActivity : AppCompatActivity() {
     private fun configRootView() {
         when (getTopAppBarType4Annotation()) {
             TopAppBarType.TYPE_SMALL -> super.setContentView(R.layout.box_activity_root_small)
-            TopAppBarType.TYPE_MEDIUM -> super.setContentView(R.layout.box_activity_root_medium)
-            TopAppBarType.TYPE_LARGE -> super.setContentView(R.layout.box_activity_root_large)
+            TopAppBarType.TYPE_MEDIUM -> {
+                super.setContentView(R.layout.box_activity_root_medium)
+            }
+            TopAppBarType.TYPE_LARGE -> {
+                super.setContentView(R.layout.box_activity_root_large)
+            }
             else -> return
         }
         if (supportActionBar == null) {
             setSupportActionBar(findViewById<BoxToolbar>(R.id.toolbar))
-        }
-        if (isShowTopAppBarDefaultNavigation4Annotation()) {
-            supportActionBar!!.setHomeButtonEnabled(true)
-            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-            supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_app_bar_back)
         }
         if (initLiftOnScrollTargetId() != ResourcesCompat.ID_NULL) {
             val appBarLayout = findViewById<AppBarLayout>(R.id.appbar_layout)
@@ -150,6 +150,15 @@ abstract class BoxActivity : AppCompatActivity() {
                 coordinatorLayout.addView(view, params)
             }
             else -> super.setContentView(view, params)
+        }
+    }
+
+    override fun setSupportActionBar(toolbar: Toolbar?) {
+        super.setSupportActionBar(toolbar)
+        if (isShowTopAppBarDefaultNavigation4Annotation()) {
+            supportActionBar!!.setHomeButtonEnabled(true)
+            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+            supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_app_bar_back)
         }
     }
 

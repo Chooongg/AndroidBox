@@ -25,8 +25,8 @@ import com.chooongg.simple.databinding.ItemSingleBinding
 import com.chooongg.simple.model.SingleItem
 import kotlinx.coroutines.launch
 
-@TopAppBarType(TopAppBarType.TYPE_SMALL)
-@TopAppBarDefaultNavigation(false)
+@TopAppBarType(TopAppBarType.TYPE_MEDIUM)
+@TopAppBarDefaultNavigation(true)
 class MainActivity : BoxBindingActivity<ActivityMainBinding>() {
 
     private val adapter = Adapter()
@@ -34,6 +34,7 @@ class MainActivity : BoxBindingActivity<ActivityMainBinding>() {
     override fun initLiftOnScrollTargetId() = R.id.recycler_view
 
     override fun initConfig(savedInstanceState: Bundle?) {
+        title = "2.colorPrimary :appbar底色 3.navigationBarColor:导航栏底色(只能在API v21 也就是 Android 5 以后的版本中使用, 因此要将之设定在 res/values-v21/styles.xml..."
         binding.recyclerView.adapter = adapter
         binding.recyclerView.divider {
             asSpace().size(dp2px(16f))

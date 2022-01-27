@@ -5,9 +5,9 @@
 
     <style name="BoxWidget.Toolbar.OnSurface" parent="Widget.Material3.Toolbar.OnSurface">
         <item name="titleMargin">0dp</item>
-        <item name="maxButtonHeight">?android:attr/actionBarSize</item>
-        <item name="android:minHeight">?android:attr/actionBarSize</item>
-        <item name="contentInsetStartWithNavigation">?android:attr/actionBarSize</item>
+        <item name="maxButtonHeight">?attr/actionBarSize</item>
+        <item name="android:minHeight">?attr/actionBarSize</item>
+        <item name="contentInsetStartWithNavigation">?attr/actionBarSize</item>
         <item name="subtitleTextAppearance">@style/BoxSubtitleAppearance</item>
     </style>
 
@@ -24,9 +24,9 @@
 
     <style name="BoxWidget.Toolbar.Surface" parent="Widget.Material3.Toolbar.Surface">
         <item name="titleMargin">0dp</item>
-        <item name="maxButtonHeight">?android:attr/actionBarSize</item>
-        <item name="android:minHeight">?android:attr/actionBarSize</item>
-        <item name="contentInsetStartWithNavigation">?android:attr/actionBarSize</item>
+        <item name="maxButtonHeight">?attr/actionBarSize</item>
+        <item name="android:minHeight">?attr/actionBarSize</item>
+        <item name="contentInsetStartWithNavigation">?attr/actionBarSize</item>
         <item name="subtitleTextAppearance">@style/BoxSubtitleAppearance</item>
     </style>
 
@@ -47,8 +47,7 @@
 
     <style name="BoxWidget.Toolbar.Button.Navigation.Primary" parent="Widget.AppCompat.Toolbar.Button.Navigation">
         <item name="minWidth">?attr/actionBarSize</item>
-        <item name="maxWidth">?attr/actionBarSize</item>
-        <item name="android:scaleType">centerInside</item>
+        <item name="android:scaleType">center</item>
         <item name="tint">?attr/colorOnPrimary</item>
     </style>
 

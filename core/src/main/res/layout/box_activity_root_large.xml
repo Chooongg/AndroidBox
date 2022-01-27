@@ -19,16 +19,15 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/collapsingToolbarLayoutLargeSize"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
-            app:titleEnabled="false">
+            app:maxLines="3">
 
             <com.chooongg.toolbar.BoxToolbar
                 android:id="@+id/toolbar"
                 style="?attr/toolbarStyle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@null"
+                android:layout_height="?attr/actionBarSize"
                 android:elevation="0dp"
-                app:autoSetActionBar="true"
+                app:autoSetActionBar="false"
                 app:defaultNavigation="false"
                 app:layout_collapseMode="pin"
                 app:loadActivityLabel="false" />
