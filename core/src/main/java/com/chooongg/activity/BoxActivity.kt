@@ -102,7 +102,10 @@ abstract class BoxActivity : AppCompatActivity() {
         super.onPostCreate(savedInstanceState)
         // 是否启用点击空白隐藏输入法
         if (isEnableAutoHideInputMethod4Annotation()) {
-            contentView.setOnClickListener { hideInputMethodEditor() }
+            contentView.setOnClickListener {
+                hideInputMethodEditor()
+                it.requestFocus()
+            }
         }
         initConfig(savedInstanceState)
         initContent()
