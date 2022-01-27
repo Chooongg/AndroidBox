@@ -8,32 +8,33 @@
     </style>
 
     <style name="BoxTheme.Surface.CenterTitle" parent="BoxTheme.Surface">
-        <item name="titleCentered">true</item>
-        <item name="subtitleCentered">true</item>
+        <item name="toolbarStyle">@style/BoxWidget.Toolbar.OnSurface.Center</item>
     </style>
 
     <style name="BoxTheme.Primary" parent="Base.BoxTheme">
         <item name="android:statusBarColor">?attr/colorPrimary</item>
         <item name="toolbarStyle">@style/BoxWidget.Toolbar.OnPrimary</item>
-        <item name="toolbarNavigationButtonStyle">@style/BoxWidget.Toolbar.Button.Navigation.Primary</item>
+        <item name="toolbarNavigationButtonStyle">
+            @style/BoxWidget.Toolbar.Button.Navigation.Primary
+        </item>
         <item name="appBarLayoutStyle">@style/BoxWidget.AppBarLayout.Primary</item>
     </style>
 
     <style name="BoxTheme.Primary.CenterTitle" parent="BoxTheme.Primary">
-        <item name="titleCentered">true</item>
-        <item name="subtitleCentered">true</item>
+        <item name="toolbarStyle">@style/BoxWidget.Toolbar.OnPrimary.Center</item>
     </style>
 
     <style name="BoxTheme.PrimarySurface" parent="Base.BoxTheme">
         <item name="android:statusBarColor">?attr/colorPrimary</item>
         <item name="toolbarStyle">@style/BoxWidget.Toolbar.OnPrimary</item>
-        <item name="toolbarNavigationButtonStyle">@style/BoxWidget.Toolbar.Button.Navigation.Primary</item>
+        <item name="toolbarNavigationButtonStyle">
+            @style/BoxWidget.Toolbar.Button.Navigation.Primary
+        </item>
         <item name="appBarLayoutStyle">@style/BoxWidget.AppBarLayout.Primary</item>
     </style>
 
     <style name="BoxTheme.PrimarySurface.CenterTitle" parent="BoxTheme.PrimarySurface">
-        <item name="titleCentered">true</item>
-        <item name="subtitleCentered">true</item>
+        <item name="toolbarStyle">@style/BoxWidget.Toolbar.OnPrimary.Center</item>
     </style>
 
     <style name="Base.BoxTheme" parent="Theme.Material3.DayNight.NoActionBar">

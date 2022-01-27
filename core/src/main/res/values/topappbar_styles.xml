@@ -11,6 +11,13 @@
         <item name="subtitleTextAppearance">@style/BoxSubtitleAppearance</item>
     </style>
 
+    <style name="BoxWidget.Toolbar.OnSurface.Center" parent="BoxWidget.Toolbar.OnSurface">
+        <item name="titleCentered">true</item>
+        <item name="subtitleCentered">true</item>
+        <item name="contentInsetStart">16dp</item>
+        <item name="contentInsetEnd">16dp</item>
+    </style>
+
     <style name="BoxWidget.Toolbar.OnPrimary" parent="BoxWidget.Toolbar.OnSurface">
         <item name="titleTextColor">?attr/colorOnPrimary</item>
         <item name="subtitleTextColor">?attr/colorPrimaryContainer</item>
@@ -20,7 +27,21 @@
         <item name="materialThemeOverlay">@style/ThemeOverlay.Material3.Toolbar.Primary</item>
     </style>
 
+    <style name="BoxWidget.Toolbar.OnPrimary.Center" parent="BoxWidget.Toolbar.OnPrimary">
+        <item name="titleCentered">true</item>
+        <item name="subtitleCentered">true</item>
+        <item name="contentInsetStart">16dp</item>
+        <item name="contentInsetEnd">16dp</item>
+    </style>
+
     <style name="BoxWidget.Toolbar.OnPrimarySurface" parent="BoxWidget.Toolbar.OnPrimary" />
+
+    <style name="BoxWidget.Toolbar.OnPrimarySurface.Center" parent="BoxWidget.Toolbar.OnPrimarySurface">
+        <item name="titleCentered">true</item>
+        <item name="subtitleCentered">true</item>
+        <item name="contentInsetStart">16dp</item>
+        <item name="contentInsetEnd">16dp</item>
+    </style>
 
     <style name="BoxWidget.Toolbar.Surface" parent="Widget.Material3.Toolbar.Surface">
         <item name="titleMargin">0dp</item>
@@ -28,6 +49,13 @@
         <item name="android:minHeight">?attr/actionBarSize</item>
         <item name="contentInsetStartWithNavigation">?attr/actionBarSize</item>
         <item name="subtitleTextAppearance">@style/BoxSubtitleAppearance</item>
+    </style>
+
+    <style name="BoxWidget.Toolbar.Surface.Center" parent="BoxWidget.Toolbar.Surface">
+        <item name="titleCentered">true</item>
+        <item name="subtitleCentered">true</item>
+        <item name="contentInsetStart">16dp</item>
+        <item name="contentInsetEnd">16dp</item>
     </style>
 
     <style name="BoxWidget.Toolbar.Primary" parent="BoxWidget.Toolbar.Surface">
@@ -39,7 +67,21 @@
         <item name="materialThemeOverlay">@style/ThemeOverlay.Material3.Toolbar.Primary</item>
     </style>
 
+    <style name="BoxWidget.Toolbar.Primary.Center" parent="BoxWidget.Toolbar.Primary">
+        <item name="titleCentered">true</item>
+        <item name="subtitleCentered">true</item>
+        <item name="contentInsetStart">16dp</item>
+        <item name="contentInsetEnd">16dp</item>
+    </style>
+
     <style name="BoxWidget.Toolbar.PrimarySurface" parent="BoxWidget.Toolbar.Primary" />
+
+    <style name="BoxWidget.Toolbar.PrimarySurface.Center" parent="BoxWidget.Toolbar.PrimarySurface">
+        <item name="titleCentered">true</item>
+        <item name="subtitleCentered">true</item>
+        <item name="contentInsetStart">16dp</item>
+        <item name="contentInsetEnd">16dp</item>
+    </style>
 
     <style name="BoxSubtitleAppearance">
         <item name="android:textSize">10sp</item>

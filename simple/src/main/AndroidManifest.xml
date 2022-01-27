@@ -40,7 +40,6 @@
             android:label="网络请求"
             android:launchMode="singleTop" />
 
-
     </application>
 
 </manifest>

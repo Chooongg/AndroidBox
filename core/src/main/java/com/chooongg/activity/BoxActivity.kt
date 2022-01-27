@@ -22,6 +22,7 @@ import com.chooongg.ext.hideInputMethodEditor
 import com.chooongg.manager.WindowPreferencesManager
 import com.chooongg.toolbar.BoxToolbar
 import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 
@@ -77,12 +78,8 @@ abstract class BoxActivity : AppCompatActivity() {
     private fun configRootView() {
         when (getTopAppBarType4Annotation()) {
             TopAppBarType.TYPE_SMALL -> super.setContentView(R.layout.box_activity_root_small)
-            TopAppBarType.TYPE_MEDIUM -> {
-                super.setContentView(R.layout.box_activity_root_medium)
-            }
-            TopAppBarType.TYPE_LARGE -> {
-                super.setContentView(R.layout.box_activity_root_large)
-            }
+            TopAppBarType.TYPE_MEDIUM -> super.setContentView(R.layout.box_activity_root_medium)
+            TopAppBarType.TYPE_LARGE -> super.setContentView(R.layout.box_activity_root_large)
             else -> return
         }
         if (supportActionBar == null) {
@@ -91,6 +88,12 @@ abstract class BoxActivity : AppCompatActivity() {
         if (initLiftOnScrollTargetId() != ResourcesCompat.ID_NULL) {
             val appBarLayout = findViewById<AppBarLayout>(R.id.appbar_layout)
             appBarLayout.liftOnScrollTargetViewId = initLiftOnScrollTargetId()
+        }
+        val collapsingLayout = findViewById<CollapsingToolbarLayout>(R.id.collapsing_toolbar_layout)
+        val topAppBarTextGravity = getTopAppBarTextGravity4Annotation()
+        if (collapsingLayout != null && topAppBarTextGravity != null) {
+            collapsingLayout.collapsedTitleGravity = topAppBarTextGravity.collapsedTitleGravity
+            collapsingLayout.expandedTitleGravity = topAppBarTextGravity.expandedTitleGravity
         }
         initActionBar(supportActionBar!!)
     }
@@ -162,6 +165,15 @@ abstract class BoxActivity : AppCompatActivity() {
         }
     }
 
+    protected fun getCoordinatorLayout(): CoordinatorLayout? =
+        findViewById(R.id.coordinator_layout)
+
+    protected fun getAppBarLayout(): AppBarLayout? =
+        findViewById(R.id.appbar_layout)
+
+    protected fun getCollapsingToolbarLayout(): CollapsingToolbarLayout? =
+        findViewById(R.id.collapsing_toolbar_layout)
+
     //</editor-fold>
 
     //<editor-fold desc="注解获取">
@@ -180,6 +192,9 @@ abstract class BoxActivity : AppCompatActivity() {
 
     private fun getTopAppBarType4Annotation() =
         javaClass.getAnnotation(TopAppBarType::class.java)?.type ?: TopAppBarType.TYPE_SMALL
+
+    private fun getTopAppBarTextGravity4Annotation() =
+        javaClass.getAnnotation(TopAppBarTextGravity::class.java)
 
     //</editor-fold>
 
