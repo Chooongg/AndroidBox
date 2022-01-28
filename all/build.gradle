@@ -42,6 +42,7 @@ afterEvaluate {
                 from components.release
                 groupId = "com.chooongg"
                 artifactId = "all"
+                version = version_name
             }
         }
     }

@@ -47,6 +47,7 @@ afterEvaluate {
                 from components.release
                 groupId = "com.chooongg"
                 artifactId = "stateLayout"
+                version = version_name
             }
         }
     }

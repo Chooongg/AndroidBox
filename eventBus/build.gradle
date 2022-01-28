@@ -41,6 +41,7 @@ afterEvaluate {
                 from components.release
                 groupId = "com.chooongg"
                 artifactId = "eventBus"
+                version = version_name
             }
         }
     }

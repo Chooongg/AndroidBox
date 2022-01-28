@@ -5,7 +5,7 @@ buildscript {
     ext.target_sdk = 31
 
     ext.version_code = 1
-    ext.version_name = "0.0.1"
+    ext.version_name = "0.0.29"
 
     repositories {
         google()
