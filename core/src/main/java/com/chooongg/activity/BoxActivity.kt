@@ -25,6 +25,7 @@ import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback
 
 abstract class BoxActivity : AppCompatActivity() {
 
@@ -67,6 +68,8 @@ abstract class BoxActivity : AppCompatActivity() {
         // 是否启用页面过渡效果
         if (isEnableActivityTransitions4Annotation()) {
             window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
+            setExitSharedElementCallback(MaterialContainerTransformSharedElementCallback())
+            window.sharedElementsUseOverlay = false
         }
         // 是否启用内容过渡效果
         if (isEnableContentTransitions4Annotation()) {
