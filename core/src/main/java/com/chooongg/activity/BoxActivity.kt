@@ -23,8 +23,10 @@ import com.chooongg.manager.WindowPreferencesManager
 import com.chooongg.toolbar.BoxToolbar
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.CollapsingToolbarLayout
+import com.google.android.material.color.MaterialColors
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.transition.platform.MaterialContainerTransform
 import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback
 
 abstract class BoxActivity : AppCompatActivity() {
@@ -35,6 +37,8 @@ abstract class BoxActivity : AppCompatActivity() {
 
     @IdRes
     protected open fun initLiftOnScrollTargetId(): Int = ResourcesCompat.ID_NULL
+
+    protected open fun initTransitions() = Unit
 
     abstract fun initConfig(savedInstanceState: Bundle?)
 
@@ -63,18 +67,36 @@ abstract class BoxActivity : AppCompatActivity() {
     //<editor-fold desc="框架方法">
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        WindowPreferencesManager(this).applyEdgeToEdgePreference(window)
         // 是否启用页面过渡效果
         if (isEnableActivityTransitions4Annotation()) {
             window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
+            contentView.transitionName = "content_layout"
+            initTransitions()
             setExitSharedElementCallback(MaterialContainerTransformSharedElementCallback())
-            window.sharedElementsUseOverlay = false
+//            window.sharedElementsUseOverlay = true
+            window.sharedElementEnterTransition = MaterialContainerTransform(this, true).apply {
+                fadeMode = MaterialContainerTransform.FADE_MODE_THROUGH
+                addTarget(android.R.id.content)
+                setAllContainerColors(
+                    MaterialColors.getColor(findViewById(android.R.id.content), R.attr.colorSurface)
+                )
+            }
+            window.sharedElementExitTransition = MaterialContainerTransform(this, false).apply {
+                fadeMode = MaterialContainerTransform.FADE_MODE_THROUGH
+                addTarget(android.R.id.content)
+                setAllContainerColors(
+                    MaterialColors.getColor(findViewById(android.R.id.content), R.attr.colorSurface)
+                )
+            }
         }
         // 是否启用内容过渡效果
         if (isEnableContentTransitions4Annotation()) {
             window.requestFeature(Window.FEATURE_CONTENT_TRANSITIONS)
         }
+
+        super.onCreate(savedInstanceState)
+        WindowPreferencesManager(this).applyEdgeToEdgePreference(window)
+
         configRootView()
     }
 

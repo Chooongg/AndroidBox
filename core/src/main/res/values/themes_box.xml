@@ -78,13 +78,6 @@
         <item name="actionBarSize">@dimen/d48</item>
         <item name="titleCentered">false</item>
         <item name="subtitleCentered">false</item>
-        <!-- 添加 Transitions 支持 -->
-        <item name="android:windowContentTransitions">false</item>
-        <item name="android:windowActivityTransitions">false</item>
-        <item name="android:windowSharedElementsUseOverlay">true</item>
-        <!-- 前后两个页面是同步执行还是顺序执行, true为同步 -->
-        <item name="android:windowAllowEnterTransitionOverlap">false</item>
-        <item name="android:windowAllowReturnTransitionOverlap">false</item>
     </style>
 
     <style name="BoxWindowAnimation" parent="@android:style/Animation.Activity">

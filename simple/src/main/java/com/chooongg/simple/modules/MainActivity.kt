@@ -11,12 +11,13 @@ import androidx.lifecycle.lifecycleScope
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.chooongg.activity.BoxBindingActivity
 import com.chooongg.adapter.BindingAdapter
+import com.chooongg.annotation.ActivityTransitions
 import com.chooongg.annotation.TopAppBarDefaultNavigation
 import com.chooongg.annotation.TopAppBarTextGravity
 import com.chooongg.annotation.TopAppBarType
-import com.chooongg.core.ext.divider
 import com.chooongg.core.ext.startActivity
-import com.chooongg.ext.dp2px
+import com.chooongg.core.ext.startActivityTransitionPage
+import com.chooongg.ext.doOnClick
 import com.chooongg.ext.getNightMode
 import com.chooongg.ext.setNightMode
 import com.chooongg.http.ext.requestBasic
@@ -27,6 +28,7 @@ import com.chooongg.simple.databinding.ItemSingleBinding
 import com.chooongg.simple.model.SingleItem
 import kotlinx.coroutines.launch
 
+@ActivityTransitions
 @TopAppBarType(TopAppBarType.TYPE_MEDIUM)
 @TopAppBarDefaultNavigation(false)
 @TopAppBarTextGravity(Gravity.START, Gravity.CENTER)
@@ -37,13 +39,16 @@ class MainActivity : BoxBindingActivity<ActivityMainBinding>() {
     override fun initLiftOnScrollTargetId() = R.id.recycler_view
 
     override fun initConfig(savedInstanceState: Bundle?) {
-        binding.recyclerView.adapter = adapter
-        binding.recyclerView.divider {
-            asSpace().size(dp2px(16f))
-            showFirstDivider().showLastDivider().showSideDividers()
-        }
+//        binding.recyclerView.adapter = adapter
+//        binding.recyclerView.divider {
+//            asSpace().size(dp2px(16f))
+//            showFirstDivider().showLastDivider().showSideDividers()
+//        }
         adapter.setOnItemClickListener { _, view, position ->
             adapter.data[position].block.invoke(view)
+        }
+        binding.fab.doOnClick {
+            startActivityTransitionPage(AppBarActivity::class, it)
         }
     }
 
@@ -51,7 +56,7 @@ class MainActivity : BoxBindingActivity<ActivityMainBinding>() {
         adapter.setNewInstance(
             arrayListOf(
                 SingleItem("AppBar") {
-                    startActivity(AppBarActivity::class)
+                    startActivityTransitionPage(AppBarActivity::class, it)
                 }, SingleItem("状态布局") {
                     startActivity(StatusActivity::class)
                 }, SingleItem("网络请求") {
