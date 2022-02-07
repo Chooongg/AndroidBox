@@ -57,7 +57,7 @@
         <item name="colorErrorContainer">@color/errorContainer</item>
         <item name="colorOnErrorContainer">@color/onErrorContainer</item>
         <item name="colorOutline">@color/outline</item>
-        <item name="android:colorBackground">@color/background</item>
+        <item name="android:colorBackground">@color/surface</item>
         <item name="colorOnBackground">@color/onBackground</item>
         <item name="colorSurface">@color/surface</item>
         <item name="colorOnSurface">@color/onSurface</item>
@@ -65,8 +65,9 @@
         <item name="colorOnSurfaceVariant">@color/onSurfaceVariant</item>
         <item name="colorSurfaceInverse">@color/surfaceInverse</item>
         <item name="colorOnSurfaceInverse">@color/onSurfaceInverse</item>
-
+        <!-- 过渡动画 -->
         <item name="android:windowAnimationStyle">@style/BoxWindowAnimation</item>
+        <item name="windowActionModeOverlay">true</item>
         <!-- 圆角设置 -->
         <item name="shapeAppearanceSmallComponent">@style/ShapeAppearanceImage.Rounded.8dp</item>
         <item name="shapeAppearanceMediumComponent">@style/ShapeAppearanceImage.Rounded.16dp</item>

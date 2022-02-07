@@ -1,12 +1,14 @@
 package com.chooongg.simple.modules
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.lifecycleScope
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.chooongg.activity.BoxBindingActivity
@@ -48,7 +50,10 @@ class MainActivity : BoxBindingActivity<ActivityMainBinding>() {
             adapter.data[position].block.invoke(view)
         }
         binding.fab.doOnClick {
-            startActivityTransitionPage(AppBarActivity::class, it)
+            val intent = Intent(activity, AppBarActivity::class.java)
+            val options =
+                ActivityOptionsCompat.makeSceneTransitionAnimation(activity, it, "content_layout")
+            startActivity(intent, options.toBundle())
         }
     }
 

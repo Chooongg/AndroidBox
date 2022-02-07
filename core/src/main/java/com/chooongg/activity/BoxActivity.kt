@@ -14,6 +14,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.updateLayoutParams
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import com.chooongg.annotation.*
 import com.chooongg.core.R
 import com.chooongg.ext.contentView
@@ -26,6 +27,7 @@ import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.color.MaterialColors
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.transition.platform.MaterialArcMotion
 import com.google.android.material.transition.platform.MaterialContainerTransform
 import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback
 
@@ -70,24 +72,13 @@ abstract class BoxActivity : AppCompatActivity() {
         // 是否启用页面过渡效果
         if (isEnableActivityTransitions4Annotation()) {
             window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
-            contentView.transitionName = "content_layout"
-            initTransitions()
+            val contentView = contentView
             setExitSharedElementCallback(MaterialContainerTransformSharedElementCallback())
-//            window.sharedElementsUseOverlay = true
-            window.sharedElementEnterTransition = MaterialContainerTransform(this, true).apply {
-                fadeMode = MaterialContainerTransform.FADE_MODE_THROUGH
-                addTarget(android.R.id.content)
-                setAllContainerColors(
-                    MaterialColors.getColor(findViewById(android.R.id.content), R.attr.colorSurface)
-                )
-            }
-            window.sharedElementExitTransition = MaterialContainerTransform(this, false).apply {
-                fadeMode = MaterialContainerTransform.FADE_MODE_THROUGH
-                addTarget(android.R.id.content)
-                setAllContainerColors(
-                    MaterialColors.getColor(findViewById(android.R.id.content), R.attr.colorSurface)
-                )
-            }
+            window.sharedElementsUseOverlay = false
+            window.sharedElementEnterTransition = buildContainerTransform(contentView, true)
+            window.sharedElementReturnTransition = buildContainerTransform(contentView, false)
+
+            initTransitions()
         }
         // 是否启用内容过渡效果
         if (isEnableContentTransitions4Annotation()) {
@@ -99,6 +90,17 @@ abstract class BoxActivity : AppCompatActivity() {
 
         configRootView()
     }
+
+    private fun buildContainerTransform(contentView: View, entering: Boolean) =
+        MaterialContainerTransform(this, entering).apply {
+            setAllContainerColors(MaterialColors.getColor(contentView, R.attr.colorSurface))
+            addTarget(contentView.id)
+            fadeMode = MaterialContainerTransform.FADE_MODE_THROUGH
+            interpolator = FastOutSlowInInterpolator()
+            pathMotion = MaterialArcMotion()
+            duration = 4000
+            isDrawDebugEnabled = false
+        }
 
     private fun configRootView() {
         when (getTopAppBarType4Annotation()) {

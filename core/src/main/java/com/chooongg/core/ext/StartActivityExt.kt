@@ -53,11 +53,9 @@ fun Context.startActivityTransitionPage(
     block?.invoke(intent)
     val activity = getActivity()
     if (activity != null) {
-        startActivity(
-            intent,
+        val options =
             ActivityOptionsCompat.makeSceneTransitionAnimation(activity, view, "content_layout")
-                .toBundle()
-        )
+        startActivity(intent, options.toBundle())
     } else startActivity(intent)
 }
 
