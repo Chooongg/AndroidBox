@@ -1,14 +1,12 @@
 package com.chooongg.simple.modules
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.lifecycleScope
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.chooongg.activity.BoxBindingActivity
@@ -17,9 +15,10 @@ import com.chooongg.annotation.ActivityTransitions
 import com.chooongg.annotation.TopAppBarDefaultNavigation
 import com.chooongg.annotation.TopAppBarTextGravity
 import com.chooongg.annotation.TopAppBarType
+import com.chooongg.core.ext.divider
 import com.chooongg.core.ext.startActivity
 import com.chooongg.core.ext.startActivityTransitionPage
-import com.chooongg.ext.doOnClick
+import com.chooongg.ext.dp2px
 import com.chooongg.ext.getNightMode
 import com.chooongg.ext.setNightMode
 import com.chooongg.http.ext.requestBasic
@@ -33,7 +32,7 @@ import kotlinx.coroutines.launch
 @ActivityTransitions
 @TopAppBarType(TopAppBarType.TYPE_MEDIUM)
 @TopAppBarDefaultNavigation(false)
-@TopAppBarTextGravity(Gravity.START, Gravity.CENTER)
+@TopAppBarTextGravity(Gravity.CENTER)
 class MainActivity : BoxBindingActivity<ActivityMainBinding>() {
 
     private val adapter = Adapter()
@@ -41,19 +40,13 @@ class MainActivity : BoxBindingActivity<ActivityMainBinding>() {
     override fun initLiftOnScrollTargetId() = R.id.recycler_view
 
     override fun initConfig(savedInstanceState: Bundle?) {
-//        binding.recyclerView.adapter = adapter
-//        binding.recyclerView.divider {
-//            asSpace().size(dp2px(16f))
-//            showFirstDivider().showLastDivider().showSideDividers()
-//        }
+        binding.recyclerView.adapter = adapter
+        binding.recyclerView.divider {
+            asSpace().size(dp2px(16f))
+            showFirstDivider().showLastDivider().showSideDividers()
+        }
         adapter.setOnItemClickListener { _, view, position ->
             adapter.data[position].block.invoke(view)
-        }
-        binding.fab.doOnClick {
-            val intent = Intent(activity, AppBarActivity::class.java)
-            val options =
-                ActivityOptionsCompat.makeSceneTransitionAnimation(activity, it, "content_layout")
-            startActivity(intent, options.toBundle())
         }
     }
 

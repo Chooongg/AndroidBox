@@ -8,6 +8,6 @@ import java.lang.annotation.Inherited
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)
 annotation class TopAppBarTextGravity(
-    @GravityInt val collapsedTitleGravity: Int,
-    @GravityInt val expandedTitleGravity: Int = Gravity.START
+    @GravityInt val expandedTitleGravity: Int,
+    @GravityInt val collapsedTitleGravity: Int= Gravity.START
 )

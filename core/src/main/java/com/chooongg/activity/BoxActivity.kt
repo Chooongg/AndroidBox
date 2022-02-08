@@ -1,6 +1,7 @@
 package com.chooongg.activity
 
 import android.content.Context
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -17,19 +18,19 @@ import androidx.core.view.updateLayoutParams
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import com.chooongg.annotation.*
 import com.chooongg.core.R
-import com.chooongg.ext.contentView
-import com.chooongg.ext.dp2px
-import com.chooongg.ext.hideInputMethodEditor
+import com.chooongg.ext.*
 import com.chooongg.manager.WindowPreferencesManager
 import com.chooongg.toolbar.BoxToolbar
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.color.MaterialColors
+import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.platform.MaterialArcMotion
 import com.google.android.material.transition.platform.MaterialContainerTransform
 import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback
+
 
 abstract class BoxActivity : AppCompatActivity() {
 
@@ -73,6 +74,7 @@ abstract class BoxActivity : AppCompatActivity() {
         if (isEnableActivityTransitions4Annotation()) {
             window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
             val contentView = contentView
+            setEnterSharedElementCallback(MaterialContainerTransformSharedElementCallback())
             setExitSharedElementCallback(MaterialContainerTransformSharedElementCallback())
             window.sharedElementsUseOverlay = false
             window.sharedElementEnterTransition = buildContainerTransform(contentView, true)
@@ -98,7 +100,6 @@ abstract class BoxActivity : AppCompatActivity() {
             fadeMode = MaterialContainerTransform.FADE_MODE_THROUGH
             interpolator = FastOutSlowInInterpolator()
             pathMotion = MaterialArcMotion()
-            duration = 4000
             isDrawDebugEnabled = false
         }
 
@@ -112,15 +113,87 @@ abstract class BoxActivity : AppCompatActivity() {
         if (supportActionBar == null) {
             setSupportActionBar(findViewById<BoxToolbar>(R.id.toolbar))
         }
+        val appBarLayout = findViewById<AppBarLayout>(R.id.appbar_layout)
         if (initLiftOnScrollTargetId() != ResourcesCompat.ID_NULL) {
-            val appBarLayout = findViewById<AppBarLayout>(R.id.appbar_layout)
             appBarLayout.liftOnScrollTargetViewId = initLiftOnScrollTargetId()
         }
         val collapsingLayout = findViewById<CollapsingToolbarLayout>(R.id.collapsing_toolbar_layout)
+        val collapsingBackground = appBarLayout.background
+        when (collapsingBackground) {
+            is MaterialShapeDrawable -> {
+                val defaultColor = collapsingBackground.fillColor?.defaultColor
+                if (defaultColor != null && defaultColor != attrColor(
+                        R.attr.colorSurface,
+                        resourcesColor(R.color.surface)
+                    )
+                ) {
+                    val onPrimary =
+                        attrColor(R.attr.colorOnPrimary, resourcesColor(R.color.onPrimary))
+                    collapsingLayout.setExpandedTitleColor(onPrimary)
+                    collapsingLayout.setCollapsedTitleTextColor(onPrimary)
+                    collapsingLayout.setContentScrimColor(
+                        attrColor(
+                            R.attr.colorPrimary,
+                            resourcesColor(R.color.primary)
+                        )
+                    )
+                }
+            }
+            is ColorDrawable -> {
+
+            }
+        }
         val topAppBarTextGravity = getTopAppBarTextGravity4Annotation()
         if (collapsingLayout != null && topAppBarTextGravity != null) {
-            collapsingLayout.collapsedTitleGravity = topAppBarTextGravity.collapsedTitleGravity
             collapsingLayout.expandedTitleGravity = topAppBarTextGravity.expandedTitleGravity
+            collapsingLayout.collapsedTitleGravity = topAppBarTextGravity.collapsedTitleGravity
+            // 折叠时标题边界强制居中
+//            if (topAppBarTextGravity.collapsedTitleGravity == Gravity.CENTER) {
+//                collapsingLayout.addOnLayoutChangeListener(object : View.OnLayoutChangeListener {
+//                    @SuppressLint("RestrictedApi")
+//                    override fun onLayoutChange(
+//                        v: View?,
+//                        left: Int,
+//                        top: Int,
+//                        right: Int,
+//                        bottom: Int,
+//                        oldLeft: Int,
+//                        oldTop: Int,
+//                        oldRight: Int,
+//                        oldBottom: Int
+//                    ) {
+//                        if (oldBottom == bottom) {
+//                            collapsingLayout.removeOnLayoutChangeListener(this)
+//                            try {
+//                                val field = collapsingLayout.javaClass
+//                                    .getDeclaredField("collapsingTextHelper")
+//                                field.isAccessible = true
+//                                val collapsingTextHelper: CollapsingTextHelper =
+//                                    field.get(collapsingLayout) as CollapsingTextHelper
+//                                field.isAccessible = false
+//                                val collapsedBoundsField =
+//                                    field.type.getDeclaredField("collapsedBounds")
+//                                collapsedBoundsField.isAccessible = true
+//                                val oldRect: Rect =
+//                                    collapsedBoundsField.get(collapsingTextHelper) as Rect
+//                                collapsedBoundsField.isAccessible = false
+//                                val margin = dp2px(84f)
+//                                collapsingTextHelper.setCollapsedBounds(
+//                                    margin,
+//                                    oldRect.top,
+//                                    right - margin,
+//                                    oldRect.bottom
+//                                )
+//                                collapsingTextHelper.recalculate()
+//                            } catch (e: NoSuchFieldException) {
+//                                e.printStackTrace()
+//                            } catch (e: IllegalAccessException) {
+//                                e.printStackTrace()
+//                            }
+//                        }
+//                    }
+//                })
+//            }
         }
         initActionBar(supportActionBar!!)
     }
