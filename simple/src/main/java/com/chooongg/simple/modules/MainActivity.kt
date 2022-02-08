@@ -14,7 +14,6 @@ import com.chooongg.adapter.BindingAdapter
 import com.chooongg.annotation.ActivityTransitions
 import com.chooongg.annotation.TopAppBarDefaultNavigation
 import com.chooongg.annotation.TopAppBarTextGravity
-import com.chooongg.annotation.TopAppBarType
 import com.chooongg.core.ext.divider
 import com.chooongg.core.ext.startActivity
 import com.chooongg.core.ext.startActivityTransitionPage
@@ -30,7 +29,6 @@ import com.chooongg.simple.model.SingleItem
 import kotlinx.coroutines.launch
 
 @ActivityTransitions
-@TopAppBarType(TopAppBarType.TYPE_MEDIUM)
 @TopAppBarDefaultNavigation(false)
 @TopAppBarTextGravity(Gravity.CENTER)
 class MainActivity : BoxBindingActivity<ActivityMainBinding>() {

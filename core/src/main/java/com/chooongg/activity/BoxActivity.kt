@@ -118,8 +118,8 @@ abstract class BoxActivity : AppCompatActivity() {
             appBarLayout.liftOnScrollTargetViewId = initLiftOnScrollTargetId()
         }
         val collapsingLayout = findViewById<CollapsingToolbarLayout>(R.id.collapsing_toolbar_layout)
-        val collapsingBackground = appBarLayout.background
-        when (collapsingBackground) {
+            ?: return
+        when (val collapsingBackground = appBarLayout.background) {
             is MaterialShapeDrawable -> {
                 val defaultColor = collapsingBackground.fillColor?.defaultColor
                 if (defaultColor != null && defaultColor != attrColor(
@@ -144,7 +144,7 @@ abstract class BoxActivity : AppCompatActivity() {
             }
         }
         val topAppBarTextGravity = getTopAppBarTextGravity4Annotation()
-        if (collapsingLayout != null && topAppBarTextGravity != null) {
+        if (topAppBarTextGravity != null) {
             collapsingLayout.expandedTitleGravity = topAppBarTextGravity.expandedTitleGravity
             collapsingLayout.collapsedTitleGravity = topAppBarTextGravity.collapsedTitleGravity
             // 折叠时标题边界强制居中
