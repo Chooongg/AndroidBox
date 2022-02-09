@@ -92,6 +92,20 @@ fun Fragment.startActivity(
     startActivity(intent, option)
 }
 
+fun Fragment.startActivityTransitionPage(
+    clazz: KClass<out Any>,
+    view: View,
+    block: (Intent.() -> Unit)? = null
+) {
+    val intent = Intent(requireContext(), clazz.java)
+    block?.invoke(intent)
+    if (activity != null) {
+        val options =
+            ActivityOptionsCompat.makeSceneTransitionAnimation(activity!!, view, "content_layout")
+        startActivity(intent, options.toBundle())
+    } else startActivity(intent)
+}
+
 fun ActivityResultLauncher<Intent>.launch(
     context: Context,
     clazz: KClass<out Any>,
