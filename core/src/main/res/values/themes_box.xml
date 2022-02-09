@@ -38,6 +38,7 @@
     </style>
 
     <style name="Base.BoxTheme" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="dynamicColorThemeOverlay">@null</item>
         <item name="colorPrimary">@color/primary</item>
         <item name="colorOnPrimary">@color/onPrimary</item>
         <item name="colorPrimaryContainer">@color/primaryContainer</item>

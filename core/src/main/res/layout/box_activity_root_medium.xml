@@ -10,7 +10,8 @@
         style="?attr/appBarLayoutStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="true"
+        app:layout_behavior="com.chooongg.core.widget.behavior.AppBarLayoutBehavior">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar_layout"
@@ -29,7 +30,8 @@
                 app:autoSetActionBar="false"
                 app:defaultNavigation="false"
                 app:layout_collapseMode="pin"
-                app:loadActivityLabel="false" />
+                app:loadActivityLabel="false"
+                app:syncStatusBarColor="false" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 

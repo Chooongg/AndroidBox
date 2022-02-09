@@ -12,6 +12,8 @@ import androidx.fragment.app.Fragment
 import com.chooongg.ext.getActivity
 import kotlin.reflect.KClass
 
+const val BOX_TRANSITION_CONTENT_LAYOUT = "box_transitions_content_layout"
+
 fun Context.startActivity(clazz: KClass<out Any>, block: (Intent.() -> Unit)? = null) {
     startActivity(clazz, getActivityOption(getActivity())?.toBundle(), block)
 }
@@ -51,12 +53,13 @@ fun Context.startActivityTransitionPage(
 ) {
     val intent = Intent(this, clazz.java)
     block?.invoke(intent)
-    val activity = getActivity()
-    if (activity != null) {
-        val options =
-            ActivityOptionsCompat.makeSceneTransitionAnimation(activity, view, "content_layout")
-        startActivity(intent, options.toBundle())
-    } else startActivity(intent)
+    startActivity(
+        intent,
+        getActivityOption(
+            getActivity(),
+            Pair.create(view, BOX_TRANSITION_CONTENT_LAYOUT)
+        )?.toBundle()
+    )
 }
 
 fun Fragment.startActivity(
@@ -99,11 +102,10 @@ fun Fragment.startActivityTransitionPage(
 ) {
     val intent = Intent(requireContext(), clazz.java)
     block?.invoke(intent)
-    if (activity != null) {
-        val options =
-            ActivityOptionsCompat.makeSceneTransitionAnimation(activity!!, view, "content_layout")
-        startActivity(intent, options.toBundle())
-    } else startActivity(intent)
+    startActivity(
+        intent,
+        getActivityOption(activity, Pair.create(view, BOX_TRANSITION_CONTENT_LAYOUT))?.toBundle()
+    )
 }
 
 fun ActivityResultLauncher<Intent>.launch(
@@ -148,6 +150,21 @@ fun ActivityResultLauncher<Intent>.launch(
     launch(intent, option)
 }
 
+fun ActivityResultLauncher<Intent>.launchTransitionPage(
+    context: Context,
+    clazz: KClass<out Any>,
+    view: View,
+    block: (Intent.() -> Unit)? = null
+) {
+    val intent = Intent(context, clazz.java)
+    block?.invoke(intent)
+    launch(
+        intent, getActivityOption(
+            context.getActivity(), Pair.create(view, BOX_TRANSITION_CONTENT_LAYOUT)
+        )
+    )
+}
+
 private fun getActivityOption(
     activity: Activity?,
     vararg sharedElements: Pair<View, String>
@@ -156,8 +173,7 @@ private fun getActivityOption(
     return if (activity != null) {
         if (sharedElements.size == 1) {
             ActivityOptionsCompat.makeSceneTransitionAnimation(
-                activity,
-                Pair.create(sharedElements[0].first, sharedElements[0].second)
+                activity, sharedElements[0].first, sharedElements[0].second
             )
         } else ActivityOptionsCompat.makeSceneTransitionAnimation(activity, *sharedElements)
     } else null

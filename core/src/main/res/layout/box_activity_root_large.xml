@@ -30,7 +30,8 @@
                 app:autoSetActionBar="false"
                 app:defaultNavigation="false"
                 app:layout_collapseMode="pin"
-                app:loadActivityLabel="false" />
+                app:loadActivityLabel="false"
+                app:syncStatusBarColor="false" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
