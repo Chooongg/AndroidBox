@@ -1,19 +1,13 @@
 package com.chooongg.activity
 
 import android.content.Context
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
-import android.view.Window
-import androidx.annotation.IdRes
+import android.view.*
 import androidx.annotation.StringRes
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.updateLayoutParams
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import com.chooongg.annotation.*
@@ -31,15 +25,11 @@ import com.google.android.material.transition.platform.MaterialArcMotion
 import com.google.android.material.transition.platform.MaterialContainerTransform
 import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback
 
-
 abstract class BoxActivity : AppCompatActivity() {
 
     //<editor-fold desc="子类实现方法">
 
     protected open fun initActionBar(actionBar: ActionBar) = Unit
-
-    @IdRes
-    protected open fun initLiftOnScrollTargetId(): Int = ResourcesCompat.ID_NULL
 
     protected open fun initTransitions() = Unit
 
@@ -115,19 +105,14 @@ abstract class BoxActivity : AppCompatActivity() {
             setSupportActionBar(findViewById<BoxToolbar>(R.id.toolbar))
         }
         val appBarLayout = findViewById<AppBarLayout>(R.id.appbar_layout)
-        if (initLiftOnScrollTargetId() != ResourcesCompat.ID_NULL) {
-            appBarLayout.liftOnScrollTargetViewId = initLiftOnScrollTargetId()
-        }
+        appBarLayout.liftOnScrollTargetViewId = getLiftOnScrollTargetId4Annotation() ?: View.NO_ID
         val collapsingLayout = findViewById<CollapsingToolbarLayout>(R.id.collapsing_toolbar_layout)
             ?: return
         when (val collapsingBackground = appBarLayout.background) {
             is MaterialShapeDrawable -> {
                 val defaultColor = collapsingBackground.fillColor?.defaultColor
-                if (defaultColor != null && defaultColor != attrColor(
-                        R.attr.colorSurface,
-                        resourcesColor(R.color.surface)
-                    )
-                ) {
+                val attrColor = attrColor(R.attr.colorSurface, resourcesColor(R.color.surface))
+                if (defaultColor != null && defaultColor != attrColor) {
                     val onPrimary =
                         attrColor(R.attr.colorOnPrimary, resourcesColor(R.color.onPrimary))
                     collapsingLayout.setExpandedTitleColor(onPrimary)
@@ -140,14 +125,15 @@ abstract class BoxActivity : AppCompatActivity() {
                     )
                 }
             }
-            is ColorDrawable -> {
-
-            }
         }
         val topAppBarTextGravity = getTopAppBarTextGravity4Annotation()
         if (topAppBarTextGravity != null) {
-            collapsingLayout.expandedTitleGravity = topAppBarTextGravity.expandedTitleGravity
-            collapsingLayout.collapsedTitleGravity = topAppBarTextGravity.collapsedTitleGravity
+            if (topAppBarTextGravity.collapsedTitleGravity != Gravity.NO_GRAVITY) {
+                collapsingLayout.collapsedTitleGravity = topAppBarTextGravity.collapsedTitleGravity
+            }
+            if (topAppBarTextGravity.expandedTitleGravity != Gravity.NO_GRAVITY) {
+                collapsingLayout.expandedTitleGravity = topAppBarTextGravity.expandedTitleGravity
+            }
             // 折叠时标题边界强制居中
 //            if (topAppBarTextGravity.collapsedTitleGravity == Gravity.CENTER) {
 //                collapsingLayout.addOnLayoutChangeListener(object : View.OnLayoutChangeListener {
@@ -291,11 +277,14 @@ abstract class BoxActivity : AppCompatActivity() {
     private fun isEnableContentTransitions4Annotation() =
         javaClass.getAnnotation(ContentTransitions::class.java)?.isEnable ?: false
 
-    private fun isShowTopAppBarDefaultNavigation4Annotation() =
-        javaClass.getAnnotation(TopAppBarDefaultNavigation::class.java)?.isShow ?: true
-
     private fun getTopAppBarType4Annotation() =
         javaClass.getAnnotation(TopAppBarType::class.java)?.type ?: TopAppBarType.TYPE_SMALL
+
+    private fun getLiftOnScrollTargetId4Annotation() =
+        javaClass.getAnnotation(LiftOnScrollTargetId::class.java)?.resId
+
+    private fun isShowTopAppBarDefaultNavigation4Annotation() =
+        javaClass.getAnnotation(TopAppBarDefaultNavigation::class.java)?.isShow ?: true
 
     private fun getTopAppBarTextGravity4Annotation() =
         javaClass.getAnnotation(TopAppBarTextGravity::class.java)

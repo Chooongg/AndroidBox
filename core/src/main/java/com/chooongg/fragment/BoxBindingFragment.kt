@@ -32,7 +32,7 @@ abstract class BoxBindingFragment<BINDING : ViewBinding> : BoxFragment() {
         throw RuntimeException("BINDING not find.")
     }
 
-    override fun onCreateView(
+    override fun onCreateContentView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
