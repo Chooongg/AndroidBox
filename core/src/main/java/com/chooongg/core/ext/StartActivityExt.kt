@@ -12,8 +12,6 @@ import androidx.fragment.app.Fragment
 import com.chooongg.ext.getActivity
 import kotlin.reflect.KClass
 
-const val BOX_TRANSITION_CONTENT_LAYOUT = "box_transitions_content_layout"
-
 fun Context.startActivity(clazz: KClass<out Any>, block: (Intent.() -> Unit)? = null) {
     startActivity(clazz, getActivityOption(getActivity())?.toBundle(), block)
 }
@@ -57,7 +55,7 @@ fun Context.startActivityTransitionPage(
         intent,
         getActivityOption(
             getActivity(),
-            Pair.create(view, BOX_TRANSITION_CONTENT_LAYOUT)
+            Pair.create(view, "box_transitions_content")
         )?.toBundle()
     )
 }
@@ -104,7 +102,7 @@ fun Fragment.startActivityTransitionPage(
     block?.invoke(intent)
     startActivity(
         intent,
-        getActivityOption(activity, Pair.create(view, BOX_TRANSITION_CONTENT_LAYOUT))?.toBundle()
+        getActivityOption(activity, Pair.create(view, "box_transitions_content"))?.toBundle()
     )
 }
 
@@ -160,7 +158,7 @@ fun ActivityResultLauncher<Intent>.launchTransitionPage(
     block?.invoke(intent)
     launch(
         intent, getActivityOption(
-            context.getActivity(), Pair.create(view, BOX_TRANSITION_CONTENT_LAYOUT)
+            context.getActivity(), Pair.create(view, "box_transitions_content")
         )
     )
 }

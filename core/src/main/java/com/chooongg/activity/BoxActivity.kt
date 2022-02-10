@@ -18,7 +18,6 @@ import androidx.core.view.updateLayoutParams
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import com.chooongg.annotation.*
 import com.chooongg.core.R
-import com.chooongg.core.ext.BOX_TRANSITION_CONTENT_LAYOUT
 import com.chooongg.ext.*
 import com.chooongg.manager.WindowPreferencesManager
 import com.chooongg.toolbar.BoxToolbar
@@ -75,7 +74,7 @@ abstract class BoxActivity : AppCompatActivity() {
         if (isEnableActivityTransitions4Annotation()) {
             window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
             val contentView = contentView
-            contentView.transitionName = BOX_TRANSITION_CONTENT_LAYOUT
+            contentView.transitionName = "box_transitions_content"
             setEnterSharedElementCallback(MaterialContainerTransformSharedElementCallback())
             setExitSharedElementCallback(MaterialContainerTransformSharedElementCallback())
             window.sharedElementsUseOverlay = false
