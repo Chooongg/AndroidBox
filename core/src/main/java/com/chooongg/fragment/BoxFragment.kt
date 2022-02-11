@@ -22,6 +22,7 @@ import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 
+@TopAppBarType(TopAppBarType.TYPE_NONE)
 abstract class BoxFragment : Fragment {
 
     constructor() : super()
@@ -191,13 +192,13 @@ abstract class BoxFragment : Fragment {
         javaClass.getAnnotation(AutoHideInputMethod::class.java)?.isEnable ?: true
 
     private fun getTopAppBarType4Annotation() =
-        javaClass.getAnnotation(TopAppBarType::class.java)?.type ?: TopAppBarType.TYPE_SMALL
+        javaClass.getAnnotation(TopAppBarType::class.java)?.type ?: TopAppBarType.TYPE_NONE
 
     private fun getLiftOnScrollTargetId4Annotation() =
         javaClass.getAnnotation(LiftOnScrollTargetId::class.java)?.resId
 
     private fun isShowTopAppBarDefaultNavigation4Annotation() =
-        javaClass.getAnnotation(TopAppBarDefaultNavigation::class.java)?.isShow ?: true
+        javaClass.getAnnotation(TopAppBarDefaultNavigation::class.java)?.isShow ?: false
 
     private fun getTopAppBarTextGravity4Annotation() =
         javaClass.getAnnotation(TopAppBarTextGravity::class.java)
