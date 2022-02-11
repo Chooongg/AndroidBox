@@ -37,26 +37,18 @@ android {
 dependencies {
     api project(path: ':utils')
     // 官方
-    api 'androidx.constraintlayout:constraintlayout:2.1.2'
+    api 'androidx.constraintlayout:constraintlayout:2.1.3'
     api 'androidx.viewpager2:viewpager2:1.1.0-beta01'
-    api 'androidx.navigation:navigation-ui-ktx:2.4.0-rc01'
-    api 'androidx.navigation:navigation-fragment-ktx:2.4.0-rc01'
-    api 'androidx.paging:paging-common-ktx:3.1.0'
-    api 'androidx.paging:paging-runtime-ktx:3.1.0'
+    api 'androidx.navigation:navigation-ui-ktx:2.4.1'
+    api 'androidx.navigation:navigation-fragment-ktx:2.4.1'
     api 'androidx.work:work-runtime-ktx:2.7.1'
     api 'com.google.android.flexbox:flexbox:3.0.0'
     // 适配器
     api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.7'
     api 'com.github.fondesa:recycler-view-divider:3.5.0'
     // 下拉刷新-上拉加载
-    api 'com.github.dkzwm:srl-core:1.7.2.4'
-    api 'com.github.dkzwm:srl-ext-classics:1.7.2.4'
-    api 'com.github.dkzwm:srl-ext-material:1.7.2.4'
-    api 'com.github.dkzwm:srl-ext-util:1.7.2.4'
     api  'io.github.scwang90:refresh-layout-kernel:2.0.5'
     api  'io.github.scwang90:refresh-header-classics:2.0.5'
-    // 状态栏适配
-    api 'com.gitee.zackratos:UltimateBarX:0.8.0'
 }
 
 afterEvaluate {

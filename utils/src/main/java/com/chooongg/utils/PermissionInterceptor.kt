@@ -11,7 +11,6 @@ import com.hjq.permissions.IPermissionInterceptor
 import com.hjq.permissions.OnPermissionCallback
 import com.hjq.permissions.Permission
 import com.hjq.permissions.XXPermissions
-import java.util.*
 
 class PermissionInterceptor : IPermissionInterceptor {
 
@@ -24,23 +23,26 @@ class PermissionInterceptor : IPermissionInterceptor {
     }
 
     override fun grantedPermissions(
-        activity: Activity,
-        callback: OnPermissionCallback,
-        permissions: MutableList<String>,
-        all: Boolean
+        activity: Activity?,
+        permissions: MutableList<String>?,
+        grantedPermissions: MutableList<String>?,
+        all: Boolean,
+        callback: OnPermissionCallback?
     ) {
-        super.grantedPermissions(activity, callback, permissions, all)
+        super.grantedPermissions(activity, permissions, grantedPermissions, all, callback)
     }
 
     override fun deniedPermissions(
-        activity: Activity,
-        callback: OnPermissionCallback,
-        permissions: MutableList<String>,
-        never: Boolean
+        activity: Activity?,
+        permissions: MutableList<String>?,
+        deniedPermissions: MutableList<String>?,
+        never: Boolean,
+        callback: OnPermissionCallback?
     ) {
         // 回调授权失败的方法
-        callback.onDenied(permissions, never)
+        callback?.onDenied(permissions, never)
         if (never) {
+            if (activity == null || permissions == null) return
             showPermissionDialog(activity, permissions)
             return
         }

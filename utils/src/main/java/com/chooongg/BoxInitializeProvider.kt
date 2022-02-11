@@ -6,7 +6,6 @@ import android.content.ContentValues
 import android.net.Uri
 import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
-import com.chooongg.ext.isAppDebug
 import com.chooongg.manager.ApplicationManager
 import com.chooongg.manager.BoxMMKV
 import com.chooongg.utils.PermissionInterceptor
@@ -30,8 +29,6 @@ class BoxInitializeProvider : ContentProvider() {
             MMKV.initialize(context as Application)
             AppCompatDelegate.setDefaultNightMode(BoxMMKV.DayNightMode.get())
             Stetho.initializeWithDefaults(context)
-            XXPermissions.setScopedStorage(true)
-            XXPermissions.setDebugMode(isAppDebug())
             XXPermissions.setInterceptor(PermissionInterceptor())
             DynamicColors.applyToActivitiesIfAvailable(context as Application)
         } else {

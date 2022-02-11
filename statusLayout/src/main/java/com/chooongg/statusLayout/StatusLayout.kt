@@ -7,11 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.core.widget.NestedScrollView
+import androidx.transition.TransitionManager
 import com.chooongg.ext.doOnClick
 import com.chooongg.ext.inVisible
 import com.chooongg.ext.visible
 import com.chooongg.statusLayout.status.AbstractStatus
 import com.chooongg.statusLayout.status.SuccessStatus
+import com.google.android.material.transition.MaterialSharedAxis
 import kotlin.reflect.KClass
 
 class StatusLayout @JvmOverloads constructor(
@@ -21,8 +23,11 @@ class StatusLayout @JvmOverloads constructor(
 ) : NestedScrollView(context, attrs, defStyleAttr) {
 
     private val rootView: FrameLayout = FrameLayout(context)
+
+    private var successView: View? = null
+
+    // 存在的状态不会包括SuccessStatus
     private val existingStatus = HashMap<KClass<out AbstractStatus>, AbstractStatus>()
-    private var successStatus: SuccessStatus? = null
 
     private var currentStatus: KClass<out AbstractStatus>? = null
 
@@ -32,7 +37,18 @@ class StatusLayout @JvmOverloads constructor(
 
     init {
         isFillViewport = true
-        super.addView(rootView, -1, generateDefaultLayoutParams())
+
+        addView(rootView, -1, generateDefaultLayoutParams())
+        rootView.scheduleLayoutAnimation()
+
+        if (!isInEditMode) show(StatusPage.config.defaultState)
+        if (StatusPage.config.enableAnimation) {
+
+            val sharedAxis = MaterialSharedAxis(StatusPage.config.animationAxis, true)
+            if (successView != null) sharedAxis.addTarget(successView!!)
+            sharedAxis.addTarget(AbstractStatus::class.java)
+            TransitionManager.beginDelayedTransition(rootView, sharedAxis)
+        }
     }
 
     fun setOnRetryListener(block: (KClass<out AbstractStatus>) -> Unit) {
@@ -43,111 +59,54 @@ class StatusLayout @JvmOverloads constructor(
         onStatusChangeListener = block
     }
 
-    override fun onFinishInflate() {
-        super.onFinishInflate()
-        if (!isInEditMode) show(StatusPage.config.defaultState)
-    }
-
     fun showSuccess() {
         show(SuccessStatus::class)
     }
 
-    fun show(statusClass: KClass<out AbstractStatus>, message: CharSequence?) {
-        show(statusClass)
-        val status = existingStatus[statusClass] ?: return
-        status.messageView(status.targetView)?.text = message
-    }
-
-    fun show(statusClass: KClass<out AbstractStatus>) {
+    fun show(statusClass: KClass<out AbstractStatus>, message: CharSequence? = null) {
         if (currentStatus == statusClass) return
         if (statusClass == SuccessStatus::class) {
             hideAllStatus()
-            showSuccessStatus()
+            successView?.visible()
+            currentStatus = SuccessStatus::class
         } else {
-            hideOtherStatus(statusClass)
-            createAndShowStatus(statusClass)
-            if (existingStatus[statusClass]?.showSuccess() == true) {
-                showSuccessStatus()
-            } else hideSuccessStatus()
+            hideAllStatus()
+            createAndShowStatus(statusClass, message)
+            if (existingStatus[statusClass]?.isShowSuccess() == true) {
+                successView?.visible()
+            } else successView?.inVisible()
         }
         onStatusChangeListener?.invoke(statusClass)
     }
 
-    private fun showSuccessStatus() {
-        if (successStatus != null) {
-            successStatus!!.targetView.visible()
-            if (StatusPage.config.enableAnimation) {
-                successStatus!!.targetView.animate().cancel()
-                successStatus!!.targetView.animate().alpha(1f)
-            }
-            currentStatus = SuccessStatus::class
-        }
-    }
-
-    private fun hideSuccessStatus() {
-        if (successStatus != null) {
-            if (StatusPage.config.enableAnimation) {
-                successStatus!!.targetView.animate().cancel()
-                successStatus!!.targetView.animate().alpha(0f).withEndAction {
-                    successStatus!!.targetView.inVisible()
-                }
-            } else {
-                successStatus!!.targetView.inVisible()
-            }
-        }
-    }
-
-    private fun createAndShowStatus(statusClass: KClass<out AbstractStatus>) {
+    private fun createAndShowStatus(
+        statusClass: KClass<out AbstractStatus>,
+        message: CharSequence?
+    ) {
         if (existingStatus[statusClass] == null) {
             existingStatus[statusClass] =
                 createStatus(statusClass).apply {
                     obtainTargetView(context)
-                    if (enableAnimation() && StatusPage.config.enableAnimation) {
-                        targetView.alpha = 0f
-                    }
-                    onAttach(context, targetView)
-                    reloadEventView(targetView)?.doOnClick {
+                    onAttach(targetView, message)
+                    getReloadEventView(targetView)?.doOnClick {
                         onRetryEventListener?.invoke(statusClass)
                     }
                 }
         }
         val status = existingStatus[statusClass]!!
         rootView.addView(status.targetView, LayoutParams(-2, -2, Gravity.CENTER))
-        if (status.enableAnimation() && StatusPage.config.enableAnimation) {
-            status.targetView.animate().cancel()
-            status.targetView.animate().alpha(1f)
-        }
         currentStatus = statusClass
     }
 
     private fun hideAllStatus() {
-        existingStatus.forEach {
-            hideStatus(it.key)
-        }
-    }
-
-    private fun hideOtherStatus(statusClass: KClass<out AbstractStatus>) {
-        existingStatus.forEach {
-            if (it.key != statusClass) {
-                hideStatus(statusClass)
-            }
-        }
+        existingStatus.forEach { hideStatus(it.key) }
     }
 
     private fun hideStatus(statusClass: KClass<out AbstractStatus>) {
         val status = existingStatus[statusClass] ?: return
-        if (status.enableAnimation() && StatusPage.config.enableAnimation) {
-            status.targetView.animate().cancel()
-            status.targetView.animate().alpha(0f).withEndAction {
-                status.onDetach(context, status.targetView)
-                rootView.removeView(status.targetView)
-                existingStatus.remove(statusClass)
-            }
-        } else {
-            status.onDetach(context, status.targetView)
-            rootView.removeView(status.targetView)
-            existingStatus.remove(statusClass)
-        }
+        status.onDetach(status.targetView)
+        rootView.removeView(status.targetView)
+        existingStatus.remove(statusClass)
     }
 
     private fun createStatus(statusClass: KClass<out AbstractStatus>): AbstractStatus {
@@ -174,24 +133,22 @@ class StatusLayout @JvmOverloads constructor(
     }
 
     override fun addView(child: View?, index: Int, params: ViewGroup.LayoutParams?) {
-        if (currentStatus == null) {
-            existingStatus.forEach {
-                if (child == it.value.targetView) {
-                    rootView.addView(child, index, params)
-                    currentStatus = it.key
-                    return
-                }
-            }
+        if (child == rootView) {
+            super.addView(child, index, params)
+            return
         }
-        if (successStatus == null) {
+        if (successView == null) {
             if (child == null) return
-            successStatus = SuccessStatus(child)
-            if (rootView.childCount > 0) {
-                successStatus!!.targetView.alpha = 0f
-                successStatus!!.targetView.inVisible()
+            successView = child
+            if (child.parent != null && child.parent is ViewGroup) {
+                (child.parent as ViewGroup).removeView(child)
             }
-            rootView.addView(successStatus!!.targetView, 0, params)
-            if (currentStatus == null) currentStatus = SuccessStatus::class
+            rootView.addView(successView, 0, params)
+            if (currentStatus == SuccessStatus::class) {
+                successView!!.visible()
+            } else {
+                successView!!.inVisible()
+            }
         } else throw IllegalStateException("StatusLayout can host only one direct child")
     }
 }

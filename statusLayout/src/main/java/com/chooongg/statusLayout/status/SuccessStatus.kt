@@ -1,13 +1,16 @@
 package com.chooongg.statusLayout.status
 
-import android.content.Context
 import android.view.View
 
-class SuccessStatus(contentView: View) : AbstractStatus(contentView) {
+class SuccessStatus : AbstractStatus() {
 
-    override fun onBuildView(context: Context) = View(context)
+    override fun onBuildView() = View(context)
 
-    override fun onAttach(context: Context, view: View) = Unit
+    override fun onAttach(view: View, message: CharSequence?) = Unit
 
-    override fun onDetach(context: Context, view: View) = Unit
+    override fun onChangeMessage(view: View, message: CharSequence?) = Unit
+
+    override fun getReloadEventView(view: View): View? = null
+
+    override fun onDetach(view: View) = Unit
 }

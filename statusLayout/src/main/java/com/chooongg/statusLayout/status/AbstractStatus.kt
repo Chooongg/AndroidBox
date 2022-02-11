@@ -2,38 +2,30 @@ package com.chooongg.statusLayout.status
 
 import android.content.Context
 import android.view.View
-import android.widget.TextView
-import java.io.Serializable
 
 /**
- * 继承此类必须保留空参构造方法
+ * 继承此类必须保留单Context构造方法
  */
-abstract class AbstractStatus : Serializable {
+abstract class AbstractStatus {
 
     internal lateinit var targetView: View
 
-    constructor()
-
-    internal constructor(view: View) {
-        this.targetView = view
-    }
+    protected lateinit var context: Context
 
     internal fun obtainTargetView(context: Context) {
-        this.targetView = onBuildView(context)
+        this.context = context
+        this.targetView = onBuildView()
     }
 
-    protected abstract fun onBuildView(context: Context): View
+    protected abstract fun onBuildView(): View
 
-    abstract fun onAttach(context: Context, view: View)
+    abstract fun onAttach(view: View, message: CharSequence?)
 
-    abstract fun onDetach(context: Context, view: View)
+    abstract fun onChangeMessage(view: View, message: CharSequence?)
 
-    open fun reloadEventView(rootView: View): View? = null
+    open fun getReloadEventView(view: View): View? = targetView
 
-    open fun messageView(rootView: View): TextView? = null
+    abstract fun onDetach(view: View)
 
-    open fun showSuccess(): Boolean = false
-
-    open fun enableAnimation():Boolean = true
-
+    open fun isShowSuccess(): Boolean = false
 }

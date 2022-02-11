@@ -73,10 +73,6 @@ abstract class BoxActivity : AppCompatActivity() {
 
             initTransitions()
         }
-        // 是否启用内容过渡效果
-        if (isEnableContentTransitions4Annotation()) {
-            window.requestFeature(Window.FEATURE_CONTENT_TRANSITIONS)
-        }
 
         super.onCreate(savedInstanceState)
         WindowPreferencesManager(this).applyEdgeToEdgePreference(window)
@@ -273,9 +269,6 @@ abstract class BoxActivity : AppCompatActivity() {
 
     private fun isEnableActivityTransitions4Annotation() =
         javaClass.getAnnotation(ActivityTransitions::class.java)?.isEnable ?: false
-
-    private fun isEnableContentTransitions4Annotation() =
-        javaClass.getAnnotation(ContentTransitions::class.java)?.isEnable ?: false
 
     private fun getTopAppBarType4Annotation() =
         javaClass.getAnnotation(TopAppBarType::class.java)?.type ?: TopAppBarType.TYPE_SMALL

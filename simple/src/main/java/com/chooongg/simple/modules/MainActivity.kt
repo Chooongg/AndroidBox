@@ -12,6 +12,7 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.chooongg.activity.BoxBindingActivity
 import com.chooongg.adapter.BindingAdapter
 import com.chooongg.annotation.ActivityTransitions
+import com.chooongg.annotation.LiftOnScrollTargetId
 import com.chooongg.annotation.TopAppBarDefaultNavigation
 import com.chooongg.annotation.TopAppBarTextGravity
 import com.chooongg.core.ext.divider
@@ -29,13 +30,12 @@ import com.chooongg.simple.model.SingleItem
 import kotlinx.coroutines.launch
 
 @ActivityTransitions
-@TopAppBarDefaultNavigation(false)
 @TopAppBarTextGravity(Gravity.CENTER)
+@TopAppBarDefaultNavigation(false)
+@LiftOnScrollTargetId(R.id.recycler_view)
 class MainActivity : BoxBindingActivity<ActivityMainBinding>() {
 
     private val adapter = Adapter()
-
-    override fun initLiftOnScrollTargetId() = R.id.recycler_view
 
     override fun initConfig(savedInstanceState: Bundle?) {
         binding.recyclerView.adapter = adapter
@@ -54,7 +54,7 @@ class MainActivity : BoxBindingActivity<ActivityMainBinding>() {
                 SingleItem("AppBar") {
                     startActivityTransitionPage(AppBarActivity::class, it)
                 }, SingleItem("状态布局") {
-                    startActivity(StatusActivity::class)
+                    startActivityTransitionPage(StatusActivity::class, it)
                 }, SingleItem("网络请求") {
                     startActivity(HttpActivity::class)
                 }, SingleItem("状态布局") {

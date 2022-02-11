@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="Theme.AndroidBox" parent="BoxTheme.Primary" />
+    <style name="Theme.AndroidBox" parent="BoxTheme.Surface" />
 
     <style name="Theme.AndroidBox.Splash" parent="BoxTheme.Surface">
         <item name="android:colorBackground">?colorSurface</item>

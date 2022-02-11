@@ -6,12 +6,9 @@ import android.text.TextUtils
 import android.util.Log
 import okhttp3.Cookie
 import okhttp3.HttpUrl
-import okhttp3.internal.and
 import java.io.*
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
-import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
 
 //将持久化的cookies缓存到内存中 即map cookies
 class PersistentCookieStore(context: Context) {
@@ -160,7 +157,7 @@ class PersistentCookieStore(context: Context) {
     protected fun byteArrayToHexString(bytes: ByteArray): String {
         val sb = StringBuilder(bytes.size * 2)
         for (element in bytes) {
-            val v: Int = element and 0xff
+            val v: Int = element.toInt() and 0xff
             if (v < 16) {
                 sb.append('0')
             }

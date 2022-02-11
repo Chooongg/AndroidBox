@@ -1,6 +1,5 @@
 package com.chooongg.statusLayout.status
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import androidx.viewbinding.ViewBinding
@@ -9,12 +8,13 @@ import java.lang.reflect.ParameterizedType
 /**
  * 继承此类必须保留空参构造方法
  */
-abstract class AbstractBindingStatus<BINDING : ViewBinding> : AbstractStatus() {
+abstract class AbstractBindingStatus<BINDING : ViewBinding> :
+    AbstractStatus() {
 
     private lateinit var binding: BINDING
 
     @Suppress("UNCHECKED_CAST")
-    override fun onBuildView(context: Context): View {
+    override fun onBuildView(): View {
         val type = javaClass.genericSuperclass
         val clazz = (type as ParameterizedType).actualTypeArguments[0] as Class<*>
         val method = clazz.getMethod("inflate", LayoutInflater::class.java)
@@ -22,21 +22,20 @@ abstract class AbstractBindingStatus<BINDING : ViewBinding> : AbstractStatus() {
         return binding.root
     }
 
-    abstract fun onAttach(context: Context, binding: BINDING)
+    abstract fun onAttach(binding: BINDING, message: CharSequence?)
+    abstract fun onChangeMessage(binding: BINDING, message: CharSequence?)
+    abstract fun getReloadEventView(binding: BINDING): View?
+    abstract fun onDetach(binding: BINDING)
 
-    abstract fun onDetach(context: Context, binding: BINDING)
+    override fun onAttach(view: View, message: CharSequence?) =
+        onAttach(binding, message)
 
-    open fun reloadEventView(binding: BINDING): View? = null
+    override fun onChangeMessage(view: View, message: CharSequence?) =
+        onChangeMessage(binding, message)
 
-    override fun onAttach(context: Context, view: View) {
-        onAttach(context, binding)
-    }
+    override fun getReloadEventView(view: View): View? =
+        getReloadEventView(binding)
 
-    override fun onDetach(context: Context, view: View) {
-        onDetach(context, binding)
-    }
-
-    override fun reloadEventView(rootView: View): View? {
-        return reloadEventView(binding)
-    }
+    override fun onDetach(view: View) =
+        onDetach(binding)
 }
