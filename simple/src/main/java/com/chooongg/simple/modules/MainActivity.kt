@@ -30,8 +30,8 @@ import com.chooongg.simple.model.SingleItem
 import kotlinx.coroutines.launch
 
 @ActivityTransitions
-@TopAppBarTextGravity(Gravity.CENTER)
 @TopAppBarDefaultNavigation(false)
+@TopAppBarTextGravity(Gravity.CENTER)
 @LiftOnScrollTargetId(R.id.recycler_view)
 class MainActivity : BoxBindingActivity<ActivityMainBinding>() {
 

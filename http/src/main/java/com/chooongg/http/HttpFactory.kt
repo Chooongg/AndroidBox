@@ -40,16 +40,36 @@ object HttpFactory {
         return retrofit.create(clazz.java)
     }
 
+    /**
+     * 获取接口类
+     */
+    fun <T : Any> getAPI(
+        baseUrl: String?,
+        clazz: KClass<T>,
+        block: (HttpConfig.() -> Unit)? = null
+    ): T {
+        val config = defaultConfig.copy()
+        block?.invoke(config)
+        val builder = Retrofit.Builder()
+            .client(okHttpClientBuilder(config).build())
+        if (!baseUrl.isNullOrEmpty()) builder.baseUrl(baseUrl)
+        config.converterFactories.forEach { builder.addConverterFactory(it) }
+        config.callAdapterFactories.forEach { builder.addCallAdapterFactory(it) }
+        config.retrofitBuilder?.invoke(builder)
+        val retrofit = builder.build()
+        return retrofit.create(clazz.java)
+    }
+
     private fun okHttpClientBuilder(config: HttpConfig) =
         OkHttpClient.Builder().apply {
             connectTimeout(config.connectTimeout, TimeUnit.SECONDS)
             writeTimeout(config.writeTimeout, TimeUnit.SECONDS)
             readTimeout(config.readTimeout, TimeUnit.SECONDS)
-            retryOnConnectionFailure(false)
+            retryOnConnectionFailure(true)
             cache(Cache(APPLICATION.cacheDir, config.cacheSize))
             cookieJar(CookieManager)
             if (config.sslSocketFactory != null && config.x509TrustManager != null) {
-                sslSocketFactory(config.sslSocketFactory!!,config.x509TrustManager!!)
+                sslSocketFactory(config.sslSocketFactory!!, config.x509TrustManager!!)
             }
             config.interceptors.forEach { addInterceptor(it) }
             config.networkInterceptors.forEach { addNetworkInterceptor(it) }
