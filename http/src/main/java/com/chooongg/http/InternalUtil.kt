@@ -1,46 +1,40 @@
 package com.chooongg.http
 
-import okhttp3.Headers
 import okhttp3.HttpUrl
 import okhttp3.Request
-import java.net.URLDecoder
+import okhttp3.ResponseBody
+import okhttp3.internal.closeQuietly
+import java.io.File
+import java.io.RandomAccessFile
+
+typealias HttpProgressListener = (contentLength: Long, progress: Int) -> Unit
 
 /** 从请求实例中获取用[retrofit2.http.Tag]注解标记的参数 */
 internal inline fun <reified T> Request.getTag(): T? {
     return tag(T::class.java)
 }
 
-/** 从请求头中获取文件名 */
-internal fun Headers.getFileName(): String? {
-    return get("Content-Disposition")
-        ?.split(';')
-        ?.let { list ->
-            list.find {
-                it.contains("filename*")
-            } ?: list.find {
-                it.contains("filename")
-            }
-        }
-        ?.split('=')
-        ?.component2()
-        ?.removeSurrounding("\"")
-        ?.let {
-            if (it.contains('\'')) {
-                //如果有'字符，则取出编码格式与字符串，解码后返回
-                val split = it.split('\'').filter(String::isNotBlank)
-                URLDecoder.decode(split.component2(), split.component1())
-            } else {
-                it  //否则直接返回字符串
-            }
-        }
+/**
+ * 使用RandomAccessFile将数据写入到文件
+ */
+fun ResponseBody.writeToFile(file: File) {
+    //使用RandomAccessFile将数据写入到文件
+    val outputFile = RandomAccessFile(file, "rws")
+    //执行写入操作
+    val buffer = ByteArray(DEFAULT_BUFFER_SIZE)
+    var readLength = source().read(buffer)
+    while (readLength > 0) {
+        outputFile.write(buffer, 0, readLength)
+        readLength = source().read(buffer)
+    }
+    outputFile.closeQuietly()
+    closeQuietly()
 }
 
 /**
  * 从下载地址中获取文件名称
- * 优先用filename参数的值作为文件名
- * 其次用name参数的值作为文件名
- * 拿不到则用下载地址的最后一位的pathSegment
+ * 用下载地址的最后一位的pathSegment
  * */
 internal fun HttpUrl.getFileName(): String {
-    return queryParameter("filename") ?: queryParameter("name") ?: pathSegments.last()
+    return pathSegments.last()
 }

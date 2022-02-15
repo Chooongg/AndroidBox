@@ -74,6 +74,7 @@ object HttpFactory {
             config.interceptors.forEach { addInterceptor(it) }
             config.networkInterceptors.forEach { addNetworkInterceptor(it) }
             config.okHttpClientBuilder?.invoke(this)
+            addInterceptor(ResponseProgressInterceptor())
             addNetworkInterceptor(StethoInterceptor())
         }
 }

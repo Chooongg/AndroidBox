@@ -1,4 +1,4 @@
-package com.chooongg.http.file
+package com.chooongg.http
 
 import okhttp3.MediaType
 import okhttp3.RequestBody
@@ -9,10 +9,10 @@ import okio.buffer
 
 class ProgressRequestBody(
     private val delegate: RequestBody,
-    private val callback: UploadProgressCallback,
+    private val callback: HttpProgressListener
 ) : RequestBody() {
 
-    private var writtenLength = 0L
+    private var currentLength = 0L
 
     private var contentLength = contentLength()
 
@@ -28,8 +28,8 @@ class ProgressRequestBody(
         object : ForwardingSink(sink) {
             override fun write(source: Buffer, byteCount: Long) {
                 super.write(source, byteCount)
-                writtenLength += byteCount
-                callback.update(contentLength, writtenLength / contentLength.toFloat())
+                currentLength += byteCount
+                callback.invoke(contentLength, ((currentLength / 100) / contentLength).toInt())
             }
         }.buffer().let {
             delegate.writeTo(it)
@@ -38,8 +38,7 @@ class ProgressRequestBody(
     }
 
     fun setExistLength(existLength: Long) {
-        writtenLength = existLength
+        currentLength = existLength
         contentLength += existLength
     }
 }
-

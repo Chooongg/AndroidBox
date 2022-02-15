@@ -1,4 +1,4 @@
-package com.chooongg.http.file
+package com.chooongg.http
 
 import okhttp3.MediaType
 import okhttp3.ResponseBody
@@ -9,24 +9,22 @@ import okio.buffer
 
 class ProgressResponseBody(
     private val delegate: ResponseBody,
-    private val callback: DownloadProgressCallback
+    private val callback: HttpProgressListener
 ) : ResponseBody() {
 
     /**
      * 当前已处理的数据大小
      */
-    private var readLength = 0L
+    private var currentLength = 0L
 
     private var contentLength = contentLength()
 
     private val source = object : ForwardingSource(delegate.source()) {
         override fun read(sink: Buffer, byteCount: Long): Long {
-            val length = super.read(sink, byteCount)
-            if (contentLength > 0 && length > 0) {
-                readLength += length
-                callback.update(contentLength, readLength / contentLength.toFloat())
-            }
-            return length
+            val bytesRead = super.read(sink, byteCount)
+            currentLength += if (bytesRead != -1L) bytesRead else 0
+            callback.invoke(contentLength, ((currentLength / 100) / contentLength).toInt())
+            return bytesRead
         }
     }.buffer()
 
@@ -35,12 +33,4 @@ class ProgressResponseBody(
     override fun contentType(): MediaType? = delegate.contentType()
 
     override fun source(): BufferedSource = source
-
-    /**
-     * 设置已存在的文件长度，以正确的获取下载进度
-     */
-    internal fun setExistLength(existLength: Long) {
-        readLength = existLength
-        contentLength += existLength
-    }
 }

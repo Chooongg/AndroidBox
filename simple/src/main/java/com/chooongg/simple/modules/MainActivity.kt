@@ -12,7 +12,6 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.chooongg.activity.BoxBindingActivity
 import com.chooongg.adapter.BindingAdapter
 import com.chooongg.annotation.ActivityTransitions
-import com.chooongg.annotation.LiftOnScrollTargetId
 import com.chooongg.annotation.TopAppBarDefaultNavigation
 import com.chooongg.annotation.TopAppBarTextGravity
 import com.chooongg.core.ext.divider

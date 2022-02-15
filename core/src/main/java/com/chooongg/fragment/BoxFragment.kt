@@ -5,6 +5,7 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
 import androidx.appcompat.widget.Toolbar
@@ -32,6 +33,9 @@ abstract class BoxFragment : Fragment {
     //<editor-fold desc="子类实现方法">
 
     protected open fun initActionBar(actionBar: Toolbar) = Unit
+
+    @IdRes
+    protected open fun getLiftOnScrollTargetId(): Int = View.NO_ID
 
     abstract fun initConfig(savedInstanceState: Bundle?)
 
@@ -103,8 +107,9 @@ abstract class BoxFragment : Fragment {
         onCreateContentView(inflater, coordinatorLayout, savedInstanceState)
 
         val appBarLayout = view.findViewById<AppBarLayout>(R.id.appbar_layout)
-        appBarLayout.liftOnScrollTargetViewId = getLiftOnScrollTargetId4Annotation() ?: View.NO_ID
-
+        if (getLiftOnScrollTargetId() != View.NO_ID) {
+            appBarLayout.liftOnScrollTargetViewId = getLiftOnScrollTargetId()
+        }
         val collapsingLayout =
             view.findViewById<CollapsingToolbarLayout>(R.id.collapsing_toolbar_layout)
                 ?: return view
@@ -193,9 +198,6 @@ abstract class BoxFragment : Fragment {
 
     private fun getTopAppBarType4Annotation() =
         javaClass.getAnnotation(TopAppBarType::class.java)?.type ?: TopAppBarType.TYPE_NONE
-
-    private fun getLiftOnScrollTargetId4Annotation() =
-        javaClass.getAnnotation(LiftOnScrollTargetId::class.java)?.resId
 
     private fun isShowTopAppBarDefaultNavigation4Annotation() =
         javaClass.getAnnotation(TopAppBarDefaultNavigation::class.java)?.isShow ?: false

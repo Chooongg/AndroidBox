@@ -3,6 +3,7 @@ package com.chooongg.activity
 import android.content.Context
 import android.os.Bundle
 import android.view.*
+import androidx.annotation.IdRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
@@ -32,6 +33,9 @@ abstract class BoxActivity : AppCompatActivity() {
     protected open fun initActionBar(actionBar: ActionBar) = Unit
 
     protected open fun initTransitions() = Unit
+
+    @IdRes
+    protected open fun getLiftOnScrollTargetId(): Int = View.NO_ID
 
     abstract fun initConfig(savedInstanceState: Bundle?)
 
@@ -101,7 +105,9 @@ abstract class BoxActivity : AppCompatActivity() {
             setSupportActionBar(findViewById<BoxToolbar>(R.id.toolbar))
         }
         val appBarLayout = findViewById<AppBarLayout>(R.id.appbar_layout)
-        appBarLayout.liftOnScrollTargetViewId = getLiftOnScrollTargetId4Annotation() ?: View.NO_ID
+        if (getLiftOnScrollTargetId() != View.NO_ID) {
+            appBarLayout.liftOnScrollTargetViewId = getLiftOnScrollTargetId()
+        }
         val collapsingLayout = findViewById<CollapsingToolbarLayout>(R.id.collapsing_toolbar_layout)
             ?: return
         when (val collapsingBackground = appBarLayout.background) {
@@ -272,9 +278,6 @@ abstract class BoxActivity : AppCompatActivity() {
 
     private fun getTopAppBarType4Annotation() =
         javaClass.getAnnotation(TopAppBarType::class.java)?.type ?: TopAppBarType.TYPE_SMALL
-
-    private fun getLiftOnScrollTargetId4Annotation() =
-        javaClass.getAnnotation(LiftOnScrollTargetId::class.java)?.resId
 
     private fun isShowTopAppBarDefaultNavigation4Annotation() =
         javaClass.getAnnotation(TopAppBarDefaultNavigation::class.java)?.isShow ?: true
