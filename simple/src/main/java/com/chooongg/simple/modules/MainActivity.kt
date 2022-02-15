@@ -31,10 +31,11 @@ import kotlinx.coroutines.launch
 @ActivityTransitions
 @TopAppBarDefaultNavigation(false)
 @TopAppBarTextGravity(Gravity.CENTER)
-@LiftOnScrollTargetId(R.id.recycler_view)
 class MainActivity : BoxBindingActivity<ActivityMainBinding>() {
 
     private val adapter = Adapter()
+
+    override fun getLiftOnScrollTargetId() = R.id.recycler_view
 
     override fun initConfig(savedInstanceState: Bundle?) {
         binding.recyclerView.adapter = adapter
