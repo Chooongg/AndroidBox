@@ -159,7 +159,7 @@ abstract class BoxFragment : Fragment {
         if (isEnableAutoHideInputMethod4Annotation()) {
             view.setOnClickListener {
                 hideInputMethodEditor()
-                it.requestFocus()
+                it.clearFocus()
             }
         }
     }

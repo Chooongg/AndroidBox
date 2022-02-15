@@ -136,53 +136,6 @@ abstract class BoxActivity : AppCompatActivity() {
             if (topAppBarTextGravity.expandedTitleGravity != Gravity.NO_GRAVITY) {
                 collapsingLayout.expandedTitleGravity = topAppBarTextGravity.expandedTitleGravity
             }
-            // 折叠时标题边界强制居中
-//            if (topAppBarTextGravity.collapsedTitleGravity == Gravity.CENTER) {
-//                collapsingLayout.addOnLayoutChangeListener(object : View.OnLayoutChangeListener {
-//                    @SuppressLint("RestrictedApi")
-//                    override fun onLayoutChange(
-//                        v: View?,
-//                        left: Int,
-//                        top: Int,
-//                        right: Int,
-//                        bottom: Int,
-//                        oldLeft: Int,
-//                        oldTop: Int,
-//                        oldRight: Int,
-//                        oldBottom: Int
-//                    ) {
-//                        if (oldBottom == bottom) {
-//                            collapsingLayout.removeOnLayoutChangeListener(this)
-//                            try {
-//                                val field = collapsingLayout.javaClass
-//                                    .getDeclaredField("collapsingTextHelper")
-//                                field.isAccessible = true
-//                                val collapsingTextHelper: CollapsingTextHelper =
-//                                    field.get(collapsingLayout) as CollapsingTextHelper
-//                                field.isAccessible = false
-//                                val collapsedBoundsField =
-//                                    field.type.getDeclaredField("collapsedBounds")
-//                                collapsedBoundsField.isAccessible = true
-//                                val oldRect: Rect =
-//                                    collapsedBoundsField.get(collapsingTextHelper) as Rect
-//                                collapsedBoundsField.isAccessible = false
-//                                val margin = dp2px(84f)
-//                                collapsingTextHelper.setCollapsedBounds(
-//                                    margin,
-//                                    oldRect.top,
-//                                    right - margin,
-//                                    oldRect.bottom
-//                                )
-//                                collapsingTextHelper.recalculate()
-//                            } catch (e: NoSuchFieldException) {
-//                                e.printStackTrace()
-//                            } catch (e: IllegalAccessException) {
-//                                e.printStackTrace()
-//                            }
-//                        }
-//                    }
-//                })
-//            }
         }
         initActionBar(supportActionBar!!)
     }
@@ -190,6 +143,8 @@ abstract class BoxActivity : AppCompatActivity() {
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
         // 是否启用点击空白隐藏输入法
+        contentView.isFocusable = true
+        contentView.isFocusableInTouchMode = true
         if (isEnableAutoHideInputMethod4Annotation()) {
             contentView.setOnClickListener {
                 hideInputMethodEditor()
