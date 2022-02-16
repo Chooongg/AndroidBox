@@ -148,7 +148,7 @@ abstract class BoxActivity : AppCompatActivity() {
         if (isEnableAutoHideInputMethod4Annotation()) {
             contentView.setOnClickListener {
                 hideInputMethodEditor()
-                it.requestFocus()
+                it.clearFocus()
             }
         }
         initConfig(savedInstanceState)
