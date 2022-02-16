@@ -1,7 +1,10 @@
 package com.chooongg.activity
 
 import android.content.Context
+import android.graphics.Matrix
+import android.graphics.RectF
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.*
 import androidx.annotation.IdRes
 import androidx.annotation.StringRes
@@ -22,7 +25,6 @@ import com.google.android.material.color.MaterialColors
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.transition.platform.MaterialArcMotion
 import com.google.android.material.transition.platform.MaterialContainerTransform
 import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback
 
@@ -70,7 +72,21 @@ abstract class BoxActivity : AppCompatActivity() {
             val contentView = contentView
             contentView.transitionName = "box_transitions_content"
             setEnterSharedElementCallback(MaterialContainerTransformSharedElementCallback())
-            setExitSharedElementCallback(MaterialContainerTransformSharedElementCallback())
+            setExitSharedElementCallback(object :
+                MaterialContainerTransformSharedElementCallback() {
+                override fun onCaptureSharedElementSnapshot(
+                    sharedElement: View,
+                    viewToGlobalMatrix: Matrix,
+                    screenBounds: RectF
+                ): Parcelable? {
+                    sharedElement.alpha = 1f
+                    return super.onCaptureSharedElementSnapshot(
+                        sharedElement,
+                        viewToGlobalMatrix,
+                        screenBounds
+                    )
+                }
+            })
             window.sharedElementsUseOverlay = false
             window.sharedElementEnterTransition = buildContainerTransform(contentView, true)
             window.sharedElementReturnTransition = buildContainerTransform(contentView, false)
@@ -90,7 +106,6 @@ abstract class BoxActivity : AppCompatActivity() {
             addTarget(contentView.id)
             fadeMode = MaterialContainerTransform.FADE_MODE_THROUGH
             interpolator = FastOutSlowInInterpolator()
-            pathMotion = MaterialArcMotion()
             isDrawDebugEnabled = false
         }
 
