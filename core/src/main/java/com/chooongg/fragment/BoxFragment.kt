@@ -140,7 +140,9 @@ abstract class BoxFragment : Fragment {
                 collapsingLayout.expandedTitleGravity = topAppBarTextGravity.expandedTitleGravity
             }
         }
-        initActionBar(view.findViewById(R.id.toolbar))
+        val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
+        toolbar.title = title
+        initActionBar(toolbar)
         return view
     }
 
