@@ -1,6 +1,7 @@
 package com.chooongg.activity
 
 import android.content.Context
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.*
 import androidx.annotation.IdRes
@@ -25,6 +26,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.platform.MaterialArcMotion
 import com.google.android.material.transition.platform.MaterialContainerTransform
 import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback
+
 
 abstract class BoxActivity : AppCompatActivity() {
 
@@ -76,8 +78,10 @@ abstract class BoxActivity : AppCompatActivity() {
             window.sharedElementsUseOverlay = false
             initTransitions()
         }
-
         super.onCreate(savedInstanceState)
+        if (getScreenOrientation4Annotation() != ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED) {
+            requestedOrientation = getScreenOrientation4Annotation()
+        }
         WindowPreferencesManager(this).applyEdgeToEdgePreference(window)
 
         configRootView()
@@ -223,6 +227,10 @@ abstract class BoxActivity : AppCompatActivity() {
     //</editor-fold>
 
     //<editor-fold desc="注解获取">
+
+    private fun getScreenOrientation4Annotation() =
+        javaClass.getAnnotation(ActivityScreenOrientation::class.java)?.value
+            ?: ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
 
     private fun isEnableAutoHideInputMethod4Annotation() =
         javaClass.getAnnotation(AutoHideInputMethod::class.java)?.isEnable ?: true
