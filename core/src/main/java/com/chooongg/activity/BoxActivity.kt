@@ -1,10 +1,7 @@
 package com.chooongg.activity
 
 import android.content.Context
-import android.graphics.Matrix
-import android.graphics.RectF
 import android.os.Bundle
-import android.os.Parcelable
 import android.view.*
 import androidx.annotation.IdRes
 import androidx.annotation.StringRes
@@ -72,25 +69,24 @@ abstract class BoxActivity : AppCompatActivity() {
             val contentView = contentView
             contentView.transitionName = "box_transitions_content"
             setEnterSharedElementCallback(MaterialContainerTransformSharedElementCallback())
-            setExitSharedElementCallback(object :
-                MaterialContainerTransformSharedElementCallback() {
-                override fun onCaptureSharedElementSnapshot(
-                    sharedElement: View,
-                    viewToGlobalMatrix: Matrix,
-                    screenBounds: RectF
-                ): Parcelable? {
-                    sharedElement.alpha = 1f
-                    return super.onCaptureSharedElementSnapshot(
-                        sharedElement,
-                        viewToGlobalMatrix,
-                        screenBounds
-                    )
-                }
-            })
-            window.sharedElementsUseOverlay = false
+            setExitSharedElementCallback(MaterialContainerTransformSharedElementCallback())
+//            val value = object : MaterialContainerTransformSharedElementCallback() {
+//                override fun onCaptureSharedElementSnapshot(
+//                    sharedElement: View,
+//                    viewToGlobalMatrix: Matrix,
+//                    screenBounds: RectF
+//                ): Parcelable? {
+//                    sharedElement.alpha = 1f
+//                    return super.onCaptureSharedElementSnapshot(
+//                        sharedElement,
+//                        viewToGlobalMatrix,
+//                        screenBounds
+//                    )
+//                }
+//            }
             window.sharedElementEnterTransition = buildContainerTransform(contentView, true)
             window.sharedElementReturnTransition = buildContainerTransform(contentView, false)
-
+            window.sharedElementsUseOverlay = false
             initTransitions()
         }
 
