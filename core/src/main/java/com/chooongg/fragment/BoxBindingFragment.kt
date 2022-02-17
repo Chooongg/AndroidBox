@@ -13,29 +13,26 @@ abstract class BoxBindingFragment<BINDING : ViewBinding> : BoxFragment() {
 
     @Suppress("UNCHECKED_CAST")
     protected val binding: BINDING by lazy {
-        val type = javaClass.genericSuperclass
-        if (type is ParameterizedType) {
-            try {
-                val clazz = type.actualTypeArguments[0] as Class<*>
-                val method = clazz.getMethod("inflate",
-                    LayoutInflater::class.java,
-                    ViewGroup::class.javaObjectType,
-                    Boolean::class.java)
-                return@lazy method.invoke(null,
-                    LayoutInflater.from(requireContext()),
-                    container,
-                    false) as BINDING
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
-        throw RuntimeException("BINDING not find.")
+        val clazz =
+            (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<*>
+        val method = clazz.getMethod(
+            "inflate",
+            LayoutInflater::class.java,
+            ViewGroup::class.java,
+            Boolean::class.java
+        )
+        return@lazy method.invoke(
+            null,
+            LayoutInflater.from(requireContext()),
+            container,
+            false
+        ) as BINDING
     }
 
-    override fun onCreateContentView(
+    override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?,
+        savedInstanceState: Bundle?
     ): View? {
         this.container = container
         return binding.root
