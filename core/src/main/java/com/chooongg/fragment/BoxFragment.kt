@@ -52,7 +52,7 @@ abstract class BoxFragment : Fragment {
     /**
      * 刷新
      */
-    protected fun onRefresh(any: Any? = null) = Unit
+    protected open fun onRefresh(any: Any? = null) = Unit
 
     /**
      * 是否可以回退
