@@ -18,6 +18,8 @@ class BoxInitializeProvider : ContentProvider() {
 
     companion object {
         init {
+            // 黑夜模式支持
+            AppCompatDelegate.setDefaultNightMode(BoxMMKV.DayNightMode.get())
             // 兼容矢量图片
             AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
         }
@@ -27,7 +29,6 @@ class BoxInitializeProvider : ContentProvider() {
         if (context is Application) {
             ApplicationManager.initialize(context as Application)
             MMKV.initialize(context as Application)
-            AppCompatDelegate.setDefaultNightMode(BoxMMKV.DayNightMode.get())
             Stetho.initializeWithDefaults(context)
             XXPermissions.setInterceptor(PermissionInterceptor())
             DynamicColors.applyToActivitiesIfAvailable(context as Application)
